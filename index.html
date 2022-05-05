@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <input type="file" accept=".sl2">
+        <div>
+            <input type="file" accept=".sl2">
+        </div>
 
-        <div id="inventory"></div>
+        <div id="weapon" style="display: inline-block; vertical-align: top;"></div>
+        <div id="armor" style="display: inline-block; vertical-align: top;"></div>
+        <div id="ash" style="display: inline-block; vertical-align: top;"></div>
+        <div id="talisman" style="display: inline-block; vertical-align: top;"></div>
+        <div id="goods" style="display: inline-block; vertical-align: top;"></div>
+        <div id="keyitems" style="display: inline-block; vertical-align: top;"></div>
 
         <script type="module">
             import { SaveData } from './src/savedata.js'
@@ -21,19 +28,45 @@
 
                     let inventory = savedata.characters[0].inventory.filter(x => x.name !== undefined);
 
-                    inventory.sort((a,b) => {
+                    let keyitems = savedata.characters[0].keyitems.filter(x => x.name !== undefined);
+
+                    keyitems.sort((a,b) => {
                         return a.name.localeCompare(b.name)
                     });
 
-                    document.getElementById('inventory').innerHTML = "";
+                    document.getElementById('keyitems').innerHTML = "";
 
-                    inventory.forEach(item => {
+                    keyitems.forEach(item => {
                         let i = document.createElement("div");
                         let itemString = item.name;
                         i.appendChild(document.createTextNode(itemString));
-                        document.getElementById('inventory').appendChild(i);
+                        document.getElementById('keyitems').appendChild(i);
                     })
 
+                    let update = (type) => {
+                        let items = inventory.filter(x => x.type == type);
+
+                        items.sort((a,b) => {
+                            return a.name.localeCompare(b.name)
+                        });
+
+                        document.getElementById(type).innerHTML = "";
+
+                        items.forEach(item => {
+                            let i = document.createElement("div");
+                            let itemString = item.name;
+                            if(item.qty > 1)
+                                itemString += ' x' + item.qty;
+                            i.appendChild(document.createTextNode(itemString));
+                            document.getElementById(type).appendChild(i);
+                        })
+                    }
+
+                    update('weapon')
+                    update('armor')
+                    update('ash')
+                    update('talisman')
+                    update('goods')
                 }
                 reader.readAsArrayBuffer(file);
             }
