@@ -83,13 +83,13 @@ class CharacterData {
         this.maxStamina = reader.readInt32();
         reader.seek(0x4, true); // Skip
         this.vigor = reader.readInt32();
-        this.attunement = reader.readInt32();
+        this.mind = reader.readInt32();
         this.endurance = reader.readInt32();
         this.strength = reader.readInt32();
         this.dexterity = reader.readInt32();
         this.intelligence = reader.readInt32();
         this.faith = reader.readInt32();
-        this.luck = reader.readInt32();
+        this.arcane = reader.readInt32();
         reader.seek(0xC, true); // Skip
         this.runeLevel = reader.readInt32();
         this.runes = reader.readInt32();
