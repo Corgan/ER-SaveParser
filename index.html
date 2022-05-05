@@ -3,75 +3,165 @@
     <body>
         <div>
             <input type="file" accept=".sl2">
+            <select id="characters" style="display: none;"></select>
         </div>
 
-        <div id="weapon" style="display: inline-block; vertical-align: top;"></div>
-        <div id="armor" style="display: inline-block; vertical-align: top;"></div>
-        <div id="ash" style="display: inline-block; vertical-align: top;"></div>
-        <div id="talisman" style="display: inline-block; vertical-align: top;"></div>
-        <div id="goods" style="display: inline-block; vertical-align: top;"></div>
-        <div id="keyitems" style="display: inline-block; vertical-align: top;"></div>
+        <div id="character" style="display: none;">
+            <h2 id="name" class="stat" style="margin: 0;"></h2>
+            <br/>
+            <div style="display: inline-block; vertical-align: top;">
+                <div>Level: <span id="runeLevel" class="stat"></span></div>
+                <div>Runes: <span id="runes" class="stat"></span></div>
+                <div>Rune Memory: <span id="runeMemory" class="stat"></span></div>
+                <br/>
+                <div>Health: <span id="maxHealth" class="stat"></span></div>
+                <div>Mana: <span id="maxMana" class="stat"></span></div>
+                <div>Stamina: <span id="maxStamina" class="stat"></span></div>
+                <br/>
+                <div>Vigor: <span id="vigor" class="stat"></span></div>
+                <div>Mind: <span id="mind" class="stat"></span></div>
+                <div>Endurance: <span id="endurance" class="stat"></span></div>
+                <div>Strength: <span id="strength" class="stat"></span></div>
+                <div>Dexterity: <span id="dexterity" class="stat"></span></div>
+                <div>Intelligence: <span id="intelligence" class="stat"></span></div>
+                <div>Faith: <span id="faith" class="stat"></span></div>
+                <div>Arcane: <span id="arcane" class="stat"></span></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <div>Unk1: <span id="unk1" class="stat"></span></div>
+                <div>Unk2: <span id="unk2" class="stat"></span></div>
+                <div>Unk3: <span id="unk3" class="stat"></span></div>
+                <div>Unk4: <span id="unk4" class="stat"></span></div>
+                <div>Unk5: <span id="unk5" class="stat"></span></div>
+                <div>Unk6: <span id="unk6" class="stat"></span></div>
+                <div>Unk7: <span id="unk7" class="stat"></span></div>
+            </div>
+            <br/>
+            <div style="display: inline-block; vertical-align: top;">
+                <h3 style="margin: 0;">Weapons</h3>
+                <div id="weapon"></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Armor</h3>
+                <div id="armor"></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Ash of War</h3>
+                <div id="ash"></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Talismans</h3>
+                <div id="talisman"></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Goods</h3>
+                <div id="goods"></div>
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Key Items</h3>
+                <div id="keyitems"></div>
+            </div>
+        </div>
 
         <script type="module">
-            import { SaveData } from './src/savedata.js'
+            import { SaveData } from './src/savedata.js';
+
+            window.savedata = null;
+
+            function renderCharacter() {
+                let slot = parseInt(document.querySelector('#characters').value);
+
+                if(slot < 0 || slot > 10)
+                    return;
+                
+                let inventory = savedata.characters[slot].inventory.filter(x => x.name !== undefined);
+
+                let keyitems = savedata.characters[slot].keyitems.filter(x => x.name !== undefined);
+
+                keyitems.sort((a,b) => {
+                    return a.name.localeCompare(b.name)
+                });
+
+                document.getElementById('keyitems').innerHTML = "";
+
+                keyitems.forEach(item => {
+                    let i = document.createElement("div");
+                    let itemString = item.name;
+                    i.appendChild(document.createTextNode(itemString));
+                    document.getElementById('keyitems').appendChild(i);
+                })
+
+                let update = (type, title) => {
+                    let items = inventory.filter(x => x.type == type);
+
+                    items.sort((a,b) => {
+                        return a.name.localeCompare(b.name)
+                    });
+
+                    document.getElementById(type).innerHTML = "";
+
+                    items.forEach(item => {
+                        let i = document.createElement("div");
+                        let itemString = item.name;
+                        if(item.qty > 1)
+                            itemString += ' x' + item.qty;
+                        i.appendChild(document.createTextNode(itemString));
+                        document.getElementById(type).appendChild(i);
+                    })
+                }
+
+                update('weapon', 'Weapons')
+                update('armor', 'Armor')
+                update('ash', 'Ash of War')
+                update('talisman', 'Talismans')
+                update('goods', 'Goods')
+
+                document.getElementById('character').querySelectorAll('.stat').forEach(el => {
+                    if(el.id && savedata.characters[slot][el.id] != undefined) {
+                        el.innerHTML = savedata.characters[slot][el.id];
+                    }
+                })
+                document.getElementById('character').style.display = 'block';
+            }
 
             function showFile() {
                 let file = document.querySelector('input[type=file]').files[0];
-                console.log(file);
                 if(!file)
                     return;
                 let reader = new FileReader();
                 reader.onload = function (event) {
-                    let savedata = new SaveData(reader.result);
+                    window.savedata = new SaveData(reader.result);
+                    console.log(window.savedata);
 
-                    console.log(savedata);
 
-                    let inventory = savedata.characters[0].inventory.filter(x => x.name !== undefined);
-
-                    let keyitems = savedata.characters[0].keyitems.filter(x => x.name !== undefined);
-
-                    keyitems.sort((a,b) => {
-                        return a.name.localeCompare(b.name)
-                    });
-
-                    document.getElementById('keyitems').innerHTML = "";
-
-                    keyitems.forEach(item => {
-                        let i = document.createElement("div");
-                        let itemString = item.name;
-                        i.appendChild(document.createTextNode(itemString));
-                        document.getElementById('keyitems').appendChild(i);
-                    })
-
-                    let update = (type) => {
-                        let items = inventory.filter(x => x.type == type);
-
-                        items.sort((a,b) => {
-                            return a.name.localeCompare(b.name)
-                        });
-
-                        document.getElementById(type).innerHTML = "";
-
-                        items.forEach(item => {
-                            let i = document.createElement("div");
-                            let itemString = item.name;
-                            if(item.qty > 1)
-                                itemString += ' x' + item.qty;
-                            i.appendChild(document.createTextNode(itemString));
-                            document.getElementById(type).appendChild(i);
-                        })
+                    let selectEl = document.querySelector('#characters');
+                    while(selectEl.options.length > 0) {                
+                        selectEl.remove(0);
                     }
 
-                    update('weapon')
-                    update('armor')
-                    update('ash')
-                    update('talisman')
-                    update('goods')
+                    for(var i=0; i<savedata.characters.length; i++) {
+                        if(savedata.characters[i] !== false && savedata.characters[i].name != "") {
+                            let option = document.createElement("option");
+                            option.text = savedata.characters[i].name;
+                            option.value = i;
+                            selectEl.add(option);
+                        }
+                    }
+
+                    if(selectEl.options.length > 0) {
+                        selectEl.style.display = 'inline-block';
+                        selectEl.value = 0;
+                        renderCharacter();
+                    } else {
+                        selectEl.style.display = 'none';
+                        document.getElementById('character').style.display = 'none';
+                    }
                 }
                 reader.readAsArrayBuffer(file);
             }
 
             document.querySelector('input').addEventListener('change', showFile);
+            document.querySelector('#characters').addEventListener('change', renderCharacter);
         </script>
     </body>
 </html>
