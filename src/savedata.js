@@ -27,9 +27,14 @@ class CharacterData {
         this.lookup = {};
         Object.defineProperty(this, 'lookup', { enumerable: false });
 
-        reader.seek(0x18);
+        reader.seek(0x10);
+        this.version = reader.readInt32();
+        reader.seek(0x04, true);
         this.timePlayed = reader.readInt32();
-        reader.seek(0x30);
+        reader.seek(0x04, true);
+        console.log(this.version);
+        if(this.version > 0x51) // Newer version have an extra 16 bytes of padding
+            reader.seek(0x10, true);
 
         for(let i=0; i<0x1400; i++) { // Lookup Table
             let bytes = reader.read(0x8, false);
@@ -62,7 +67,7 @@ class CharacterData {
                     this.lookup[ref] = id;
                 }
             } else if ((bytes[0] == 0x00 && bytes[1] == 0x00 && bytes[2] == 0x00 && bytes[3] == 0x00 && bytes[4] == 0x00 && bytes[5] == 0x00 && bytes[6] == 0x00 && bytes[7] == 0x00)) {
-                //Stops earlier than Expected. Pre-1.04 saves have 2 less lookup slots... Hope they don't keep increasing them :)
+                //Stops earlier than Expected. Shouldn't really happen unless FromSoft decides to add more random bytes in the header.
                 break;
             } else {
                 reader.read(0x8);
@@ -123,10 +128,10 @@ class CharacterData {
         this.armsIndex = reader.readInt32();
         this.legsIndex = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.ring1Index = reader.readInt32();
-        this.ring2Index = reader.readInt32();
-        this.ring3Index = reader.readInt32();
-        this.ring4Index = reader.readInt32();
+        this.talisman1Index = reader.readInt32();
+        this.talisman2Index = reader.readInt32();
+        this.talisman3Index = reader.readInt32();
+        this.talisman4Index = reader.readInt32();
         reader.seek(0x4, true); // Skip
         this.stance = reader.readInt32();
         reader.seek(0x18, true); // Skip
@@ -146,10 +151,10 @@ class CharacterData {
         this.armsId = reader.readInt32();
         this.legsId = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.ring1Id = reader.readInt32();
-        this.ring2Id = reader.readInt32();
-        this.ring3Id = reader.readInt32();
-        this.ring4Id = reader.readInt32();
+        this.talisman1Id = reader.readInt32();
+        this.talisman2Id = reader.readInt32();
+        this.talisman3Id = reader.readInt32();
+        this.talisman4Id = reader.readInt32();
         reader.seek(0x4, true); // Skip
         this.leftWeapon1Lookup = reader.readUint32();
         this.rightWeapon1Lookup = reader.readUint32();
@@ -167,14 +172,14 @@ class CharacterData {
         this.armsLookup = reader.readUint32();
         this.legsLookup = reader.readUint32();
         reader.seek(0x4, true); // Skip
-        this.ring1Lookup = reader.readUint32();
-        this.ring2Lookup = reader.readUint32();
-        this.ring3Lookup = reader.readUint32();
-        this.ring4Lookup = reader.readUint32();
+        this.talisman1Lookup = reader.readUint32();
+        this.talisman2Lookup = reader.readUint32();
+        this.talisman3Lookup = reader.readUint32();
+        this.talisman4Lookup = reader.readUint32();
         reader.seek(0x4, true); // Skip
         
-        this.inventoryCount = reader.readInt32();
         this.inventory = [];
+        this.inventoryCount = reader.readInt32();
         for(let i=0; i<0xA80; i++) { // Inventory
             let item = reader.readInventoryItem(this.lookup);
             if(item.id > 0)
@@ -188,6 +193,7 @@ class CharacterData {
             if(item.id > 0)
                 this.keyitems.push(item);
         }
+
         reader.seek(0x8, true); // Skip
         this.spellIds = [];
         for(var i=0; i<0xC; i++) {
@@ -227,10 +233,10 @@ class CharacterData {
         this.armsId2 = reader.readInt32NoCategory();
         this.legsId2 = reader.readInt32NoCategory();
         reader.seek(0x4, true); // Skip
-        this.ring1Id2 = reader.readInt32NoCategory();
-        this.ring2Id2 = reader.readInt32NoCategory();
-        this.ring3Id2 = reader.readInt32NoCategory();
-        this.ring4Id2 = reader.readInt32NoCategory();
+        this.talisman1Id2 = reader.readInt32NoCategory();
+        this.talisman2Id2 = reader.readInt32NoCategory();
+        this.talisman3Id2 = reader.readInt32NoCategory();
+        this.talisman4Id2 = reader.readInt32NoCategory();
         reader.seek(0x4, true); // Skip
         this.quick1ID = reader.readInt32NoCategory();
         this.quick2ID = reader.readInt32NoCategory();
