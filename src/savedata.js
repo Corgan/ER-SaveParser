@@ -151,14 +151,17 @@ class CharacterData {
         this.ring3Id = reader.readInt32();
         this.ring4Id = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.quickSlotIds = [];
         this.leftWeapon1Lookup = reader.readUint32();
         this.rightWeapon1Lookup = reader.readUint32();
         this.leftWeapon2Lookup = reader.readUint32();
         this.rightWeapon2Lookup = reader.readUint32();
         this.leftWeapon3Lookup = reader.readUint32();
         this.rightWeapon3Lookup = reader.readUint32();
-        reader.seek(0x18, true); // TODO All 0x00
+        this.arrow1Lookup = reader.readInt32();
+        this.bolt1Lookup = reader.readInt32();
+        this.arrow2Lookup = reader.readInt32();
+        this.bolt2Lookup = reader.readInt32();
+        reader.seek(0x8, true); // TODO All 0x00
         this.headLookup = reader.readUint32();
         this.chestLookup = reader.readUint32();
         this.armsLookup = reader.readUint32();
@@ -192,7 +195,64 @@ class CharacterData {
             this.spellIds.push(spellId);
             reader.seek(0x4, true); // Skip
         }
-        console.log(reader.offset);
+
+        reader.seek(0xB8, true);
+        this.unknownBlock = {};
+        this.unknownBlockCount = reader.readInt32();
+        for(var i=0; i<this.unknownBlockCount; i++) {
+            let data = reader.read(0x4);
+            let id = data.slice(0x0, 0x4);
+            id[3] = 0;
+
+            id = new DataView(id.buffer).getUint32(0, true)
+
+            let value = reader.readInt32();
+
+            this.unknownBlock[id] = value;
+        }
+
+        this.leftWeapon1Id2 = reader.readInt32();
+        this.rightWeapon1Id2 = reader.readInt32();
+        this.leftWeapon2Id2 = reader.readInt32();
+        this.rightWeapon2Id2 = reader.readInt32();
+        this.leftWeapon3Id2 = reader.readInt32();
+        this.rightWeapon3Id2 = reader.readInt32();
+        this.arrow1Id2 = reader.readInt32();
+        this.bolt1Id2 = reader.readInt32();
+        this.arrow2Id2 = reader.readInt32();
+        this.bolt2Id2 = reader.readInt32();
+        reader.seek(0x8, true); // Skip
+        this.headId2 = reader.readInt32NoCategory();
+        this.chestId2 = reader.readInt32NoCategory();
+        this.armsId2 = reader.readInt32NoCategory();
+        this.legsId2 = reader.readInt32NoCategory();
+        reader.seek(0x4, true); // Skip
+        this.ring1Id2 = reader.readInt32NoCategory();
+        this.ring2Id2 = reader.readInt32NoCategory();
+        this.ring3Id2 = reader.readInt32NoCategory();
+        this.ring4Id2 = reader.readInt32NoCategory();
+        reader.seek(0x4, true); // Skip
+        this.quick1ID = reader.readInt32NoCategory();
+        this.quick2ID = reader.readInt32NoCategory();
+        this.quick3ID = reader.readInt32NoCategory();
+        this.quick4ID = reader.readInt32NoCategory();
+        this.quick5ID = reader.readInt32NoCategory();
+        this.quick6ID = reader.readInt32NoCategory();
+        this.quick7ID = reader.readInt32NoCategory();
+        this.quick8ID = reader.readInt32NoCategory();
+        this.quick9ID = reader.readInt32NoCategory();
+        this.quick10ID = reader.readInt32NoCategory();
+        this.pouch1ID = reader.readInt32NoCategory();
+        this.pouch2ID = reader.readInt32NoCategory();
+        this.pouch3ID = reader.readInt32NoCategory();
+        this.pouch4ID = reader.readInt32NoCategory();
+        this.pouch5ID = reader.readInt32NoCategory();
+        this.pouch6ID = reader.readInt32NoCategory();
+        reader.seek(0x4, true); // Skip
+        this.flask1ID = reader.readInt32NoCategory();
+        this.flask2ID = reader.readInt32NoCategory();
+        reader.seek(0x8, true); // Skip
+        console.log(reader.offset); // FACE DATA???
 
         this.leftWeapon1 = this.inventory.find(item => item.lookupId == this.leftWeapon1Lookup);
         this.rightWeapon1 = this.inventory.find(item => item.lookupId == this.rightWeapon1Lookup);

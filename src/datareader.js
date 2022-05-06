@@ -15,6 +15,17 @@ class DataReader {
         return data;
     }
 
+    readInt32NoCategory(consume=true) {
+        let data = this.data.slice(this.offset, this.offset + 0x4);
+        if(data[3] == 0x10 || data[3] == 0x20 || data[3] == 0x40 || data[3] == 0x80)
+            data[3] = 0;
+
+        if(consume)
+            this.offset += 4;
+
+        return new DataView(data.buffer).getInt32(0, true)
+    }
+
     readInt32(consume=true) {
         let ret = this.view.getInt32(this.offset, true);
 
