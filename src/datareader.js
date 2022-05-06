@@ -31,6 +31,22 @@ class DataReader {
         return ret;
     }
 
+    readInt16(consume=true) {
+        let ret = this.view.getInt16(this.offset, true);
+
+        if(consume)
+            this.offset += 2;
+        return ret;
+    }
+
+    readUint16(consume=true) {
+        let ret = this.view.getUint16(this.offset, true);
+
+        if(consume)
+            this.offset += 2;
+        return ret;
+    }
+
     seek(offset, relative=false) {
         if(relative) {
             this.offset += offset;
@@ -41,11 +57,13 @@ class DataReader {
 
     readInventoryItem(lookup) {
         let ref = this.read(4, false);
+        let lookupId = -1;
         let id = -1;
         let type = -1;
         let level = -1;
-        if((ref[2] == 0x80 || ref[2] == 0x81 || ref[2] == 0x8E) && (ref[3] == 0xC0 || ref[3] == 0x80 || ref[3] == 0x90)) {
-            id = lookup[this.readUint32()];
+        if((ref[3] == 0xC0 || ref[3] == 0x80 || ref[3] == 0x90)) {
+            lookupId = this.readUint32();
+            id = lookup[lookupId];
             if(ref[3] == 0x80)
                 type = "weapon";
             if(ref[3] == 0x90)
@@ -83,6 +101,10 @@ class DataReader {
             name = ashes[id];
         
         let ret = { name: name, id: id, type: type, qty: qty, handle: handle, hex: buf2hex(ref.buffer) };
+            
+        if(lookupId > -1)
+            ret.lookupId = lookupId;
+
         if(level > -1)
             ret.level = level;
         if(type == "weapon")

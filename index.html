@@ -36,6 +36,10 @@
                 <div>Unk6: <span id="unk6" class="stat"></span></div>
                 <div>Unk7: <span id="unk7" class="stat"></span></div>
             </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+                <h3 style="margin: 0;">Equipped Spells</h3>
+                <div id="spells"></div>
+            </div>
             <br/>
             <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Weapons</h3>
@@ -110,11 +114,20 @@
                     })
                 }
 
-                update('weapon', 'Weapons')
-                update('armor', 'Armor')
-                update('ash', 'Ash of War')
-                update('talisman', 'Talismans')
-                update('goods', 'Goods')
+                update('weapon')
+                update('armor')
+                update('ash')
+                update('talisman')
+                update('goods')
+
+                document.getElementById('spells').innerHTML = "";
+
+                savedata.characters[slot].spells.forEach(item => {
+                    let i = document.createElement("div");
+                    let itemString = item.name;
+                    i.appendChild(document.createTextNode(itemString));
+                    document.getElementById('spells').appendChild(i);
+                })
 
                 document.getElementById('character').querySelectorAll('.stat').forEach(el => {
                     if(el.id && savedata.characters[slot][el.id] != undefined) {

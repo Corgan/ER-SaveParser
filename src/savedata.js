@@ -1,4 +1,5 @@
 import { DataReader } from './datareader.js'
+import { buf2hex } from './util.js'
 
 class SaveData {
     constructor(data) {
@@ -7,7 +8,8 @@ class SaveData {
         
         for(let i=0; i<10; i++) {
             if(view.getInt8(i) == 1) {
-                this.characters[i] = new CharacterData(this.getSlotData(data, i));
+                let reader = new DataReader(this.getSlotData(data, i));
+                this.characters[i] = new CharacterData(reader);
             }
         }
     }
@@ -21,55 +23,53 @@ class SaveData {
 }
 
 class CharacterData {
-    constructor(data) {
-        let reader = new DataReader(data);
+    constructor(reader) {
         this.lookup = {};
         Object.defineProperty(this, 'lookup', { enumerable: false });
-        this.inventory = [];
-        this.keyitems = [];
 
         reader.seek(0x18);
         this.timePlayed = reader.readInt32();
         reader.seek(0x30);
 
-        let stopReading = false;
-        while(!stopReading) {
+        for(let i=0; i<0x1400; i++) { // Lookup Table
             let bytes = reader.read(0x8, false);
-            if((bytes[0] == 0x00 && bytes[1] == 0x00 && bytes[2] == 0x00 && bytes[3] == 0x00
-             && bytes[4] == 0x00 && bytes[5] == 0x00 && bytes[6] == 0x00 && bytes[7] == 0x00))
-             {
-                 reader.read(0x8);
-                 stopReading = true;
-             } else if(bytes[0] == 0x00 && bytes[1] == 0x00 && bytes[2] == 0x00 && bytes[3] == 0x00
-                    && bytes[4] == 0xFF && bytes[5] == 0xFF && bytes[6] == 0xFF && bytes[7] == 0xFF) {
-                reader.read(0x8);
-             } else if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
-                if(bytes[3] == 0xC0) {
+            if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
+                if(bytes[3] == 0x80) { // Weapons
                     let ref = reader.readUint32();
-                    let dat = reader.read(0x4);
-                    let id = dat.slice(0x0, 0x4);
-                    id[3] = 0;
+                    let data = reader.read(0x11);
+
+                    let id = data.slice(0x0, 0x4);
+
                     id = new DataView(id.buffer).getUint32(0, true)
                     this.lookup[ref] = id;
-                } else if(bytes[3] == 0x80) {
+                } else if(bytes[3] == 0x90) { // Armor
                     let ref = reader.readUint32();
-                    let dat = reader.read(0x11);
-                    let id = dat.slice(0x0, 0x4);
+                    let data = reader.read(0xC);
+
+                    let id = data.slice(0x0, 0x4);
+                    id[3] = 0;
+
                     id = new DataView(id.buffer).getUint32(0, true)
                     this.lookup[ref] = id;
-                } else if(bytes[3] == 0x90) {
+                } else if(bytes[3] == 0xC0) { // Ash of War
                     let ref = reader.readUint32();
-                    let dat = reader.read(0xC);
-                    let id = dat.slice(0x0, 0x4);
+                    let data = reader.read(0x4);
+
+                    let id = data.slice(0x0, 0x4);
                     id[3] = 0;
+
                     id = new DataView(id.buffer).getUint32(0, true)
                     this.lookup[ref] = id;
                 }
-             } else {
-                 console.log(buf2hex(bytes.buffer));
-                 reader.read(0x8);
+            } else if ((bytes[0] == 0x00 && bytes[1] == 0x00 && bytes[2] == 0x00 && bytes[3] == 0x00 && bytes[4] == 0x00 && bytes[5] == 0x00 && bytes[6] == 0x00 && bytes[7] == 0x00)) {
+                //Stops earlier than Expected. Pre-1.04 saves have 2 less lookup slots... Hope they don't keep increasing them :)
+                break;
+            } else {
+                reader.read(0x8);
              }
         }
+        reader.seek(0x8, true);
+
         //Character Info
         this.health = reader.readInt32();
         this.baseMaxHealth = reader.readInt32();
@@ -151,18 +151,34 @@ class CharacterData {
         this.ring3Id = reader.readInt32();
         this.ring4Id = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        reader.seek(0x18, true); // TODO Quick Slots?
+        this.quickSlotIds = [];
+        this.leftWeapon1Lookup = reader.readUint32();
+        this.rightWeapon1Lookup = reader.readUint32();
+        this.leftWeapon2Lookup = reader.readUint32();
+        this.rightWeapon2Lookup = reader.readUint32();
+        this.leftWeapon3Lookup = reader.readUint32();
+        this.rightWeapon3Lookup = reader.readUint32();
         reader.seek(0x18, true); // TODO All 0x00
-        reader.seek(0x10, true); // TODO Gestures?
+        this.headLookup = reader.readUint32();
+        this.chestLookup = reader.readUint32();
+        this.armsLookup = reader.readUint32();
+        this.legsLookup = reader.readUint32();
         reader.seek(0x4, true); // Skip
-        reader.seek(0x10, true); // TODO DPad Slots?
+        this.ring1Lookup = reader.readUint32();
+        this.ring2Lookup = reader.readUint32();
+        this.ring3Lookup = reader.readUint32();
+        this.ring4Lookup = reader.readUint32();
         reader.seek(0x4, true); // Skip
+        
         this.inventoryCount = reader.readInt32();
+        this.inventory = [];
         for(let i=0; i<0xA80; i++) { // Inventory
             let item = reader.readInventoryItem(this.lookup);
             if(item.id > 0)
                 this.inventory.push(item);
         }
+
+        this.keyitems = [];
         this.keyitemCount = reader.readInt32();
         for(let i=0; i<0x180; i++) { // Key Items
             let item = reader.readInventoryItem(this.lookup);
@@ -170,12 +186,27 @@ class CharacterData {
                 this.keyitems.push(item);
         }
         reader.seek(0x8, true); // Skip
-        this.spells = [];
-        for(var i=0; i<12; i++) {
-            this.spells.push(reader.readInt32());
+        this.spellIds = [];
+        for(var i=0; i<0xC; i++) {
+            let spellId = reader.readInt32();
+            this.spellIds.push(spellId);
             reader.seek(0x4, true); // Skip
         }
         console.log(reader.offset);
+
+        this.leftWeapon1 = this.inventory.find(item => item.lookupId == this.leftWeapon1Lookup);
+        this.rightWeapon1 = this.inventory.find(item => item.lookupId == this.rightWeapon1Lookup);
+        this.leftWeapon2 = this.inventory.find(item => item.lookupId == this.leftWeapon2Lookup);
+        this.rightWeapon2 = this.inventory.find(item => item.lookupId == this.rightWeapon2Lookup);
+        this.leftWeapon3 = this.inventory.find(item => item.lookupId == this.leftWeapon3Lookup);
+        this.rightWeapon3 = this.inventory.find(item => item.lookupId == this.rightWeapon3Lookup);
+
+        this.head = this.inventory.find(item => item.lookupId == this.headLookup);
+        this.chest = this.inventory.find(item => item.lookupId == this.chestLookup);
+        this.arms = this.inventory.find(item => item.lookupId == this.armsLookup);
+        this.legs = this.inventory.find(item => item.lookupId == this.legsLookup);
+
+        this.spells = this.spellIds.filter(spellId => spellId != -1).map(spellId => this.inventory.find(item => item.id == spellId && item.type == "goods"))
     }
 }
 
