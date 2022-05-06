@@ -9,22 +9,17 @@ http.createServer(function (req, res) {
   const parsedUrl = url.parse(req.url);
   let pathname = `.${parsedUrl.pathname}`;
 
-  if(parsedUrl.pathname == '/')
-    pathname += 'index.html'
+  if(!parsedUrl.pathname.startsWith('/src/')) {
+    if(parsedUrl.pathname.indexOf('/src/') > -1) {
+        pathname = '.' + parsedUrl.pathname.slice(parsedUrl.pathname.indexOf('/src/'));
+    } else {
+        pathname = './index.html'
+    }
+  }
   const ext = path.parse(pathname).ext;
   const map = {
-    '.ico': 'image/x-icon',
     '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.json': 'application/json',
-    '.css': 'text/css',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.wav': 'audio/wav',
-    '.mp3': 'audio/mpeg',
-    '.svg': 'image/svg+xml',
-    '.pdf': 'application/pdf',
-    '.doc': 'application/msword'
+    '.js': 'text/javascript'
   };
 
   fs.exists(pathname, function (exist) {
