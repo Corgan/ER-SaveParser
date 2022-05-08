@@ -126,7 +126,9 @@
 
         <script type="module">
             import { SaveData } from './src/savedata.js';
+            import lookup from './src/lookup.js'
 
+            window.lookup = lookup;
             window.savedata = null;
 
             function renderCharacter() {

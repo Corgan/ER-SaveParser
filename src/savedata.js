@@ -1,12 +1,10 @@
 import { DataReader } from './datareader.js'
-import lookup from './lookup.js'
 import { buf2hex } from './util.js'
 
 class SaveData {
     constructor(data) {
         let view = new DataView(data, 0x1901D04, 10);
         this.characters = new Array(10).fill(false);
-        this.lookup = lookup;
         
         for(let i=0; i<10; i++) {
             if(view.getInt8(i) == 1) {
