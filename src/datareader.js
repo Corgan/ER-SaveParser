@@ -94,24 +94,26 @@ class DataReader {
         let qty = this.readInt32();
         let handle = this.readUint32();
 
-        let name = "???";
+        let param;
         if(type == "goods")
-            name = goods[id];
+            param = goods.find(good => good.RowID == id);
         if(type == "armor")
-            name = armor[id];
+        param = armor.find(armor => armor.RowID == id);
         if(type == "weapon") {
             let weaponId = Math.trunc(id / 100) * 100;
             level = id % 100;
-            name = weapons[weaponId];
-            if(level > 0)
-                name = name + " +" + level;
+            param = weapons.find(weapon => weapon.RowID == weaponId);
         }
         if(type == "talisman")
-            name = talismans[id];
+            param = talismans.find(talisman => talisman.RowID == id);
         if(type == "ash")
-            name = ashes[id];
+            param = ashes.find(ash => ash.RowID == id);
+
+        let name;
+        if(param && param.RowName)
+            name = param.RowName;
         
-        let ret = { name: name, id: id, type: type, qty: qty, handle: handle, hex: buf2hex(ref.buffer) };
+        let ret = { name: name, id: id, type: type, qty: qty, handle: handle, hex: buf2hex(ref.buffer), params: param };
             
         if(lookupId > -1)
             ret.lookupId = lookupId;

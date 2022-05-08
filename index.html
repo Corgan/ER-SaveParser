@@ -1,5 +1,62 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+        [data-tooltip] {
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+          }
+          
+          [data-tooltip]:before,
+          [data-tooltip]:after {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+          }
+          
+          [data-tooltip]:before {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-bottom: 5px;
+            margin-left: -80px;
+            padding: 7px;
+            width: 160px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            background-color: #000;
+            background-color: hsla(0, 0%, 20%, 0.9);
+            color: #fff;
+            content: attr(data-tooltip);
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.2;
+          }
+          
+          [data-tooltip]:after {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            width: 0;
+            border-top: 5px solid #000;
+            border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
+            content: " ";
+            font-size: 0;
+            line-height: 0;
+          }
+          
+          [data-tooltip]:hover:before,
+          [data-tooltip]:hover:after {
+            visibility: visible;
+            opacity: 1;
+          }
+        </style>
+    </head>
     <body>
         <div>
             <input type="file" accept=".sl2">
@@ -43,27 +100,27 @@
             <br/>
             <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Weapons</h3>
-                <div id="weapon"></div>
+                <div id="weapon" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+            <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Armor</h3>
-                <div id="armor"></div>
+                <div id="armor" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+            <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Ash of War</h3>
-                <div id="ash"></div>
+                <div id="ash" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+            <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Talismans</h3>
-                <div id="talisman"></div>
+                <div id="talisman" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+            <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Goods</h3>
-                <div id="goods"></div>
+                <div id="goods" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
+            <div style="display: inline-block; vertical-align: top;">
                 <h3 style="margin: 0;">Key Items</h3>
-                <div id="keyitems"></div>
+                <div id="keyitems" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
             </div>
         </div>
 
@@ -77,41 +134,60 @@
 
                 if(slot < 0 || slot > 10)
                     return;
+
+                const blacklist = ['Unarmed', 'Head', 'Body', 'Arms', 'Legs'];
                 
-                let inventory = savedata.characters[slot].inventory.filter(x => x.name !== undefined);
+                let inventory = savedata.characters[slot].inventory.filter(x => x.name !== undefined && !blacklist.includes(x.name));
 
                 let keyitems = savedata.characters[slot].keyitems.filter(x => x.name !== undefined);
 
-                keyitems.sort((a,b) => {
-                    return a.name.localeCompare(b.name)
-                });
+                let sortGoods = (a,b) => {
+                    if(a.params.goodsType == b.params.goodsType) {
+                        if(a.params.sortGroupId == b.params.sortGroupId)
+                            return a.params.sortId - b.params.sortId;
+                        return a.params.sortGroupId - b.params.sortGroupId;
+                    }
+                    return a.params.goodsType - b.params.goodsType;
+                }
+
+                let renderItem = (item) => {
+                    let i = document.createElement("div");
+                    i.style.display = "inline-block";
+                    if(item.params.iconId > -1 || item.params.iconIdM > -1  || item.params.iconIdF > -1 ) {
+                        let id = item.params.iconId || item.params.iconIdM || item.params.iconIdF;
+                        let img = document.createElement('img');
+                        img.src = `images/MENU_Knowledge_${String(id).padStart(5, 0)}.png`;
+                        img.width = '48';
+                        img.height = '48';
+                        img.style.backgroundColor = "rgba(50, 50, 50, 1)";
+                        img.style.border = "1px solid black";
+                        img.style.margin = "1px 1px 0px 0px";
+                        img.style.borderRadius = "5px";
+
+                        let itemString = item.name;
+                        if(item.qty > 1)
+                            itemString += ' x' + item.qty;
+
+                        i.setAttribute('data-tooltip', itemString);
+                        i.appendChild(img);
+                    }
+                    return i;
+                }
+
+                keyitems.sort(sortGoods);
 
                 document.getElementById('keyitems').innerHTML = "";
 
-                keyitems.forEach(item => {
-                    let i = document.createElement("div");
-                    let itemString = item.name;
-                    i.appendChild(document.createTextNode(itemString));
-                    document.getElementById('keyitems').appendChild(i);
-                })
+                keyitems.forEach((item) => document.getElementById('keyitems').appendChild(renderItem(item)))
 
                 let update = (type, title) => {
                     let items = inventory.filter(x => x.type == type);
 
-                    items.sort((a,b) => {
-                        return a.name.localeCompare(b.name)
-                    });
+                    items.sort(sortGoods);
 
                     document.getElementById(type).innerHTML = "";
 
-                    items.forEach(item => {
-                        let i = document.createElement("div");
-                        let itemString = item.name;
-                        if(item.qty > 1)
-                            itemString += ' x' + item.qty;
-                        i.appendChild(document.createTextNode(itemString));
-                        document.getElementById(type).appendChild(i);
-                    })
+                    items.forEach((item) => document.getElementById(type).appendChild(renderItem(item)))
                 }
 
                 update('weapon')
@@ -122,12 +198,7 @@
 
                 document.getElementById('spells').innerHTML = "";
 
-                savedata.characters[slot].spells.forEach(item => {
-                    let i = document.createElement("div");
-                    let itemString = item.name;
-                    i.appendChild(document.createTextNode(itemString));
-                    document.getElementById('spells').appendChild(i);
-                })
+                savedata.characters[slot].spells.forEach((item) => document.getElementById('spells').appendChild(renderItem(item)))
 
                 document.getElementById('character').querySelectorAll('.stat').forEach(el => {
                     if(el.id && savedata.characters[slot][el.id] != undefined) {
