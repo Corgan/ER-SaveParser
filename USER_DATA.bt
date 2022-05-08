@@ -1,0 +1,285 @@
+typedef struct {
+    ushort ref;
+    ubyte unk;
+    ubyte type;
+    if(type == 0x80) {
+        int id;
+        FSeek(FTell() + 0xD);
+    } else if(type == 0x90) {
+        int id;
+        FSeek(FTell() + 0x8);
+    } else if(type == 0xc0) {
+        int id;
+    } else {
+        FSeek(FTell() + 0x4);
+    }
+} LookupEntry;
+
+typedef struct {
+    GUID checksum;
+    int version;
+    int playtime;
+    if(header.version > 0x51) {
+        int unk;
+        int unk;
+        int unk;
+        int unk;
+        int unk;
+        int unk;
+    }
+} Header;
+
+typedef struct {
+    int unk;
+    int unk;
+    int health;
+    int baseMaxHealth;
+    int maxHealth;
+    int mana;
+    int baseMaxMana;
+    int maxMana;
+    int unk;
+    int stamina;
+    int baseMaxStamina;
+    int maxStamina;
+    int unk;
+    int vigor;
+    int mind;
+    int endurance;
+    int strength;
+    int dexterity;
+    int intelligence;
+    int faith;
+    int arcane;
+    int unk;
+    int unk;
+    int unk;
+    int soulLevel;
+    int souls;
+    int soulMemory;
+    int unk;
+    int resist;
+    int resist;
+    int resist;
+    int resist;
+    int resist;
+    int resist;
+    int resist;
+    int unk;
+    int unk;
+    wchar_t name[0x10];
+    FSeek(FTell() + 0xFC);
+    FSeek(FTell() + 0xD0);
+} Stats;
+
+typedef struct {
+    uint id;
+    int quantity;
+    int unk;
+} Item;
+
+typedef struct {
+    uint id;
+    int bool;
+} UnkItems;
+
+typedef struct {
+    int id;
+    int unk;
+} Spell;
+
+typedef struct {
+    int leftWeapon1Index;
+    int rightWeapon1Index;
+    int leftWeapon2Index;
+    int rightWeapon2Index;
+    int leftWeapon3Index;
+    int rightWeapon3Index;
+    int arrow1Index;
+    int bolt1Index;
+    int arrow2Index;
+    int bolt2Index;
+    int unk;
+    int unk;
+    int headIndex;
+    int chestIndex;
+    int armsIndex;
+    int legsIndex;
+    int unk;
+    int talisman1Index;
+    int talisman2Index;
+    int talisman3Index;
+    int talisman4Index;
+    int unk;
+    int stance;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int leftWeapon1ID;
+    int rightWeapon1ID;
+    int leftWeapon2ID;
+    int rightWeapon2ID;
+    int leftWeapon3ID;
+    int rightWeapon3ID;
+    int arrow1ID;
+    int bolt1ID;
+    int arrow2ID;
+    int bolt2ID;
+    int unk;
+    int unk;
+    int headID;
+    int chestID;
+    int armsID;
+    int legsID;
+    int unk;
+    int talisman1ID;
+    int talisman2ID;
+    int talisman3ID;
+    int talisman4ID;
+    int unk;
+    uint leftWeapon1Lookup;
+    uint rightWeapon1Lookup;
+    uint leftWeapon2Lookup;
+    uint rightWeapon2Lookup;
+    uint leftWeapon3Lookup;
+    uint rightWeapon3Lookup;
+    uint arrow1Lookup;
+    uint bolt1Lookup;
+    uint arrow2Lookup;
+    uint bolt2Lookup;
+    int unk;
+    int unk;
+    uint headLookup;
+    uint chestLookup;
+    uint armsLookup;
+    uint legsLookup;
+    int unk;
+    uint talisman1Lookup;
+    uint talisman2Lookup;
+    uint talisman3Lookup;
+    uint talisman4Lookup;
+    int unk;
+    int inventoryCount;
+    Item inventory[0xA80];
+    int keyItemCount;
+    Item keyItems[0x180];
+    int unk;
+    int unk;
+    Spell spells[0xC];
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    uint quick1;
+    int quick1Ref;
+    uint quick2;
+    int quick2Ref;
+    uint quick3;
+    int quick3Ref;
+    uint quick4;
+    int quick4Ref;
+    uint quick5;
+    int quick5Ref;
+    uint quick6;
+    int quick6Ref;
+    uint quick7;
+    int quick7Ref;
+    uint quick8;
+    int quick8Ref;
+    uint quick9;
+    int quick9Ref;
+    uint quick10;
+    int quick10Ref;
+    int unk;
+    uint pouch1;
+    int pouch1Ref;
+    uint pouch2;
+    int pouch2Ref;
+    uint pouch3;
+    int pouch3Ref;
+    uint pouch4;
+    int pouch4Ref;
+    uint pouch5;
+    int pouch5Ref;
+    uint pouch6;
+    int pouch6Ref;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+    int unk;
+
+    int unkCount;
+    UnkItems unkitems[unkCount];
+
+    int leftWeapon1ID;
+    int rightWeapon1ID;
+    int leftWeapon2ID;
+    int rightWeapon2ID;
+    int leftWeapon3ID;
+    int rightWeapon3ID;
+    int arrow1ID;
+    int bolt1ID;
+    int arrow2ID;
+    int bolt2ID;
+    int unk;
+    int unk;
+    int headID;
+    int chestID;
+    int armsID;
+    int legsID;
+    int unk;
+    int talisman1ID;
+    int talisman2ID;
+    int talisman3ID;
+    int talisman4ID;
+    int unk;
+    int quick1ID;
+    int quick2ID;
+    int quick3ID;
+    int quick4ID;
+    int quick5ID;
+    int quick6ID;
+    int quick7ID;
+    int quick8ID;
+    int quick9ID;
+    int quick10ID;
+    int pouch1ID;
+    int pouch2ID;
+    int pouch3ID;
+    int pouch4ID;
+    int pouch5ID;
+    int pouch6ID;
+    int unk;
+    int flask1ID;
+    int flask2ID;
+    int unk;
+    int unk;
+} Items;
+
+typedef struct {
+    int unk;
+    struct { ubyte unk[0x11F]; } customizationData;
+    int unk;
+    int unk;
+} FaceData;
+
+typedef struct {
+    int storageCount;
+    Item inventory[0x800];
+    
+} Storage;
+
+Header header;
+struct { LookupEntry lookup[0x1400] <optimize=false>; } lookupTable;
+Stats stats;
+Items items;
+FaceData face;
+Storage storage;
