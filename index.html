@@ -165,6 +165,8 @@
                         img.style.borderRadius = "5px";
 
                         let itemString = item.name;
+                        if(item.level > 0)
+                            itemString += ' +' + item.level;
                         if(item.qty > 1)
                             itemString += ' x' + item.qty;
 
