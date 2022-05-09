@@ -2,60 +2,90 @@
 <html>
     <head>
         <style>
-        [data-tooltip] {
-            position: relative;
-            z-index: 2;
-            cursor: pointer;
-          }
-          
-          [data-tooltip]:before,
-          [data-tooltip]:after {
-            visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-          }
-          
-          [data-tooltip]:before {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            margin-bottom: 5px;
-            margin-left: -80px;
-            padding: 7px;
-            width: 160px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            background-color: #000;
-            background-color: hsla(0, 0%, 20%, 0.9);
-            color: #fff;
-            content: attr(data-tooltip);
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.2;
-          }
-          
-          [data-tooltip]:after {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            margin-left: -5px;
-            width: 0;
-            border-top: 5px solid #000;
-            border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-            border-right: 5px solid transparent;
-            border-left: 5px solid transparent;
-            content: " ";
-            font-size: 0;
-            line-height: 0;
-          }
-          
-          [data-tooltip]:hover:before,
-          [data-tooltip]:hover:after {
-            visibility: visible;
-            opacity: 1;
-          }
-        </style>
+    [data-tooltip] {
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
+        
+    [data-tooltip]:before,
+    [data-tooltip]:after {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+        
+    [data-tooltip]:before {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-bottom: 5px;
+        margin-left: -80px;
+        padding: 7px;
+        width: 160px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        background-color: #000;
+        background-color: hsla(0, 0%, 20%, 0.9);
+        color: #fff;
+        content: attr(data-tooltip);
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+        
+    [data-tooltip]:after {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        width: 0;
+        border-top: 5px solid #000;
+        border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+        border-right: 5px solid transparent;
+        border-left: 5px solid transparent;
+        content: " ";
+        font-size: 0;
+        line-height: 0;
+    }
+        
+    [data-tooltip]:hover:before,
+    [data-tooltip]:hover:after {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #tab-select > span {
+        display: inline-block;
+        border-radius: 2px;
+        background-color: rgba(100, 100, 100, 1);
+        font-size: 16px;
+        padding: 2px 5px;
+        margin: 1px;
+        color: white;
+    }
+
+    #tab-select > span.active {
+        font-weight: bold;
+    }
+
+    #tab-content > div:not(.active) {
+        display: none;
+    }
+
+    #tab-content > div > div {
+        width: 493px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        margin-bottom: 8px;
+        margin-top: 3px;
+        border-bottom: solid 2px black;
+    }
+    #tab-content > div > div:last-child {
+        border-bottom: none;
+    }
+          </style>
     </head>
     <body>
         <div>
@@ -98,29 +128,9 @@
                 <div id="spells"></div>
             </div>
             <br/>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Weapons</h3>
-                <div id="weapon" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
-            </div>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Armor</h3>
-                <div id="armor" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
-            </div>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Ash of War</h3>
-                <div id="ash" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
-            </div>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Talismans</h3>
-                <div id="talisman" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
-            </div>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Goods</h3>
-                <div id="goods" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
-            </div>
-            <div style="display: inline-block; vertical-align: top;">
-                <h3 style="margin: 0;">Key Items</h3>
-                <div id="keyitems" style="display: grid; grid-template-columns: repeat(6, 1fr);"></div>
+            <div id="tabs">
+                <div id="tab-select"></div>
+                <div id="tab-content"></div>
             </div>
         </div>
 
@@ -143,14 +153,7 @@
 
                 let keyitems = savedata.characters[slot].keyitems.filter(x => x.name !== undefined);
 
-                let sortGoods = (a,b) => {
-                    if(a.params.goodsType == b.params.goodsType) {
-                        if(a.params.sortGroupId == b.params.sortGroupId)
-                            return a.params.sortId - b.params.sortId;
-                        return a.params.sortGroupId - b.params.sortGroupId;
-                    }
-                    return a.params.goodsType - b.params.goodsType;
-                }
+                let sortGroup = (a,b) => { return a.params.sortId - b.params.sortId; }
 
                 let renderItem = (item) => {
                     let i = document.createElement("div");
@@ -159,8 +162,6 @@
                         let id = item.params.iconId || item.params.iconIdM || item.params.iconIdF;
                         let img = document.createElement('img');
                         img.src = `images/MENU_Knowledge_${String(id).padStart(5, 0)}.png`;
-                        img.width = '48';
-                        img.height = '48';
                         img.style.backgroundColor = "rgba(50, 50, 50, 1)";
                         img.style.border = "1px solid black";
                         img.style.margin = "1px 1px 0px 0px";
@@ -169,8 +170,15 @@
                         let itemString = item.name;
                         if(item.level > 0)
                             itemString += ' +' + item.level;
-                        if(item.qty > 1)
-                            itemString += ' x' + item.qty;
+                        if(item.qty > 1) {
+                            let qty = document.createElement("div");
+                            qty.style.position = 'absolute';
+                            qty.style.bottom = '8px';
+                            qty.style.right = '8px';
+                            qty.style.color = 'white';
+                            qty.appendChild(document.createTextNode(item.qty));
+                            i.appendChild(qty);
+                        }
 
                         i.setAttribute('data-tooltip', itemString);
                         i.appendChild(img);
@@ -178,11 +186,26 @@
                     return i;
                 }
 
-                keyitems.sort(sortGoods);
+                let tabs = {};
 
-                document.getElementById('keyitems').innerHTML = "";
-
-                keyitems.forEach((item) => document.getElementById('keyitems').appendChild(renderItem(item)))
+                tabs.tools = { name: "Tools", data: inventory.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3) };
+                tabs.ashes = { name: "Ashes", data: inventory.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8) };
+                tabs.crafting = { name: "Crafting Materials", data: inventory.filter(item => item.params.goodsType == 2) };
+                tabs.bolstering = { name: "Bolstering Materials", data: inventory.filter(item => item.params.goodsType == 14) };
+                tabs.keyitems = { name: "Key Items", data: inventory.filter(item => item.params.goodsType == 10 || item.params.goodsType == 11).concat(keyitems) };
+                tabs.sorceries = { name: "Sorceries", data: inventory.filter(item => item.params.goodsType == 5 || item.params.goodsType == 17) };
+                tabs.incantations = { name: "Incantations", data: inventory.filter(item => item.params.goodsType == 16 || item.params.goodsType == 18) };
+                tabs.ashofwar = { name: "Ashes of War", data: inventory.filter(item => item.type == "ash") };
+                tabs.melee = { name: "Melee Armaments", data: inventory.filter(item => [1,3,5,7,9,11,13,14,15,16,17,19,2123,24,25,28,29,31,33,35,37,39,41].includes(item.params.wepType)) };
+                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", data: inventory.filter(item => [50,51,53,55,56,57,59,61].includes(item.params.wepType)) };
+                tabs.arrowbolts = { name: "Arrows/Bolts", data: inventory.filter(item => [81,83,85,86].includes(item.params.wepType)) };
+                tabs.shields = { name: "Shields", data: inventory.filter(item => [65,67,69,87].includes(item.params.wepType)) };
+                tabs.head = { name: "Head", data: inventory.filter(item => item.params.protectorCategory == 0) };
+                tabs.chest = { name: "Chest", data: inventory.filter(item => item.params.protectorCategory == 1) };
+                tabs.arms = { name: "Arms", data: inventory.filter(item => item.params.protectorCategory == 2) };
+                tabs.legs = { name: "Legs", data: inventory.filter(item => item.params.protectorCategory == 3) };
+                tabs.talismans = { name: "Talismans", data: inventory.filter(item => item.params.accessoryCategory == 0) };
+                tabs.info = { name: "Info", data: inventory.filter(item => item.params.goodsType == 12) };
 
                 let update = (type, title) => {
                     let items = inventory.filter(x => x.type == type);
@@ -194,11 +217,48 @@
                     items.forEach((item) => document.getElementById(type).appendChild(renderItem(item)))
                 }
 
-                update('weapon')
+                let tabSelect = document.getElementById('tab-select');
+                tabSelect.innerHTML = '';
+                let tabContent = document.getElementById('tab-content')
+                tabContent.innerHTML = '';
+
+                Object.entries(tabs).forEach(([id, tab], i) => {
+                    let tabTitle = document.createElement('span');
+                    if(i == 0)
+                        tabTitle.classList.add('active');
+                    tabTitle.appendChild(document.createTextNode(tab.name));
+                    tabSelect.appendChild(tabTitle);
+                    tabTitle.addEventListener('click', e => {
+                        let selectChildren = [...tabSelect.children];
+                        let contentChildren = [...tabContent.children];
+                        let oldIndex = selectChildren.findIndex(e => e.classList.contains('active'));
+                        let newIndex = selectChildren.indexOf(e.target);
+                        selectChildren[oldIndex].classList.remove('active');
+                        contentChildren[oldIndex].classList.remove('active');
+                        selectChildren[newIndex].classList.add('active');
+                        contentChildren[newIndex].classList.add('active');
+                    })
+
+                    let tabEl = document.createElement('div');
+                    if(i == 0)
+                        tabEl.classList.add('active');
+                    
+                    let items = new Set(tab.data.map(item => item.params.sortGroupId));
+                    new Array(...items).sort((a,b) => a-b).forEach(groupId => {
+                        let group = document.createElement('div');
+                        tab.data.filter(item => item.params.sortGroupId == groupId).sort(sortGroup).forEach(item => {
+                            group.appendChild(renderItem(item));
+                        })
+                        tabEl.appendChild(group);
+                    })
+                    tabContent.appendChild(tabEl);
+                });
+
+                /*update('weapon')
                 update('armor')
                 update('ash')
                 update('talisman')
-                update('goods')
+                update('goods')*/
 
                 document.getElementById('spells').innerHTML = "";
 
