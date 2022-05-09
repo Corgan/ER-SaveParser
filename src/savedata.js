@@ -100,13 +100,13 @@ class CharacterData {
         this.runes = reader.readInt32();
         this.runeMemory = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.unk1 = reader.readInt32(); // These are likely resistances?
-        this.unk2 = reader.readInt32();
-        this.unk3 = reader.readInt32();
-        this.unk4 = reader.readInt32();
-        this.unk5 = reader.readInt32();
-        this.unk6 = reader.readInt32();
-        this.unk7 = reader.readInt32();
+        this.immunity = reader.readInt32();
+        this.immunity2 = reader.readInt32();
+        this.robustness = reader.readInt32();
+        this.vitality = reader.readInt32();
+        this.robustness2 = reader.readInt32();
+        this.focus = reader.readInt32();
+        this.focus2 = reader.readInt32();
         reader.seek(0x8, true); // Skip
         let name = new Uint16Array(reader.read(0x20).buffer);
         this.name = String.fromCharCode.apply(null, name.slice(0, name.indexOf(0)));
