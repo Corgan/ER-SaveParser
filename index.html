@@ -1,90 +1,195 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="module" src="src/tooltipper.js"></script>
         <style>
-    [data-tooltip] {
-        position: relative;
-        z-index: 2;
-        cursor: pointer;
-    }
-        
-    [data-tooltip]:before,
-    [data-tooltip]:after {
-        visibility: hidden;
-        opacity: 0;
-        pointer-events: none;
-    }
-        
-    [data-tooltip]:before {
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        margin-bottom: 5px;
-        margin-left: -80px;
-        padding: 7px;
-        width: 160px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        background-color: #000;
-        background-color: hsla(0, 0%, 20%, 0.9);
-        color: #fff;
-        content: attr(data-tooltip);
-        text-align: center;
-        font-size: 14px;
-        line-height: 1.2;
-    }
-        
-    [data-tooltip]:after {
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        margin-left: -5px;
-        width: 0;
-        border-top: 5px solid #000;
-        border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        content: " ";
-        font-size: 0;
-        line-height: 0;
-    }
-        
-    [data-tooltip]:hover:before,
-    [data-tooltip]:hover:after {
-        visibility: visible;
-        opacity: 1;
-    }
+tooltip {
+    background-color: #424242;
+    color: #fff;
+    border-radius: 0.125rem;
+    line-height: 24px;
+    height: 24px;
+    white-space: nowrap;
+    padding: 0 0.5rem;
+    pointer-events: none;
+    transform-origin: center;
+    z-index: 999;
+}
 
-    #tab-select > span {
-        display: inline-block;
-        border-radius: 2px;
-        background-color: rgba(100, 100, 100, 1);
-        font-size: 16px;
-        padding: 2px 5px;
-        margin: 1px;
-        color: white;
-    }
+.item-icon {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    height: 96px;
+    width: 96px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(50, 50, 50, 1);
+}
 
-    #tab-select > span.active {
-        font-weight: bold;
-    }
+.item-icon > .qty {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    color: white;
+}
 
-    #tab-content > div:not(.active) {
-        display: none;
-    }
+#character {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    align-items: start;
+    grid-template-areas:
+        'stats inventory'
+        'equipment inventory'
+        'empty inventory';
+    grid-gap: 10px;
+}
 
-    #tab-content > div > div {
-        width: 493px;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        margin-bottom: 8px;
-        margin-top: 3px;
-        border-bottom: solid 2px black;
-    }
-    #tab-content > div > div:last-child {
-        border-bottom: none;
-    }
+#character-stats {
+    grid-area: stats;
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-template-areas: 
+        'name empty'
+        'statsleft statsright';
+    grid-gap: 5px;
+}
+
+#character-equipment {
+    grid-area: equipment;
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-template-areas: 
+        'weapons spells'
+        'armor spells'
+        'talismans pouch'
+        'quick pouch';
+    grid-gap: 5px;
+}
+
+#character.hide {
+    display: none;
+}
+
+#character #name {
+    grid-area: name;
+}
+
+#character #statsLeft {
+    grid-area: statsleft;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#character #statsRight {
+    grid-area: statsright;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#character #weapons {
+    grid-area: weapons;
+    display: grid;
+    grid-template-rows: repeat(2, 96px);
+    grid-template-columns: repeat(5, 96px);
+    grid-gap: 2px;
+}
+
+#character #armor {
+    grid-area: armor;
+    display: grid;
+    grid-template-rows: repeat(1, 96px);
+    grid-template-columns: repeat(4, 96px);
+    grid-gap: 2px;
+}
+
+#character #equipped-talismans {
+    grid-area: talismans;
+    display: grid;
+    grid-template-rows: repeat(1, 96px);
+    grid-template-columns: repeat(4, 96px);
+    grid-gap: 2px;
+}
+
+#character #equipped-spells {
+    grid-area: spells;
+    display: grid;
+    grid-template-rows: repeat(2, 96px);
+    grid-template-columns: repeat(6, 96px);
+    grid-gap: 2px;
+}
+
+#character #equipped-quick {
+    grid-area: quick;
+    display: grid;
+    grid-template-rows: repeat(2, 96px);
+    grid-template-columns: repeat(5, 96px);
+    grid-gap: 2px;
+}
+
+#character #equipped-pouch {
+    grid-area: pouch;
+    display: grid;
+    grid-template-rows: repeat(3, 96px);
+    grid-template-columns: repeat(2, 96px);
+    grid-gap: 2px;
+    align-self: end;
+}
+
+#character #character-inventory {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-area: inventory;
+    grid-gap: 10px;
+}
+
+#tab-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+
+#tab-select > .title {
+    display: inline-block;
+    border-radius: 2px;
+    background-color: rgba(100, 100, 100, 1);
+    font-size: 16px;
+    padding: 2px 5px;
+    color: white;
+}
+
+#tab-select > .title.active {
+    font-weight: bold;
+}
+
+#tab-content {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-gap: 10px;
+}
+
+#tab-content > .tab:not(.active) {
+    display: none;
+}
+
+#tab-content .tab {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-gap: 10px;
+}
+
+#tab-content .tab .group {
+    display: grid;
+    grid-template-columns: repeat(5, 96px);
+    grid-auto-rows: auto;
+    grid-gap: 2px;
+}
           </style>
     </head>
     <body>
@@ -93,39 +198,59 @@
             <select id="characters" style="display: none;"></select>
         </div>
 
-        <div id="character" style="display: none;">
-            <h2 id="name" class="stat" style="margin: 0;"></h2>
-            <br/>
-            <div style="display: inline-block; vertical-align: top;">
-                <div>Level: <span id="runeLevel" class="stat"></span></div>
-                <div>Runes: <span id="runes" class="stat"></span></div>
-                <div>Rune Memory: <span id="runeMemory" class="stat"></span></div>
-                <br/>
-                <div>Health: <span id="maxHealth" class="stat"></span></div>
-                <div>Mana: <span id="maxMana" class="stat"></span></div>
-                <div>Stamina: <span id="maxStamina" class="stat"></span></div>
-                <br/>
-                <div>Vigor: <span id="vigor" class="stat"></span></div>
-                <div>Mind: <span id="mind" class="stat"></span></div>
-                <div>Endurance: <span id="endurance" class="stat"></span></div>
-                <div>Strength: <span id="strength" class="stat"></span></div>
-                <div>Dexterity: <span id="dexterity" class="stat"></span></div>
-                <div>Intelligence: <span id="intelligence" class="stat"></span></div>
-                <div>Faith: <span id="faith" class="stat"></span></div>
-                <div>Arcane: <span id="arcane" class="stat"></span></div>
+        <div id="character" class="hide">
+            <div id="character-stats">
+                <h2 id="name" class="stat" style="margin: 0;"></h2>
+                <div id="statsLeft">
+                    <div>Level: <span id="stats-runeLevel" class="stat"></span></div>
+                    <div>Runes: <span id="stats-runes" class="stat"></span></div>
+                    <div>Rune Memory: <span id="stats-runeMemory" class="stat"></span></div>
+                    <br/>
+                    <div>Vigor: <span id="stats-vigor" class="stat"></span></div>
+                    <div>Mind: <span id="stats-mind" class="stat"></span></div>
+                    <div>Endurance: <span id="stats-endurance" class="stat"></span></div>
+                    <div>Strength: <span id="stats-strength" class="stat"></span></div>
+                    <div>Dexterity: <span id="stats-dexterity" class="stat"></span></div>
+                    <div>Intelligence: <span id="stats-intelligence" class="stat"></span></div>
+                    <div>Faith: <span id="stats-faith" class="stat"></span></div>
+                    <div>Arcane: <span id="stats-arcane" class="stat"></span></div>
+                </div>
+                <div id="statsRight">
+                    <div>HP: <span id="stats-maxHealth" class="stat"></span></div>
+                    <div>FP: <span id="stats-maxMana" class="stat"></span></div>
+                    <div>Stamina: <span id="stats-maxStamina" class="stat"></span></div>
+                    <br/>
+                    <div>Immunity: <span id="stats-immunity" class="stat"></span></div>
+                    <div>Robustness: <span id="stats-robustness" class="stat"></span></div>
+                    <div>Vitality: <span id="stats-vitality" class="stat"></span></div>
+                    <div>Focus: <span id="stats-focus" class="stat"></span></div>
+                </div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
-                <div>Immunity: <span id="immunity" class="stat"></span></div>
-                <div>Robustness: <span id="robustness" class="stat"></span></div>
-                <div>Vitality: <span id="vitality" class="stat"></span></div>
-                <div>Focus: <span id="focus" class="stat"></span></div>
+            <div id="character-equipment">
+                <div id="weapons">
+                    <div id="equipped-rightWeapon1" class="stat"></div>
+                    <div id="equipped-rightWeapon2" class="stat"></div>
+                    <div id="equipped-rightWeapon3" class="stat"></div>
+                    <div id="equipped-arrow1" class="stat"></div>
+                    <div id="equipped-arrow2" class="stat"></div>
+                    <div id="equipped-leftWeapon1" class="stat"></div>
+                    <div id="equipped-leftWeapon2" class="stat"></div>
+                    <div id="equipped-leftWeapon3" class="stat"></div>
+                    <div id="equipped-bolt1" class="stat"></div>
+                    <div id="equipped-bolt2" class="stat"></div>
+                </div>
+                <div id="armor">
+                    <div id="equipped-head" class="stat"></div>
+                    <div id="equipped-chest" class="stat"></div>
+                    <div id="equipped-arms" class="stat"></div>
+                    <div id="equipped-legs" class="stat"></div>
+                </div>
+                <div id="equipped-talismans" class="stat"></div>
+                <div id="equipped-quick" class="stat"></div>
+                <div id="equipped-spells" class="stat"></div>
+                <div id="equipped-pouch" class="stat"></div>
             </div>
-            <div style="display: inline-block; vertical-align: top; margin-left: 20px;">
-                <h3 style="margin: 0;">Equipped Spells</h3>
-                <div id="spells"></div>
-            </div>
-            <br/>
-            <div id="tabs">
+            <div id="character-inventory">
                 <div id="tab-select"></div>
                 <div id="tab-content"></div>
             </div>
@@ -138,81 +263,102 @@
             window.lookup = lookup;
             window.savedata = null;
 
+            function createElement(tagName, options={}) {
+                const elem = document.createElement(tagName);
+                if (options.className !== undefined)
+                    elem.className = options.className;
+                if (options.classList !== undefined)
+                    elem.classList.add(...options.classList);
+                if (options.text !== undefined)
+                    elem.textContent = options.text;
+                if (options.parent !== undefined)
+                    options.parent.appendChild(elem);
+                if (options.children !== undefined)
+                    elem.append(...options.children);
+                if (options.style !== undefined)
+                    options.style.forEach(([name,value]) => elem.style[name] = value);
+                if (options.attributes !== undefined)
+                    options.attributes.forEach(([name,value]) => elem.setAttribute(name, value));
+                if (options.id !== undefined)
+                    elem.id = options.id;
+                return elem;
+            }
+
             function renderCharacter() {
                 let slot = parseInt(document.querySelector('#characters').value);
 
                 if(slot < 0 || slot > 10)
                     return;
 
-                const blacklist = ['Unarmed', 'Head', 'Body', 'Arms', 'Legs'];
-                
-                let inventory = savedata.characters[slot].inventory.filter(x => x.name !== undefined && !blacklist.includes(x.name));
-
-                let keyitems = savedata.characters[slot].keyitems.filter(x => x.name !== undefined);
+                let character = savedata.characters[slot];
 
                 let sortGroup = (a,b) => { return a.params.sortId - b.params.sortId; }
 
-                let renderItem = (item) => {
-                    let i = document.createElement("div");
-                    i.style.display = "inline-block";
-                    if(item.params.iconId > -1 || item.params.iconIdM > -1  || item.params.iconIdF > -1 ) {
-                        let id = item.params.iconId || item.params.iconIdM || item.params.iconIdF;
-                        let img = document.createElement('img');
-                        img.src = `images/MENU_Knowledge_${String(id).padStart(5, 0)}.png`;
-                        img.style.backgroundColor = "rgba(50, 50, 50, 1)";
-                        img.style.border = "1px solid black";
-                        img.style.margin = "1px 1px 0px 0px";
-                        img.style.borderRadius = "5px";
+                let renderItem = (item, slotName="Empty") => {
+                    if(!item || !item.params)
+                        return createElement("div", {
+                        classList: ['item-icon'],
+                        attributes: [
+                            ['tooltip', item && item.name || slotName]
+                        ]
+                    });
+                    let icon = createElement("div", {
+                        classList: ['item-icon'],
+                        style: [
+                            ['backgroundImage', `url('images/MENU_Knowledge_${String(item.params.iconId || item.params.iconIdM || item.params.iconIdF).padStart(5, 0)}.png')`]
+                        ],
+                        attributes: [
+                            ['tooltip', `${item.name}${item.level > 0 ? `+ ${item.level}` : ''}`]
+                        ]
+                    });
 
-                        let itemString = item.name;
-                        if(item.level > 0)
-                            itemString += ' +' + item.level;
-                        if(item.qty > 1) {
-                            let qty = document.createElement("div");
-                            qty.style.position = 'absolute';
-                            qty.style.bottom = '8px';
-                            qty.style.right = '8px';
-                            qty.style.color = 'white';
-                            qty.appendChild(document.createTextNode(item.qty));
-                            i.appendChild(qty);
-                        }
-
-                        i.setAttribute('data-tooltip', itemString);
-                        i.appendChild(img);
+                    if(item.qty > 1) {
+                        createElement('div', {
+                            classList: ['qty'],
+                            text: item.qty,
+                            parent: icon
+                        })
                     }
-                    return i;
+                    return icon;
                 }
+
+                document.getElementById('character').querySelectorAll('.stat').forEach(el => {
+                    if(el.id) {
+                        let stat = el.id.split('-').reduce((stat, name) => stat[name], character);
+                        if(Array.isArray(stat)) {
+                            el.innerHTML = '';
+                            stat.forEach(item => el.appendChild(renderItem(item)));
+                        } else if (typeof stat == "object") {
+                            el.innerHTML = '';
+                            el.appendChild(renderItem(stat));
+                        } else if(stat !== undefined) {
+                            el.innerHTML = stat;
+                        } else {
+                            el.innerHTML = '';
+                            el.appendChild(renderItem(stat));
+                        }
+                    }
+                })
 
                 let tabs = {};
-
-                tabs.tools = { name: "Tools", data: inventory.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3) };
-                tabs.ashes = { name: "Ashes", data: inventory.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8) };
-                tabs.crafting = { name: "Crafting Materials", data: inventory.filter(item => item.params.goodsType == 2) };
-                tabs.bolstering = { name: "Bolstering Materials", data: inventory.filter(item => item.params.goodsType == 14) };
-                tabs.keyitems = { name: "Key Items", data: inventory.filter(item => item.params.goodsType == 10 || item.params.goodsType == 11).concat(keyitems) };
-                tabs.sorceries = { name: "Sorceries", data: inventory.filter(item => item.params.goodsType == 5 || item.params.goodsType == 17) };
-                tabs.incantations = { name: "Incantations", data: inventory.filter(item => item.params.goodsType == 16 || item.params.goodsType == 18) };
-                tabs.ashofwar = { name: "Ashes of War", data: inventory.filter(item => item.type == "ash") };
-                tabs.melee = { name: "Melee Armaments", data: inventory.filter(item => [1,3,5,7,9,11,13,14,15,16,17,19,2123,24,25,28,29,31,33,35,37,39,41].includes(item.params.wepType)) };
-                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", data: inventory.filter(item => [50,51,53,55,56,57,59,61].includes(item.params.wepType)) };
-                tabs.arrowbolts = { name: "Arrows/Bolts", data: inventory.filter(item => [81,83,85,86].includes(item.params.wepType)) };
-                tabs.shields = { name: "Shields", data: inventory.filter(item => [65,67,69,87].includes(item.params.wepType)) };
-                tabs.head = { name: "Head", data: inventory.filter(item => item.params.protectorCategory == 0) };
-                tabs.chest = { name: "Chest", data: inventory.filter(item => item.params.protectorCategory == 1) };
-                tabs.arms = { name: "Arms", data: inventory.filter(item => item.params.protectorCategory == 2) };
-                tabs.legs = { name: "Legs", data: inventory.filter(item => item.params.protectorCategory == 3) };
-                tabs.talismans = { name: "Talismans", data: inventory.filter(item => item.params.accessoryCategory == 0) };
-                tabs.info = { name: "Info", data: inventory.filter(item => item.params.goodsType == 12) };
-
-                let update = (type, title) => {
-                    let items = inventory.filter(x => x.type == type);
-
-                    items.sort(sortGoods);
-
-                    document.getElementById(type).innerHTML = "";
-
-                    items.forEach((item) => document.getElementById(type).appendChild(renderItem(item)))
-                }
+                tabs.tools = { name: "Tools", data: character.inventory.tools };
+                tabs.ashes = { name: "Ashes", data: character.inventory.ashes };
+                tabs.crafting = { name: "Crafting Materials", data: character.inventory.crafting };
+                tabs.bolstering = { name: "Bolstering Materials", data: character.inventory.bolstering };
+                tabs.keyitems = { name: "Key Items", data: character.inventory.keyitems };
+                tabs.sorceries = { name: "Sorceries", data: character.inventory.sorceries };
+                tabs.incantations = { name: "Incantations", data: character.inventory.incantations };
+                tabs.ashofwar = { name: "Ashes of War", data: character.inventory.ashofwar };
+                tabs.melee = { name: "Melee Armaments", data: character.inventory.melee };
+                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", data:  character.inventory.rangedcatalyst };
+                tabs.arrowbolts = { name: "Arrows/Bolts", data: character.inventory.arrowbolts };
+                tabs.shields = { name: "Shields", data: character.inventory.shields };
+                tabs.head = { name: "Head", data: character.inventory.head };
+                tabs.chest = { name: "Chest", data: character.inventory.chest };
+                tabs.arms = { name: "Arms", data: character.inventory.arms };
+                tabs.legs = { name: "Legs", data: character.inventory.legs };
+                tabs.talismans = { name: "Talismans", data: character.inventory.talismans };
+                tabs.info = { name: "Info", data: character.inventory.info };
 
                 let tabSelect = document.getElementById('tab-select');
                 tabSelect.innerHTML = '';
@@ -221,10 +367,11 @@
 
                 Object.entries(tabs).forEach(([id, tab], i) => {
                     let tabTitle = document.createElement('span');
+                    tabTitle.classList.add('title');
                     if(i == 0)
                         tabTitle.classList.add('active');
+
                     tabTitle.appendChild(document.createTextNode(tab.name));
-                    tabSelect.appendChild(tabTitle);
                     tabTitle.addEventListener('click', e => {
                         let selectChildren = [...tabSelect.children];
                         let contentChildren = [...tabContent.children];
@@ -234,15 +381,18 @@
                         contentChildren[oldIndex].classList.remove('active');
                         selectChildren[newIndex].classList.add('active');
                         contentChildren[newIndex].classList.add('active');
-                    })
+                    });
+                    tabSelect.appendChild(tabTitle);
 
                     let tabEl = document.createElement('div');
+                    tabEl.classList.add('tab');
                     if(i == 0)
                         tabEl.classList.add('active');
                     
                     let items = new Set(tab.data.map(item => item.params.sortGroupId));
-                    new Array(...items).sort((a,b) => a-b).forEach(groupId => {
+                    Array.from(items).sort((a,b) => a-b).forEach(groupId => {
                         let group = document.createElement('div');
+                        group.classList.add('group');
                         tab.data.filter(item => item.params.sortGroupId == groupId).sort(sortGroup).forEach(item => {
                             group.appendChild(renderItem(item));
                         })
@@ -251,22 +401,7 @@
                     tabContent.appendChild(tabEl);
                 });
 
-                /*update('weapon')
-                update('armor')
-                update('ash')
-                update('talisman')
-                update('goods')*/
-
-                document.getElementById('spells').innerHTML = "";
-
-                savedata.characters[slot].spells.forEach((item) => document.getElementById('spells').appendChild(renderItem(item)))
-
-                document.getElementById('character').querySelectorAll('.stat').forEach(el => {
-                    if(el.id && savedata.characters[slot][el.id] != undefined) {
-                        el.innerHTML = savedata.characters[slot][el.id];
-                    }
-                })
-                document.getElementById('character').style.display = 'block';
+                document.getElementById('character').classList.remove('hide');
             }
 
             function showFile() {

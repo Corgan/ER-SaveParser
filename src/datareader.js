@@ -1,4 +1,4 @@
-import { weapons, armor, goods, talismans, ashes } from './lookup.js'
+import { weapons, armor, goods, talismans, ashofwar } from './lookup.js'
 import { buf2hex } from './util.js'
 
 class DataReader {
@@ -80,7 +80,7 @@ class DataReader {
             if(ref[3] == 0x90)
                 type = "armor";
             if(ref[3] == 0xC0)
-                type = "ash";
+                type = "ashofwar";
         } else {
             let dat = this.read(4);
             id = dat.slice(0x0, 0x4);
@@ -106,8 +106,8 @@ class DataReader {
         }
         if(type == "talisman")
             param = talismans.find(talisman => talisman.RowID == id);
-        if(type == "ash")
-            param = ashes.find(ash => ash.RowID == id);
+        if(type == "ashofwar")
+            param = ashofwar.find(ash => ash.RowID == id);
 
         let name;
         if(param && param.RowName)
@@ -122,6 +122,8 @@ class DataReader {
             ret.level = level;
         if(type == "weapon")
             ret.base = Math.trunc(id / 10000) * 10000;
+        if(type == "goods" && (param.goodsType == 7 || param.goodsType == 8))
+            ret.base = Math.trunc(id / 100) * 100;
         return ret;
     }
 }

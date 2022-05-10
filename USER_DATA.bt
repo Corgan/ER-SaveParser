@@ -277,9 +277,28 @@ typedef struct {
     
 } Storage;
 
-Header header;
-struct { LookupEntry lookup[0x1400] <optimize=false>; } lookupTable;
-Stats stats;
-Items items;
-FaceData face;
-Storage storage;
+
+typedef struct {
+    int flagsCount;
+    int flags[flagsCount];
+} UnkFlags;
+
+local int i;
+for(i = 0; i < 10; i++) {
+    FSeek(0x300 + 0x280010 * i);
+    struct {
+        Header header;
+        if(header.version > 0) {
+            struct { LookupEntry lookup[0x1400] <optimize=false>; } lookupTable;
+            Stats stats;
+            Items items;
+            FaceData face;
+            Storage storage;
+            int unk1[67];
+            UnkFlags unkFlags;
+            int unk2[8];
+            ubyte count;
+            struct { int unk; int unk; int unk; int unk; } unk[count];
+        }
+    } character;
+}
