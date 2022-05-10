@@ -354,7 +354,7 @@
 3051100 Flamberge [Blood]
 3051200 Flamberge [Occult]
 3060000 Ordovis's Greatsword
-3070000 Onyx Lord's Sword
+3070000 Alabaster Lord's Sword
 3080000 Banished Knight's Greatsword
 3080100 Banished Knight's Greatsword [Heavy]
 3080200 Banished Knight's Greatsword [Keen]
@@ -1520,7 +1520,7 @@
 16151100 Iron Spear [Blood]
 16151200 Iron Spear [Occult]
 16160000 Rotten Crystal Spear
-17010000 Sacred Mohgwyn's Spear
+17010000 Mohgwyn's Sacred Spear
 17020000 Siluria's Tree
 17030000 Serpent-Hunter
 17050000 Vyke's War Spear
