@@ -64,7 +64,7 @@ tooltip {
     grid-auto-rows: max-content;
     grid-template-areas: 
         'weapons spells'
-        'armor spells'
+        'armor flask'
         'talismans pouch'
         'quick pouch';
     grid-gap: 5px;
@@ -128,6 +128,15 @@ tooltip {
     grid-template-rows: repeat(2, 96px);
     grid-template-columns: repeat(5, 96px);
     grid-gap: 2px;
+}
+
+#character #equipped-flask {
+    grid-area: flask;
+    display: grid;
+    grid-template-rows: repeat(1, 96px);
+    grid-template-columns: repeat(2, 96px);
+    grid-gap: 2px;
+    align-self: end;
 }
 
 #character #equipped-pouch {
@@ -249,6 +258,7 @@ tooltip {
                 <div id="equipped-quick" class="stat"></div>
                 <div id="equipped-spells" class="stat"></div>
                 <div id="equipped-pouch" class="stat"></div>
+                <div id="equipped-flask" class="stat"></div>
             </div>
             <div id="character-inventory">
                 <div id="tab-select"></div>

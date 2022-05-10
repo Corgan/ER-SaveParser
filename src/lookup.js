@@ -22,6 +22,7 @@ let armor = await parseParams('EquipParamProtector');
 let goods = await parseParams('EquipParamGoods');
 let talismans = await parseParams('EquipParamAccessory');
 let ashofwar = await parseParams('EquipParamGem');
+let mapDrops = await parseParams('ItemLotParam_map');
 
-let all = { weapons, armor, goods, talismans, ashofwar };
-export { all as default, weapons, armor, goods, talismans, ashofwar };
+let all = { weapons, armor, goods, talismans, ashofwar, mapDrops };
+export { all as default, weapons, armor, goods, talismans, ashofwar, mapDrops };

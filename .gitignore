@@ -1,4 +1,9 @@
+node_modules/
+
 texconv.exe
+dcx/
+dds/
+
 yabber/
 
 !yapped/
@@ -19,9 +24,5 @@ yapped/Paramdex/ER/Names/*
 !yapped/Paramdex/ER/Names/EquipParamGoods.txt
 !yapped/Paramdex/ER/Names/EquipParamProtector.txt
 !yapped/Paramdex/ER/Names/EquipParamWeapon.txt
-!yapped/Paramdex/ER/Names/Magic.txt
 !yapped/Paramdex/ER/Names/SwordArtsParam.txt
-
-dcx/
-dds/
-node_modules/
+!yapped/Paramdex/ER/Names/Magic.txt
