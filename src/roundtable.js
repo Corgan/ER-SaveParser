@@ -10,7 +10,6 @@ let roundtable = {
     tools: {},
 };
 
-// Weapons
 roundtable.weapons[1000000] = 'weapons_3_1';
 roundtable.weapons[1010000] = 'weapons_3_2';
 roundtable.weapons[1020000] = 'weapons_3_3';
@@ -388,8 +387,6 @@ roundtable.weapons[43080000] = 'weapons_7_6';
 roundtable.weapons[43110000] = 'weapons_7_7';
 roundtable.weapons[44000000] = 'weapons_2_1';
 roundtable.weapons[44010000] = 'weapons_2_2';
-
-// Armor
 roundtable.armor[40000] = 'armor_297';
 roundtable.armor[40100] = 'armor_298';
 roundtable.armor[40200] = 'armor_299';
@@ -880,9 +877,7 @@ roundtable.armor[2000300] = 'armor_269';
 roundtable.armor[2010000] = 'armor_50';
 roundtable.armor[2020000] = 'armor_48';
 roundtable.armor[2030000] = 'armor_69';
-
-// Talismans
-roundtable.talismans[1000] = 'talismans_2_1';
+roundtable.talismans[1000] = 'talismans_1_1';
 roundtable.talismans[1001] = 'talismans_7_1';
 roundtable.talismans[1002] = 'talismans_12_1';
 roundtable.talismans[1010] = 'talismans_4_6';
@@ -996,8 +991,6 @@ roundtable.talismans[6060] = 'talismans_7_9';
 roundtable.talismans[6080] = 'talismans_3_2';
 roundtable.talismans[6090] = 'talismans_3_3';
 roundtable.talismans[6110] = 'talismans_3_4';
-
-// Sorceries
 roundtable.sorceries[4000] = 'sorceries_1_5';
 roundtable.sorceries[4001] = 'sorceries_4_18';
 roundtable.sorceries[4010] = 'sorceries_4_19';
@@ -1068,8 +1061,6 @@ roundtable.sorceries[5030] = 'sorceries_9_2';
 roundtable.sorceries[5100] = 'sorceries_7_1';
 roundtable.sorceries[5110] = 'sorceries_7_2';
 roundtable.sorceries[6500] = 'sorceries_8_9';
-
-// Incantations
 roundtable.incantations[5040] = 'incantations_4_3';
 roundtable.incantations[6000] = 'incantations_7_9';
 roundtable.incantations[6001] = 'incantations_7_5';
@@ -1171,8 +1162,6 @@ roundtable.incantations[7520] = 'incantations_5_1';
 roundtable.incantations[7530] = 'incantations_5_5';
 roundtable.incantations[7900] = 'incantations_7_8';
 roundtable.incantations[7903] = 'incantations_5_10';
-
-// Ashes of War
 roundtable.ashofwar[10000] = 'ashesofwar_5_9';
 roundtable.ashofwar[10100] = 'ashesofwar_6_4';
 roundtable.ashofwar[10200] = 'ashesofwar_6_5';
@@ -1264,8 +1253,6 @@ roundtable.ashofwar[80000] = 'ashesofwar_6_6';
 roundtable.ashofwar[80100] = 'ashesofwar_6_2';
 roundtable.ashofwar[80200] = 'ashesofwar_6_7';
 roundtable.ashofwar[85000] = 'ashesofwar_9_4';
-
-// Spirit Ashes
 roundtable.ashes[200000] = 'spirit_ashes_3_3';
 roundtable.ashes[201000] = 'spirit_ashes_2_2';
 roundtable.ashes[202000] = 'spirit_ashes_2_1';
@@ -1330,16 +1317,12 @@ roundtable.ashes[260000] = 'spirit_ashes_3_5';
 roundtable.ashes[261000] = 'spirit_ashes_3_7';
 roundtable.ashes[262000] = 'spirit_ashes_3_4';
 roundtable.ashes[263000] = 'spirit_ashes_3_9';
-
-// Whetlades
 roundtable.keyitems[8590] = 'whetstones_0_1';
 roundtable.keyitems[8970] = 'whetstones_0_2';
 roundtable.keyitems[8971] = 'whetstones_0_4';
 roundtable.keyitems[8972] = 'whetstones_0_6';
 roundtable.keyitems[8973] = 'whetstones_0_3';
 roundtable.keyitems[8974] = 'whetstones_0_5';
-
-// Cookbooks
 roundtable.keyitems[9300] = 'cookbooks_1_1';
 roundtable.keyitems[9301] = 'cookbooks_1_3';
 roundtable.keyitems[9302] = 'cookbooks_1_6';
@@ -1399,8 +1382,6 @@ roundtable.keyitems[9422] = 'cookbooks_4_2';
 roundtable.keyitems[9423] = 'cookbooks_2_7';
 roundtable.keyitems[9440] = 'cookbooks_6_1';
 roundtable.keyitems[9441] = 'cookbooks_6_2';
-
-// Tears
 roundtable.keyitems[11000] = 'crystal_tears_4_3';
 roundtable.keyitems[11001] = 'crystal_tears_1_3';
 roundtable.keyitems[11002] = 'crystal_tears_1_4';
@@ -1433,8 +1414,6 @@ roundtable.keyitems[11028] = 'crystal_tears_3_1';
 roundtable.keyitems[11029] = 'crystal_tears_2_6';
 roundtable.keyitems[11030] = 'crystal_tears_2_4';
 roundtable.keyitems[11031] = 'crystal_tears_2_5';
-
-// Tools
 roundtable.tools[100] = 'tools_4_2';
 roundtable.tools[101] = 'tools_4_8';
 roundtable.tools[102] = 'tools_4_13';
@@ -1452,24 +1431,26 @@ roundtable.tools[115] = 'tools_1_1';
 roundtable.tools[130] = 'tools_1_3';
 roundtable.tools[135] = 'tools_4_15';
 roundtable.tools[150] = 'tools_4_5';
-roundtable.tools[2200] = "tools_3_1";
-roundtable.tools[2201] = "tools_3_2";
-roundtable.tools[2202] = "tools_3_3";
-roundtable.tools[2203] = "tools_3_4";
-roundtable.tools[2204] = "tools_3_5";
-roundtable.tools[2205] = "tools_3_6";
-roundtable.tools[2206] = "tools_3_7";
-roundtable.tools[2207] = "tools_3_8";
 roundtable.tools[2040] = 'tools_1_2';
 roundtable.tools[2070] = 'tools_1_5';
 roundtable.tools[2080] = 'tools_2_7';
 roundtable.tools[2140] = 'tools_2_1';
 roundtable.tools[2150] = 'tools_2_4';
 roundtable.tools[2160] = 'tools_1_6';
+roundtable.tools[2200] = 'tools_3_1';
+roundtable.tools[2201] = 'tools_3_3';
+roundtable.tools[2202] = 'tools_3_5';
+roundtable.tools[2203] = 'tools_3_4';
+roundtable.tools[2204] = 'tools_3_2';
+roundtable.tools[2205] = 'tools_3_8';
+roundtable.tools[2206] = 'tools_3_7';
+roundtable.tools[2207] = 'tools_3_6';
 roundtable.tools[3000] = 'tools_2_3';
 roundtable.tools[3010] = 'tools_2_5';
 roundtable.tools[3011] = 'tools_2_6';
 roundtable.tools[3040] = 'tools_1_4';
 roundtable.tools[3080] = 'tools_2_2';
+
+
 
 export { roundtable };
