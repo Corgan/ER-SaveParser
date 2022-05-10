@@ -259,8 +259,13 @@ tooltip {
         <script type="module">
             import { SaveData } from './src/savedata.js';
             import lookup from './src/lookup.js'
+            import { roundtable_names, build_output } from './src/roundtable_names.js'
+            import { roundtable } from './src/roundtable.js'
 
             window.lookup = lookup;
+            window.roundtable = roundtable;
+            window.roundtable_names = roundtable_names;
+            window.build_output = build_output;
             window.savedata = null;
 
             function createElement(tagName, options={}) {

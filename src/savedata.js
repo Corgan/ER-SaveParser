@@ -1,8 +1,6 @@
 import { DataReader } from './datareader.js'
 import { buf2hex } from './util.js'
 import { roundtable } from './roundtable.js'
-import { roundtable_names } from './roundtable_names.js'
-import lookup from './lookup.js'
 
 class SaveData {
     constructor(data) {
@@ -341,48 +339,24 @@ class CharacterData {
         this.inventory.weapons = [...this.inventory.melee, ...this.inventory.rangedcatalyst, ...this.inventory.arrowbolts, ...this.inventory.shields];
         this.inventory.armor = [...this.inventory.head, ...this.inventory.chest, ...this.inventory.arms, ...this.inventory.legs];
         this.inventory.spells = [...this.inventory.sorceries, ...this.inventory.incantations];
+    }
 
-        this.roundTableOutputIds = {};
-        this.roundTableMissingOutput = {};
-
-        let lookupType = {};
-        lookupType.weapons = "weapons"
-        lookupType.armor = "armor"
-        lookupType.talismans = "talismans"
-        lookupType.sorceries = "goods"
-        lookupType.incantations = "goods"
-        lookupType.ashofwar = "ashofwar"
-        lookupType.ashes = "goods"
-        lookupType.keyitems = "goods"
-        lookupType.tools = "goods"
-        
-        Object.entries(roundtable_names).forEach(([type, list]) => {
-            this.roundTableOutputIds[type] = {};
-            Object.entries(list).forEach(([name, checkId]) => {
-                let item = lookup[lookupType[type]].find(item => item.RowName && item.RowName.toLowerCase() == name.toLowerCase());
-                if(item) {
-                    this.roundTableOutputIds[type][item.RowID] = list[name];
-                } else {
-                    this.roundTableMissingOutput[name] = type;
-                }
-            })
-        })
-
-        this.roundTableIds = [];
-        this.roundTableMissing = {};
+    exportRoundTable() {
+        let roundTableIds = [];
+        let roundTableMissing = {};
 
         Object.entries(roundtable).forEach(([type, list]) => {
-            this.roundTableMissing[type] = {};
+            roundTableMissing[type] = {};
             this.inventory[type].forEach(item => {
                 if(list[item.base || item.id]) {
-                    this.roundTableIds.push(list[item.base || item.id]);
+                    roundTableIds.push(list[item.base || item.id]);
                 } else {
-                    this.roundTableMissing[type][item.id] = item.name;
+                    roundTableMissing[type][item.id] = item.name;
                 }
             })
         })
 
-        this.roundTableExportString = JSON.stringify(this.roundTableIds);
+        return roundTableIds;
     }
 }
 

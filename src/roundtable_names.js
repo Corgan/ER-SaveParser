@@ -1,3 +1,5 @@
+import lookup from './lookup.js'
+
 let roundtable_names = {
     weapons: {},
     armor: {},
@@ -1484,4 +1486,36 @@ roundtable_names.tools["Bloody Finger"] = "tools_4_13";
 roundtable_names.tools["Recusant Finger"] = "tools_4_14";
 roundtable_names.tools["Phantom Great Rune"] = "tools_4_15";
 
-export { roundtable_names };
+
+function build_output() {
+    let roundTableOutputIds = {};
+    let roundTableMissingOutput = {};
+
+    let lookupType = {};
+    lookupType.weapons = "weapons"
+    lookupType.armor = "armor"
+    lookupType.talismans = "talismans"
+    lookupType.sorceries = "goods"
+    lookupType.incantations = "goods"
+    lookupType.ashofwar = "ashofwar"
+    lookupType.ashes = "goods"
+    lookupType.keyitems = "goods"
+    lookupType.tools = "goods"
+
+    Object.entries(roundtable_names).forEach(([type, list]) => {
+        roundTableOutputIds[type] = {};
+        Object.entries(list).forEach(([name, checkId]) => {
+            let item = lookup[lookupType[type]].find(item => item.RowName && item.RowName.toLowerCase() == name.toLowerCase());
+            if(item) {
+                roundTableOutputIds[type][item.RowID] = list[name];
+            } else {
+                roundTableMissingOutput[name] = type;
+            }
+        })
+    })
+    let roundTableJSString = "";
+    Object.entries(roundTableOutputIds).forEach(([type, list]) => Object.entries(list).forEach(([id, check]) => roundTableJSString += `roundtable.${type}[${id}] = '${check}';\n`));
+    return [roundTableJSString, roundTableMissingOutput];
+}
+
+export { roundtable_names, build_output };
