@@ -1,5 +1,5 @@
 # ER-SaveParser
-WIP Save Parser written in JavaScript
+WIP Elden Ring Save Parser written in JavaScript
 
 **[Github Pages version](https://corgan.github.io/ER-SaveParser/)**
 
