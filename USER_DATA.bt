@@ -284,8 +284,16 @@ typedef struct {
 } UnkFlags;
 
 local int i;
-for(i = 0; i < 10; i++) {
-    FSeek(0x300 + 0x280010 * i);
+local int offset = 0;
+local int count = 1;
+char magic[4];
+if(magic == "BND4") {
+    offset = 0x300;
+    count = 10;
+}
+
+for(i = 0; i < count; i++) {
+    FSeek(offset + 0x280010 * i);
     struct {
         Header header;
         if(header.version > 0) {

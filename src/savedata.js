@@ -1,6 +1,7 @@
 import { DataReader } from './datareader.js'
 import { buf2hex } from './util.js'
 import { roundtable } from './roundtable.js'
+import lookup from './lookup.js'
 
 class SaveData {
     constructor(data) {
@@ -33,7 +34,6 @@ class CharacterData {
         reader.seek(0x04, true);
         this.timePlayed = reader.readInt32();
         reader.seek(0x04, true);
-        console.log(this.version);
         if(this.version > 0x51) // Newer version have an extra 16 bytes of padding
             reader.seek(0x10, true);
 
@@ -262,7 +262,23 @@ class CharacterData {
         let flask1Id = reader.readInt32NoCategory();
         let flask2Id = reader.readInt32NoCategory();
         reader.seek(0x8, true); // Skip
-        console.log(reader.offset); // FACE DATA???
+        reader.seek(0x12B, true); // Skip Face Data
+
+        this.inventory.storage = [];
+        let storageCount = reader.readInt32();
+        for(let i=0; i<0x800; i++) { // Storage
+            let item = reader.readInventoryItem(this.lookup);
+            if(item.id > 0)
+                this.inventory.storage.push(item);
+        }
+        reader.seek(0x10C, true); // Not sure what this is
+
+        this.playRegions = {};
+        let playRegionCount = reader.readInt32();
+        for(let i=0; i<playRegionCount; i++) {
+            let playRegion = reader.readInt32();
+            this.playRegions[playRegion] = lookup.playRegion.find(p => p.RowID == playRegion);
+        }
 
         const blacklist = ['Unarmed', 'Head', 'Body', 'Arms', 'Legs'];
 
