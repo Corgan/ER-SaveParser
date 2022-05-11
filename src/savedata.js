@@ -26,313 +26,255 @@ class SaveData {
 
 class CharacterData {
     constructor(reader) {
-        this.lookup = {};
-        Object.defineProperty(this, 'lookup', { enumerable: false });
+        this.reader = reader;
 
         reader.seek(0x10);
         this.version = reader.readInt32();
         reader.seek(0x04, true);
         this.timePlayed = reader.readInt32();
         reader.seek(0x04, true);
-        if(this.version > 0x51) // Newer version have an extra 16 bytes of padding
+        if(this.version > 0x51) // Newer versions have an extra 16 bytes of padding
             reader.seek(0x10, true);
 
         for(let i=0; i<0x1400; i++) { // Lookup Table
-            let bytes = reader.read(0x8, false);
-            if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
-                if(bytes[3] == 0x80) { // Weapons
-                    let ref = reader.readUint32();
-                    let data = reader.read(0x11);
-
-                    let id = data.slice(0x0, 0x4);
-
-                    id = new DataView(id.buffer).getUint32(0, true)
-                    this.lookup[ref] = id;
-                } else if(bytes[3] == 0x90) { // Armor
-                    let ref = reader.readUint32();
-                    let data = reader.read(0xC);
-
-                    let id = data.slice(0x0, 0x4);
-                    id[3] = 0;
-
-                    id = new DataView(id.buffer).getUint32(0, true)
-                    this.lookup[ref] = id;
-                } else if(bytes[3] == 0xC0) { // Ash of War
-                    let ref = reader.readUint32();
-                    let data = reader.read(0x4);
-
-                    let id = data.slice(0x0, 0x4);
-                    id[3] = 0;
-
-                    id = new DataView(id.buffer).getUint32(0, true)
-                    this.lookup[ref] = id;
-                }
-            } else if ((bytes[0] == 0x00 && bytes[1] == 0x00 && bytes[2] == 0x00 && bytes[3] == 0x00 && bytes[4] == 0x00 && bytes[5] == 0x00 && bytes[6] == 0x00 && bytes[7] == 0x00)) {
-                //Stops earlier than Expected. Shouldn't really happen unless FromSoft decides to add more random bytes in the header.
-                break;
-            } else {
-                reader.read(0x8);
-             }
+            reader.parseLookupEntry();
         }
         reader.seek(0x8, true);
 
-        this.stats = {};
-        this.equipped = {};
+        this.internal = {};
 
         //Character Info
-        this.stats.health = reader.readInt32();
-        this.stats.baseMaxHealth = reader.readInt32();
-        this.stats.maxHealth = reader.readInt32();
-        this.stats.mana = reader.readInt32();
-        this.stats.baseMaxMana = reader.readInt32();
-        this.stats.maxMana = reader.readInt32();
+        this.internal.health = reader.readInt32();
+        this.internal.baseMaxHealth = reader.readInt32();
+        this.internal.maxHealth = reader.readInt32();
+        this.internal.mana = reader.readInt32();
+        this.internal.baseMaxMana = reader.readInt32();
+        this.internal.maxMana = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.stats.stamina = reader.readInt32();
-        this.stats.baseMaxStamina = reader.readInt32();
-        this.stats.maxStamina = reader.readInt32();
+        this.internal.stamina = reader.readInt32();
+        this.internal.baseMaxStamina = reader.readInt32();
+        this.internal.maxStamina = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.stats.vigor = reader.readInt32();
-        this.stats.mind = reader.readInt32();
-        this.stats.endurance = reader.readInt32();
-        this.stats.strength = reader.readInt32();
-        this.stats.dexterity = reader.readInt32();
-        this.stats.intelligence = reader.readInt32();
-        this.stats.faith = reader.readInt32();
-        this.stats.arcane = reader.readInt32();
+        this.internal.vigor = reader.readInt32();
+        this.internal.mind = reader.readInt32();
+        this.internal.endurance = reader.readInt32();
+        this.internal.strength = reader.readInt32();
+        this.internal.dexterity = reader.readInt32();
+        this.internal.intelligence = reader.readInt32();
+        this.internal.faith = reader.readInt32();
+        this.internal.arcane = reader.readInt32();
         reader.seek(0xC, true); // Skip
-        this.stats.runeLevel = reader.readInt32();
-        this.stats.runes = reader.readInt32();
-        this.stats.runeMemory = reader.readInt32();
+        this.internal.runeLevel = reader.readInt32();
+        this.internal.runes = reader.readInt32();
+        this.internal.runeMemory = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.stats.immunity = reader.readInt32();
-        let immunity2 = reader.readInt32();
-        this.stats.robustness = reader.readInt32();
-        this.stats.vitality = reader.readInt32();
-        let robustness2 = reader.readInt32();
-        this.stats.focus = reader.readInt32();
-        let focus2 = reader.readInt32();
+        this.internal.immunity = reader.readInt32();
+        this.internal.immunity2 = reader.readInt32();
+        this.internal.robustness = reader.readInt32();
+        this.internal.vitality = reader.readInt32();
+        this.internal.robustness2 = reader.readInt32();
+        this.internal.focus = reader.readInt32();
+        this.internal.focus2 = reader.readInt32();
         reader.seek(0x8, true); // Skip
         let name = new Uint16Array(reader.read(0x20).buffer);
-        this.name = String.fromCharCode.apply(null, name.slice(0, name.indexOf(0)));
+        this.internal.name = String.fromCharCode.apply(null, name.slice(0, name.indexOf(0)));
         reader.seek(0xFC, true); // Skip the rest for now
         reader.seek(0xD0, true); // Skip padding
-        let leftWeapon1Index = reader.readInt32();
-        let rightWeapon1Index = reader.readInt32();
-        let leftWeapon2Index = reader.readInt32();
-        let rightWeapon2Index = reader.readInt32();
-        let leftWeapon3Index = reader.readInt32();
-        let rightWeapon3Index = reader.readInt32();
-        let arrow1Index = reader.readInt32();
-        let bolt1Index = reader.readInt32();
-        let arrow2Index = reader.readInt32();
-        let bolt2Index = reader.readInt32();
+        this.internal.leftWeapon1Index = reader.readInt32();
+        this.internal.rightWeapon1Index = reader.readInt32();
+        this.internal.leftWeapon2Index = reader.readInt32();
+        this.internal.rightWeapon2Index = reader.readInt32();
+        this.internal.leftWeapon3Index = reader.readInt32();
+        this.internal.rightWeapon3Index = reader.readInt32();
+        this.internal.arrow1Index = reader.readInt32();
+        this.internal.bolt1Index = reader.readInt32();
+        this.internal.arrow2Index = reader.readInt32();
+        this.internal.bolt2Index = reader.readInt32();
         reader.seek(0x8, true); // Skip
-        let headIndex = reader.readInt32();
-        let chestIndex = reader.readInt32();
-        let armsIndex = reader.readInt32();
-        let legsIndex = reader.readInt32();
+        this.internal.headIndex = reader.readInt32();
+        this.internal.chestIndex = reader.readInt32();
+        this.internal.armsIndex = reader.readInt32();
+        this.internal.legsIndex = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        let talisman1Index = reader.readInt32();
-        let talisman2Index = reader.readInt32();
-        let talisman3Index = reader.readInt32();
-        let talisman4Index = reader.readInt32();
+        this.internal.talisman1Index = reader.readInt32();
+        this.internal.talisman2Index = reader.readInt32();
+        this.internal.talisman3Index = reader.readInt32();
+        this.internal.talisman4Index = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        this.stance = reader.readInt32();
+        this.internal.stance = reader.readInt32();
         reader.seek(0x18, true); // Skip
-        let leftWeapon1Id = reader.readInt32();
-        let rightWeapon1Id = reader.readInt32();
-        let leftWeapon2Id = reader.readInt32();
-        let rightWeapon2Id = reader.readInt32();
-        let leftWeapon3Id = reader.readInt32();
-        let rightWeapon3Id = reader.readInt32();
-        let arrow1Id = reader.readInt32();
-        let bolt1Id = reader.readInt32();
-        let arrow2Id = reader.readInt32();
-        let bolt2Id = reader.readInt32();
+        this.internal.leftWeapon1Id = reader.readInt32();
+        this.internal.rightWeapon1Id = reader.readInt32();
+        this.internal.leftWeapon2Id = reader.readInt32();
+        this.internal.rightWeapon2Id = reader.readInt32();
+        this.internal.leftWeapon3Id = reader.readInt32();
+        this.internal.rightWeapon3Id = reader.readInt32();
+        this.internal.arrow1Id = reader.readInt32();
+        this.internal.bolt1Id = reader.readInt32();
+        this.internal.arrow2Id = reader.readInt32();
+        this.internal.bolt2Id = reader.readInt32();
         reader.seek(0x8, true); // Skip
-        let headId = reader.readInt32();
-        let chestId = reader.readInt32();
-        let armsId = reader.readInt32();
-        let legsId = reader.readInt32();
+        this.internal.headId = reader.readInt32();
+        this.internal.chestId = reader.readInt32();
+        this.internal.armsId = reader.readInt32();
+        this.internal.legsId = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        let talisman1Id = reader.readInt32();
-        let talisman2Id = reader.readInt32();
-        let talisman3Id = reader.readInt32();
-        let talisman4Id = reader.readInt32();
+        this.internal.talisman1Id = reader.readInt32();
+        this.internal.talisman2Id = reader.readInt32();
+        this.internal.talisman3Id = reader.readInt32();
+        this.internal.talisman4Id = reader.readInt32();
         reader.seek(0x4, true); // Skip
-        let leftWeapon1Lookup = reader.readUint32();
-        let rightWeapon1Lookup = reader.readUint32();
-        let leftWeapon2Lookup = reader.readUint32();
-        let rightWeapon2Lookup = reader.readUint32();
-        let leftWeapon3Lookup = reader.readUint32();
-        let rightWeapon3Lookup = reader.readUint32();
-        let arrow1Lookup = reader.readInt32();
-        let bolt1Lookup = reader.readInt32();
-        let arrow2Lookup = reader.readInt32();
-        let bolt2Lookup = reader.readInt32();
-        reader.seek(0x8, true); // TODO All 0x00
-        let headLookup = reader.readUint32();
-        let chestLookup = reader.readUint32();
-        let armsLookup = reader.readUint32();
-        let legsLookup = reader.readUint32();
+        this.internal.leftWeapon1Lookup = reader.readLookupEntry();
+        this.internal.rightWeapon1Lookup = reader.readLookupEntry();
+        this.internal.leftWeapon2Lookup = reader.readLookupEntry();
+        this.internal.rightWeapon2Lookup = reader.readLookupEntry();
+        this.internal.leftWeapon3Lookup = reader.readLookupEntry();
+        this.internal.rightWeapon3Lookup = reader.readLookupEntry();
+        this.internal.arrow1Lookup = reader.readLookupEntry();
+        this.internal.bolt1Lookup = reader.readLookupEntry();
+        this.internal.arrow2Lookup = reader.readLookupEntry();
+        this.internal.bolt2Lookup = reader.readLookupEntry();
+        reader.seek(0x8, true); // Skip
+        this.internal.headLookup = reader.readLookupEntry();
+        this.internal.chestLookup = reader.readLookupEntry();
+        this.internal.armsLookup = reader.readLookupEntry();
+        this.internal.legsLookup = reader.readLookupEntry();
         reader.seek(0x4, true); // Skip
-        let talisman1Lookup = reader.readUint32();
-        let talisman2Lookup = reader.readUint32();
-        let talisman3Lookup = reader.readUint32();
-        let talisman4Lookup = reader.readUint32();
+        this.internal.talisman1Lookup = reader.readLookupEntry();
+        this.internal.talisman2Lookup = reader.readLookupEntry();
+        this.internal.talisman3Lookup = reader.readLookupEntry();
+        this.internal.talisman4Lookup = reader.readLookupEntry();
         reader.seek(0x4, true); // Skip
         
-        this.inventory = {};
-        this.inventory.all = [];
-        let inventoryCount = reader.readInt32();
+        this.internal.inventory = [];
+        this.internal.inventoryCount = reader.readInt32();
         for(let i=0; i<0xA80; i++) { // Inventory
-            let item = reader.readInventoryItem(this.lookup);
-            if(item.id > 0)
-                this.inventory.all.push(item);
+            let item = reader.readInventoryItem();
+            this.internal.inventory.push(item);
         }
 
-        let keyitemCount = reader.readInt32();
+        this.internal.keyitemCount = reader.readInt32();
         for(let i=0; i<0x180; i++) { // Key Items
-            let item = reader.readInventoryItem(this.lookup);
-            if(item.id > 0)
-                this.inventory.all.push(item);
+            let item = reader.readInventoryItem();
+            this.internal.inventory.push(item);
         }
 
         reader.seek(0x8, true); // Skip
-        let equippedSpellIds = [];
+        this.internal.equippedSpellIds = [];
         for(var i=0; i<0xC; i++) {
             let spellId = reader.readInt32();
-            equippedSpellIds.push(spellId);
+            this.internal.equippedSpellIds.push(spellId);
             reader.seek(0x4, true); // Skip
         }
 
         reader.seek(0xB8, true);
-        this.unknownBlock = {};
-        this.unknownBlockCount = reader.readInt32();
-        for(var i=0; i<this.unknownBlockCount; i++) {
-            let data = reader.read(0x4);
-            let id = data.slice(0x0, 0x4);
-            id[3] = 0;
-
-            id = new DataView(id.buffer).getUint32(0, true)
-
+        this.internal.unknownBlock = {};
+        this.internal.unknownBlockCount = reader.readInt32();
+        for(var i=0; i<this.internal.unknownBlockCount; i++) {
+            let id = reader.readInt32NoCategory();
             let value = reader.readInt32();
 
-            this.unknownBlock[id] = value;
+            this.internal.unknownBlock[id] = value;
         }
 
-        let leftWeapon1Id2 = reader.readInt32();
-        let rightWeapon1Id2 = reader.readInt32();
-        let leftWeapon2Id2 = reader.readInt32();
-        let rightWeapon2Id2 = reader.readInt32();
-        let leftWeapon3Id2 = reader.readInt32();
-        let rightWeapon3Id2 = reader.readInt32();
-        let arrow1Id2 = reader.readInt32();
-        let bolt1Id2 = reader.readInt32();
-        let arrow2Id2 = reader.readInt32();
-        let bolt2Id2 = reader.readInt32();
+        this.internal.leftWeapon1Id2 = reader.readInt32();
+        this.internal.rightWeapon1Id2 = reader.readInt32();
+        this.internal.leftWeapon2Id2 = reader.readInt32();
+        this.internal.rightWeapon2Id2 = reader.readInt32();
+        this.internal.leftWeapon3Id2 = reader.readInt32();
+        this.internal.rightWeapon3Id2 = reader.readInt32();
+        this.internal.arrow1Id2 = reader.readInt32();
+        this.internal.bolt1Id2 = reader.readInt32();
+        this.internal.arrow2Id2 = reader.readInt32();
+        this.internal.bolt2Id2 = reader.readInt32();
         reader.seek(0x8, true); // Skip
-        let headId2 = reader.readInt32NoCategory();
-        let chestId2 = reader.readInt32NoCategory();
-        let armsId2 = reader.readInt32NoCategory();
-        let legsId2 = reader.readInt32NoCategory();
+        this.internal.headId2 = reader.readInt32NoCategory();
+        this.internal.chestId2 = reader.readInt32NoCategory();
+        this.internal.armsId2 = reader.readInt32NoCategory();
+        this.internal.legsId2 = reader.readInt32NoCategory();
         reader.seek(0x4, true); // Skip
-        let talisman1Id2 = reader.readInt32NoCategory();
-        let talisman2Id2 = reader.readInt32NoCategory();
-        let talisman3Id2 = reader.readInt32NoCategory();
-        let talisman4Id2 = reader.readInt32NoCategory();
+        this.internal.talisman1Id2 = reader.readInt32NoCategory();
+        this.internal.talisman2Id2 = reader.readInt32NoCategory();
+        this.internal.talisman3Id2 = reader.readInt32NoCategory();
+        this.internal.talisman4Id2 = reader.readInt32NoCategory();
         reader.seek(0x4, true); // Skip
-        let quick1Id = reader.readInt32NoCategory();
-        let quick2Id = reader.readInt32NoCategory();
-        let quick3Id = reader.readInt32NoCategory();
-        let quick4Id = reader.readInt32NoCategory();
-        let quick5Id = reader.readInt32NoCategory();
-        let quick6Id = reader.readInt32NoCategory();
-        let quick7Id = reader.readInt32NoCategory();
-        let quick8Id = reader.readInt32NoCategory();
-        let quick9Id = reader.readInt32NoCategory();
-        let quick10Id = reader.readInt32NoCategory();
-        let pouch1Id = reader.readInt32NoCategory();
-        let pouch2Id = reader.readInt32NoCategory();
-        let pouch3Id = reader.readInt32NoCategory();
-        let pouch4Id = reader.readInt32NoCategory();
-        let pouch5Id = reader.readInt32NoCategory();
-        let pouch6Id = reader.readInt32NoCategory();
+        this.internal.quick1Id = reader.readInt32NoCategory();
+        this.internal.quick2Id = reader.readInt32NoCategory();
+        this.internal.quick3Id = reader.readInt32NoCategory();
+        this.internal.quick4Id = reader.readInt32NoCategory();
+        this.internal.quick5Id = reader.readInt32NoCategory();
+        this.internal.quick6Id = reader.readInt32NoCategory();
+        this.internal.quick7Id = reader.readInt32NoCategory();
+        this.internal.quick8Id = reader.readInt32NoCategory();
+        this.internal.quick9Id = reader.readInt32NoCategory();
+        this.internal.quick10Id = reader.readInt32NoCategory();
+        this.internal.pouch1Id = reader.readInt32NoCategory();
+        this.internal.pouch2Id = reader.readInt32NoCategory();
+        this.internal.pouch3Id = reader.readInt32NoCategory();
+        this.internal.pouch4Id = reader.readInt32NoCategory();
+        this.internal.pouch5Id = reader.readInt32NoCategory();
+        this.internal.pouch6Id = reader.readInt32NoCategory();
         reader.seek(0x4, true); // Skip
-        let flask1Id = reader.readInt32NoCategory();
-        let flask2Id = reader.readInt32NoCategory();
+        this.internal.flask1Id = reader.readInt32NoCategory();
+        this.internal.flask2Id = reader.readInt32NoCategory();
         reader.seek(0x8, true); // Skip
         reader.seek(0x12B, true); // Skip Face Data
 
-        this.inventory.storage = [];
-        let storageCount = reader.readInt32();
+        this.internal.storage = [];
+        this.internal.storageCount = reader.readInt32();
         for(let i=0; i<0x800; i++) { // Storage
-            let item = reader.readInventoryItem(this.lookup);
-            if(item.id > 0)
-                this.inventory.storage.push(item);
+            let item = reader.readInventoryItem();
+            this.internal.storage.push(item);
         }
         reader.seek(0x10C, true); // Not sure what this is
 
-        this.playRegions = {};
-        let playRegionCount = reader.readInt32();
-        for(let i=0; i<playRegionCount; i++) {
+        this.internal.playRegions = {};
+        this.internal.playRegionCount = reader.readInt32();
+        for(let i=0; i<this.internal.playRegionCount; i++) {
             let playRegion = reader.readInt32();
-            this.playRegions[playRegion] = lookup.playRegion.find(p => p.RowID == playRegion);
+            this.internal.playRegions[playRegion] = lookup.playRegion.find(p => p.RowID == playRegion);
         }
 
+        this.name = this.internal.name;
+        this.stats = {
+            health: this.internal.health,
+            baseMaxHealth: this.internal.baseMaxHealth,
+            maxHealth: this.internal.maxHealth,
+
+            mana: this.internal.mana,
+            baseMaxMana: this.internal.baseMaxMana,
+            maxMana: this.internal.maxMana,
+
+            stamina: this.internal.stamina,
+            baseMaxStamina: this.internal.baseMaxStamina,
+            maxStamina: this.internal.maxStamina,
+
+            vigor: this.internal.vigor,
+            mind: this.internal.mind,
+            endurance: this.internal.endurance,
+            strength: this.internal.strength,
+            dexterity: this.internal.dexterity,
+            intelligence: this.internal.intelligence,
+            faith: this.internal.faith,
+            arcane: this.internal.arcane,
+
+            runeLevel: this.internal.runeLevel,
+            runes: this.internal.runes,
+            runeMemory: this.internal.runeMemory,
+
+            immunity: this.internal.immunity,
+            robustness: this.internal.robustness,
+            vitality: this.internal.vitality,
+            focus: this.internal.focus
+        };
+
         const blacklist = ['Unarmed', 'Head', 'Body', 'Arms', 'Legs'];
+        
+        this.equipped = {};
+        this.inventory = {};
 
-        this.inventory.all = this.inventory.all.filter(x => x.name !== undefined && !blacklist.includes(x.name));
-
-        this.equipped.leftWeapon1 = this.inventory.all.find(item => item.lookupId == leftWeapon1Lookup) || { name: "Unarmed" };
-        this.equipped.rightWeapon1 = this.inventory.all.find(item => item.lookupId == rightWeapon1Lookup) || { name: "Unarmed" };
-        this.equipped.leftWeapon2 = this.inventory.all.find(item => item.lookupId == leftWeapon2Lookup) || { name: "Unarmed" };
-        this.equipped.rightWeapon2 = this.inventory.all.find(item => item.lookupId == rightWeapon2Lookup) || { name: "Unarmed" };
-        this.equipped.leftWeapon3 = this.inventory.all.find(item => item.lookupId == leftWeapon3Lookup) || { name: "Unarmed" };
-        this.equipped.rightWeapon3 = this.inventory.all.find(item => item.lookupId == rightWeapon3Lookup) || { name: "Unarmed" };
-
-        this.equipped.arrow1 = this.inventory.all.find(item => item.lookupId == arrow1Lookup) || { name: "Arrow" };
-        this.equipped.bolt1 = this.inventory.all.find(item => item.lookupId == bolt1Lookup) || { name: "Bolt" };
-        this.equipped.arrow2 = this.inventory.all.find(item => item.lookupId == arrow2Lookup) || { name: "Arrow" };
-        this.equipped.bolt2 = this.inventory.all.find(item => item.lookupId == bolt2Lookup) || { name: "Bolt" };
-
-        this.equipped.head = this.inventory.all.find(item => item.lookupId == headLookup) || { name: "Head" };
-        this.equipped.chest = this.inventory.all.find(item => item.lookupId == chestLookup) || { name: "Body" };
-        this.equipped.arms = this.inventory.all.find(item => item.lookupId == armsLookup) || { name: "Arms" };
-        this.equipped.legs = this.inventory.all.find(item => item.lookupId == legsLookup) || { name: "Legs" };
-
-        this.equipped.talismans = [];
-        this.equipped.talismans.push(this.inventory.all.find(item => item.id == talisman1Id && item.type == "talisman") || { name: "Talisman" });
-        this.equipped.talismans.push(this.inventory.all.find(item => item.id == talisman2Id && item.type == "talisman") || { name: "Talisman" });
-        this.equipped.talismans.push(this.inventory.all.find(item => item.id == talisman3Id && item.type == "talisman") || { name: "Talisman" });
-        this.equipped.talismans.push(this.inventory.all.find(item => item.id == talisman4Id && item.type == "talisman") || { name: "Talisman" });
-
-        this.equipped.quick = [];
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick1Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick2Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick3Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick4Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick5Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick6Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick7Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick8Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick9Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == quick10Id) || { name: "Quick Slot" });
-
-        this.equipped.pouch = [];
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch1Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch2Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch3Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch4Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch5Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == pouch6Id) || { name: "Pouch" });
-
-        this.equipped.flask = [];
-        this.equipped.flask.push(this.inventory.all.find(item => item.id == flask1Id) || { name: "Left Flask" });
-        this.equipped.flask.push(this.inventory.all.find(item => item.id == flask2Id) || { name: "Right Flask" });
-
-        this.equipped.spells = equippedSpellIds.map(spellId => this.inventory.all.find(item => item.id == spellId && item.type == "goods") || { name: "Spell Slot" });
-
+        this.inventory.all = this.internal.inventory.filter(item => item.params && !blacklist.includes(item.name));
+        
         this.inventory.tools = this.inventory.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3);
         this.inventory.ashes = this.inventory.all.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8);
         this.inventory.crafting = this.inventory.all.filter(item => item.params.goodsType == 2);
@@ -355,6 +297,57 @@ class CharacterData {
         this.inventory.weapons = [...this.inventory.melee, ...this.inventory.rangedcatalyst, ...this.inventory.arrowbolts, ...this.inventory.shields];
         this.inventory.armor = [...this.inventory.head, ...this.inventory.chest, ...this.inventory.arms, ...this.inventory.legs];
         this.inventory.spells = [...this.inventory.sorceries, ...this.inventory.incantations];
+
+        this.equipped.leftWeapon1 = this.inventory.weapons.find(item => item.lookup.id == this.internal.leftWeapon1Lookup.id) || { name: "Unarmed" };
+        this.equipped.rightWeapon1 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon1Lookup.id) || { name: "Unarmed" };
+        this.equipped.leftWeapon2 = this.inventory.weapons.find(item => item.lookup.id == this.internal.leftWeapon2Lookup.id) || { name: "Unarmed" };
+        this.equipped.rightWeapon2 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon2Lookup.id) || { name: "Unarmed" };
+        this.equipped.leftWeapon3 = this.inventory.weapons.find(item => item.lookup.id == this.internal.leftWeapon3Lookup.id) || { name: "Unarmed" };
+        this.equipped.rightWeapon3 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon3Lookup.id) || { name: "Unarmed" };
+
+        this.equipped.arrow1 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.arrow1Lookup.id) || { name: "Arrow" };
+        this.equipped.bolt1 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.bolt1Lookup.id) || { name: "Bolt" };
+        this.equipped.arrow2 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.arrow2Lookup.id) || { name: "Arrow" };
+        this.equipped.bolt2 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.bolt2Lookup.id) || { name: "Bolt" };
+
+        this.equipped.head = this.inventory.armor.find(item => item.lookup.id == this.internal.headLookup.id) || { name: "Head" };
+        this.equipped.chest = this.inventory.armor.find(item => item.lookup.id == this.internal.chestLookup.id) || { name: "Body" };
+        this.equipped.arms = this.inventory.armor.find(item => item.lookup.id == this.internal.armsLookup.id) || { name: "Arms" };
+        this.equipped.legs = this.inventory.armor.find(item => item.lookup.id == this.internal.legsLookup.id) || { name: "Legs" };
+
+        this.equipped.talismans = [];
+        this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman1Id && item.type == "talisman") || { name: "Talisman" });
+        this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman2Id && item.type == "talisman") || { name: "Talisman" });
+        this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman3Id && item.type == "talisman") || { name: "Talisman" });
+        this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman4Id && item.type == "talisman") || { name: "Talisman" });
+
+        this.equipped.quick = [];
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick1Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick2Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick3Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick4Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick5Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick6Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick7Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick8Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick9Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick10Id) || { name: "Quick Slot" });
+
+        this.equipped.pouch = [];
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch1Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch2Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch3Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch4Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch5Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch6Id) || { name: "Pouch" });
+
+        this.equipped.flask = [];
+        this.equipped.flask.push(this.inventory.all.find(item => item.id == this.internal.flask1Id) || { name: "Left Flask" });
+        this.equipped.flask.push(this.inventory.all.find(item => item.id == this.internal.flask2Id) || { name: "Right Flask" });
+
+        this.equipped.spells = this.internal.equippedSpellIds.map(spellId => this.inventory.spells.find(item => item.id == spellId && item.type == "goods") || { name: "Spell Slot" });
+
+
     }
 
     exportRoundTable() {

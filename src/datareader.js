@@ -6,6 +6,8 @@ class DataReader {
         this.data = new Uint8Array(data);
         this.view = new DataView(data);
         this.offset = 0;
+        this.lookup = [];
+        this.missedLookup = [];
     }
 
     read(len, consume=true) {
@@ -17,7 +19,7 @@ class DataReader {
 
     readInt32NoCategory(consume=true) {
         let data = this.data.slice(this.offset, this.offset + 0x4);
-        if(data[3] == 0x10 || data[3] == 0x20 || data[3] == 0x40 || data[3] == 0x80)
+        if(data[3] == 0x10 || data[3] == 0x20 || data[3] == 0x40 || data[3] == 0x80 || data[3] == 0xA0 || data[3] == 0xB0 || data[3] == 0xC0)
             data[3] = 0;
 
         if(consume)
@@ -58,6 +60,22 @@ class DataReader {
         return ret;
     }
 
+    readInt8(consume=true) {
+        let ret = this.view.getInt8(this.offset, true);
+
+        if(consume)
+            this.offset += 1;
+        return ret;
+    }
+
+    readUint8(consume=true) {
+        let ret = this.view.getUint8(this.offset, true);
+
+        if(consume)
+            this.offset += 1;
+        return ret;
+    }
+
     seek(offset, relative=false) {
         if(relative) {
             this.offset += offset;
@@ -66,64 +84,84 @@ class DataReader {
         }
     }
 
-    readInventoryItem(lookup) {
-        let ref = this.read(4, false);
-        let lookupId = -1;
-        let id = -1;
-        let type = -1;
-        let level = -1;
-        if((ref[3] == 0xC0 || ref[3] == 0x80 || ref[3] == 0x90)) {
-            lookupId = this.readUint32();
-            id = lookup[lookupId];
-            if(ref[3] == 0x80)
-                type = "weapon";
-            if(ref[3] == 0x90)
-                type = "armor";
-            if(ref[3] == 0xC0)
-                type = "ashofwar";
+    parseLookupEntry() {
+        let ret = { };
+        let bytes = this.read(0x8, false);
+        if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
+            ret.hex =  buf2hex(bytes.buffer);
+            ret.ref = this.readUint16();
+            ret.unk = this.readUint8();
+            ret.type = this.readUint8();
+            ret.id = this.readInt32NoCategory();
+            if(bytes[3] == 0x80) { // Weapon
+                ret.extra = buf2hex(this.read(0xD).buffer);
+            } else if(bytes[3] == 0x90) { // Armor
+                ret.extra = buf2hex(this.read(0x8).buffer);
+            } else if(bytes[3] == 0xC0) { // Ash of War
+                // No extra bytes to read
+            }
+            this.lookup[ret.ref] = ret;
         } else {
-            let dat = this.read(4);
-            id = dat.slice(0x0, 0x4);
-            if(ref[3] == 0xB0)
-                type = "goods";
-            if(ref[3] == 0xA0)
-                type = "talisman";
-            id[3] = 0;
-            id = new DataView(id.buffer).getUint32(0, true)
+            this.missedLookup.push(buf2hex(this.read(0x8).buffer));
         }
-        let qty = this.readInt32();
-        let handle = this.readUint32();
+    }
 
-        let param;
-        if(type == "goods")
-            param = goods.find(good => good.RowID == id);
-        if(type == "armor")
-        param = armor.find(armor => armor.RowID == id);
-        if(type == "weapon") {
-            let weaponId = Math.trunc(id / 100) * 100;
-            level = id % 100;
-            param = weapons.find(weapon => weapon.RowID == weaponId);
+    readLookupEntry() {
+        let id = this.readUint16();
+        let unk = this.readUint8();
+        let type = this.readUint8();
+        return { id: id, unk: unk, type: type };
+    }
+
+    readInventoryItem() {
+        let ret = { };
+
+        let bytes = this.read(4, false);
+        ret.hex = buf2hex(bytes.buffer);
+
+        if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
+            ret.lookup = {};
+            ret.lookup.id = this.readUint16();
+            ret.lookup.unk = this.readUint8();
+            ret.lookup.type = this.readUint8();
+
+            ret.id = this.lookup[ret.lookup.id].id;
+        } else {
+            ret.id = this.readInt32NoCategory();
         }
-        if(type == "talisman")
-            param = talismans.find(talisman => talisman.RowID == id);
-        if(type == "ashofwar")
-            param = ashofwar.find(ash => ash.RowID == id);
+        ret.qty = this.readInt32();
+        ret.handle = this.readUint32();
 
-        let name;
-        if(param && param.RowName)
-            name = param.RowName;
+        if(bytes[3] == 0x80) {
+            ret.type = "weapon";
+            ret.base = Math.trunc(ret.id / 10000) * 10000;
+            ret.level = ret.id % 100;
+
+            let weaponId = Math.trunc(ret.id / 100) * 100;
+            ret.params = weapons.find(weapon => weapon.RowID == weaponId);
+        }
+        if(bytes[3] == 0x90) {
+            ret.type = "armor";
+            ret.params = armor.find(armor => armor.RowID == ret.id);
+        }
+        if(bytes[3] == 0xA0) {
+            ret.type = "talisman";
+            ret.params = talismans.find(talisman => talisman.RowID == ret.id);
+        }
+        if(bytes[3] == 0xB0) {
+            ret.type = "goods";
+            ret.params = goods.find(good => good.RowID == ret.id);
+            if(ret.params && (ret.params.goodsType == 7 || ret.params.goodsType == 8))
+                ret.base = Math.trunc(ret.id / 100) * 100;
+        }
+        if(bytes[3] == 0xC0) {
+            ret.type = "ashofwar";
+            ret.params = ashofwar.find(ash => ash.RowID == ret.id);
+        }
         
-        let ret = { name: name, id: id, type: type, qty: qty, handle: handle, hex: buf2hex(ref.buffer), params: param };
-            
-        if(lookupId > -1)
-            ret.lookupId = lookupId;
-
-        if(level > -1)
-            ret.level = level;
-        if(type == "weapon")
-            ret.base = Math.trunc(id / 10000) * 10000;
-        if(type == "goods" && (param.goodsType == 7 || param.goodsType == 8))
-            ret.base = Math.trunc(id / 100) * 100;
+        if(ret.params && ret.params.RowName)
+            ret.name = ret.params.RowName;
+        
         return ret;
     }
 }
