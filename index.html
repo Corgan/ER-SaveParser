@@ -266,11 +266,16 @@ tooltip {
             </div>
         </div>
 
+        <div id="flags">
+
+        </div>
+
         <script type="module">
             import { SaveData } from './src/savedata.js';
             import lookup from './src/lookup.js'
             import { roundtable_names, build_output } from './src/roundtable_names.js'
             import { roundtable } from './src/roundtable.js'
+            import eventFlags from './src/eventflags.js'
 
             window.lookup = lookup;
             window.roundtable = roundtable;
@@ -415,6 +420,15 @@ tooltip {
                     })
                     tabContent.appendChild(tabEl);
                 });
+
+                let flagEl = document.getElementById('flags');
+                flagEl.innerHTML = '';
+
+                eventFlags.forEach((flag) => createElement('div', {
+                    classList: ['flag'],
+                    text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
+                    parent: flagEl
+                }))
 
                 document.getElementById('character').classList.remove('hide');
             }

@@ -2,6 +2,8 @@ import { DataReader } from './datareader.js'
 import { buf2hex } from './util.js'
 import { roundtable } from './roundtable.js'
 import lookup from './lookup.js'
+import offsetMap from './offsets.js'
+import eventFlags from './eventflags.js'
 
 class SaveData {
     constructor(data) {
@@ -234,6 +236,33 @@ class CharacterData {
             let playRegion = reader.readInt32();
             this.internal.playRegions[playRegion] = lookup.playRegion.find(p => p.RowID == playRegion);
         }
+
+        reader.seek(0x1C629, true); // Skip this BS
+        // Start of the Event Flag Block
+        reader.seek(0x1C, true); // Skip unknown stuff
+        this.internal.flags = {};
+        reader.seek(0x419, true); // Skip unknown stuff
+        let flagsOffset = reader.offset;
+        
+        eventFlags.forEach(flag => {
+            let flagId = flag.id;
+            let name = flag.name;
+
+            let category = Math.floor(flagId / 1000);
+            let subId = flagId - (category * 1000);
+            let checkMask = 1 << (7 - (subId & 7));
+            let shiftedOffset = subId >> 3;
+            let offset = offsetMap[category] + shiftedOffset;
+
+            reader.seek(flagsOffset + offset);
+
+            let checkBytes = reader.readUint32(false);
+
+            this.internal.flags[flagId] = (checkBytes & checkMask) != 0;
+        });
+        
+
+        
 
         this.name = this.internal.name;
         this.stats = {
