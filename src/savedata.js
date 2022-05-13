@@ -250,6 +250,8 @@ class CharacterData {
 
             let category = Math.floor(flagId / 1000);
             let subId = flagId - (category * 1000);
+            if(offsetMap[category] == undefined)
+                return;
             let checkMask = 1 << (7 - (subId & 7));
             let shiftedOffset = subId >> 3;
             let offset = offsetMap[category] + shiftedOffset;
