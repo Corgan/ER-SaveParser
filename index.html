@@ -181,6 +181,8 @@ tooltip {
     grid-auto-columns: max-content;
     grid-auto-rows: max-content;
     grid-gap: 10px;
+    max-height: 776px;
+    overflow-y: scroll;
 }
 
 #tab-content > .tab:not(.active) {
@@ -329,7 +331,7 @@ tooltip {
                             ['backgroundImage', `url('images/MENU_Knowledge_${String(item.params.iconId || item.params.iconIdM || item.params.iconIdF).padStart(5, 0)}.png')`]
                         ],
                         attributes: [
-                            ['tooltip', `${item.name}${item.level > 0 ? `+ ${item.level}` : ''}`]
+                            ['tooltip', `${item.name}${item.level > 0 ? ` +${item.level}` : ''}`]
                         ]
                     });
 
