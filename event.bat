@@ -1,0 +1,1 @@
+FOR /r dcx\event\ %%i IN (*.dcx) DO yabber\Yabber.DCX "%%i"

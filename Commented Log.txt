@@ -1,0 +1,1023 @@
+Opened Chapel Door
+10018540 = True
+
+
+Walked out of Chapel
+10010502 = True
+10012502 = True
+
+710000 = True
+10012682 = True
+
+
+Boss Spawn
+10010801 = True
+10012805 = True
+10015006 = True
+
+
+Boss Engaged
+10012810 = True
+
+
+Died
+9021 = True
+10010030 = True
+
+2200 = True
+
+2200 = False
+
+62101 = True
+
+
+Cutscene with Melina
+101 = True
+1020 = True
+2200 = True
+9021 = False
+18000050 = True
+18000530 = True
+18000531 = True
+18000532 = True
+18000820 = True
+18000870 = True
+18002250 = True
+18002251 = True
+18002270 = True
+18002400 = True
+18002510 = True
+18002520 = True
+18002580 = True
+18005001 = True
+18005012 = True
+
+
+Post Cutscene & Flasks
+60000 = True
+18000020 = True
+
+Loaded Into the World
+1042360711 = True
+1042360750 = True
+1042362215 = True
+1042362216 = True
+1042362217 = True
+1042365009 = True
+1042365010 = True
+10002423 = False
+10002424 = False
+10002425 = False
+10002426 = False
+10002480 = False
+10002510 = False
+10002580 = False
+10002690 = False
+10002849 = False
+10002889 = False
+10003745 = False
+10005010 = False
+10005011 = False
+10005066 = False
+10012502 = False
+10012682 = False
+10012805 = False
+10012810 = False
+10012849 = False
+10015006 = False
+
+1042382290 = True
+
+18002411 = True
+
+1040 = True
+
+
+First Tutorial Popup
+1735 = True
+69420 = True
+710820 = True
+18002023 = True
+
+
+Using Items Sidebar
+710010 = True
+18002650 = True
+
+
+Site of Grace Tutorial Popup
+69000 = True
+710020 = True
+18002640 = True
+
+
+Cave of Knowledge Grace
+71800 = True
+
+
+Rest at Cave of Knowledge Grace
+9000 = True
+9020 = True
+
+9808 = False
+9809 = True
+1042382290 = False
+10009350 = True
+18002411 = False
+18002510 = False
+18002520 = False
+18002640 = False
+18002650 = False
+
+1042382290 = True
+
+18002411 = True
+
+
+Stop Resting
+9000 = False
+9020 = False
+
+
+Rest again
+9808 = True
+9809 = False
+1042382290 = False
+18002411 = False
+
+1042382290 = True
+
+18002411 = True
+
+
+Stop Resting
+9000 = False
+9020 = False
+
+
+Reset Lockon and Attack Sidebar
+710030 = True
+18002651 = True
+
+710040 = True
+18002652 = True
+
+
+Strong Attack Sidebar
+710050 = True
+18002654 = True
+
+
+Guarding Tutorial Popup
+69120 = True
+710070 = True
+18002641 = True
+
+
+Killed Zombie after Guarding Popup
+18000220 = True
+18002212 = True
+
+
+Dodging Tutorial Popup
+69380 = True
+710210 = True
+18002646 = True
+
+
+Second Zombie Kill
+18002211 = True
+
+
+Jump Sidebar
+710080 = True
+18002653 = True
+
+
+Dash Sidebar
+710090 = True
+
+
+Pickup Rowa Fruit & Materials Popup
+1726 = True
+69340 = True
+710560 = True
+
+
+Walked into Room with Shield Soldier
+18002200 = True
+
+
+Wielding Armaments Tutorial Popup
+69400 = True
+710100 = True
+18002647 = True
+
+
+Change Target Sidebar
+710110 = True
+18002656 = True
+
+
+Skills Tutorial Popup
+69290 = True
+710200 = True
+18002645 = True
+
+
+Crouching Tutorial Popup
+69030 = True
+710140 = True
+18002642 = True
+
+
+Killed Soldier / Walked Into Grassy Room
+18005013 = True
+
+18005011 = True
+
+
+Back turned Crit Hit Sidebar
+710150 = True
+18002658 = True
+
+
+Stance Breaking Tutorial Popup
+69040 = True
+710160 = True
+18002643 = True
+18005014 = True
+
+
+Stake of Marika Tutorial Popup
+69050 = True
+710190 = True
+18002644 = True
+
+
+Soldier of Godrick Engaged
+18002855 = True
+18002860 = True
+18005047 = True
+
+
+Guard Counters Tutorial Popup
+69060 = True
+710180 = True
+18002663 = True
+
+
+You Died (To Soldier of Godrick)
+1701 = True
+9910 = True
+710530 = True
+
+
+Loading Screen & Respawn
+2000 = False
+
+2000 = True
+
+1042362215 = False
+1042362216 = False
+1042362217 = False
+1042365009 = False
+1042365010 = False
+1042382290 = False
+1099002980 = False
+18002023 = False
+18002200 = False
+18002211 = False
+18002212 = False
+18002250 = False
+18002251 = False
+18002270 = False
+18002400 = False
+18002411 = False
+18002580 = False
+18002641 = False
+18002642 = False
+18002643 = False
+18002644 = False
+18002645 = False
+18002646 = False
+18002647 = False
+18002651 = False
+18002652 = False
+18002653 = False
+18002654 = False
+18002656 = False
+18002658 = False
+18002663 = False
+18002855 = False
+18002860 = False
+18005001 = False
+18005011 = False
+18005012 = False
+18005013 = False
+18005014 = False
+18005047 = False
+
+9807 = False
+9808 = True
+1042362215 = True
+1042362216 = True
+1042362217 = True
+1042365009 = True
+1042365010 = True
+1099002980 = True
+18002023 = True
+18002212 = True
+18002250 = True
+18002251 = True
+18002270 = True
+18002400 = True
+18002510 = True
+18002520 = True
+18002580 = True
+18005001 = True
+18005012 = True
+
+1042382290 = True
+
+
+Death Tutorial Popup
+69100 = True
+700530 = True
+
+
+Move after respawning
+18002411 = True
+
+18005014 = True
+
+
+Soldier of Godrick Engaged
+18002855 = True
+18002860 = True
+18005047 = True
+
+
+Soldier of Godrick Killed
+18000850 = True
+18002850 = True
+18005049 = True
+18005050 = True
+18005051 = True
+
+
+Run up to Ledge with Strength Emote
+1044332240 = True
+1044362300 = True
+1242335065 = True
+
+1041365007 = True
+1042372610 = True
+1042375003 = True
+1042375005 = True
+1043352200 = True
+1043372732 = True
+
+1043372340 = True
+
+1041350700 = True
+1041359950 = True
+
+1043362213 = True
+
+1043362211 = True
+
+1043362215 = True
+
+1043362216 = True
+
+1043362212 = True
+
+1043362217 = True
+
+
+Pickup Strength!
+60809 = True
+18005010 = True
+
+
+Jump off Ledge run to Door
+18005004 = True
+
+18005007 = True
+
+
+Open Door
+18000542 = True
+18005006 = True
+18008542 = True
+
+
+End of Tutorial Door Opened
+710000 = False
+710010 = False
+710020 = False
+710030 = False
+710040 = False
+710050 = False
+710070 = False
+710080 = False
+710090 = False
+710100 = False
+710110 = False
+710140 = False
+710150 = False
+710160 = False
+710190 = False
+710200 = False
+710210 = False
+18002671 = True
+18002672 = True
+18002673 = True
+18002674 = True
+18002675 = True
+18002676 = True
+18002677 = True
+18002678 = True
+18002679 = True
+18002680 = True
+18002681 = True
+18002682 = True
+18002683 = True
+18002684 = True
+18002685 = True
+18002686 = True
+18002687 = True
+18002688 = True
+18002689 = True
+18002690 = True
+18002691 = True
+18002692 = True
+18002693 = True
+
+
+Stranded Graveyard Grace Touched
+71801 = True
+
+
+Rest at Grace
+9000 = True
+9020 = True
+
+9806 = True
+9808 = False
+1042382290 = False
+1043362211 = False
+1043362212 = False
+1043362213 = False
+1043362215 = False
+1043362216 = False
+1043362217 = False
+1043372340 = False
+1043372732 = False
+18002411 = False
+18002510 = False
+18002520 = False
+18002855 = False
+18005006 = False
+18005007 = False
+18005010 = False
+18005014 = False
+18005047 = False
+18005048 = True
+18005049 = False
+18005050 = False
+
+1042382290 = True
+
+
+Stop Resting
+9000 = False
+9020 = False
+18002411 = True
+
+1043362216 = True
+
+1043362212 = True
+
+1043362217 = True
+
+1043362215 = True
+
+1043362211 = True
+1043362213 = True
+
+
+Coop Multiplayer Popup & Finger Severer & Furled Finger
+60220 = True
+60310 = True
+69220 = True
+710660 = True
+18002665 = True
+
+Step on Elevator
+18000510 = True
+18000511 = True
+18001510 = True
+
+Top of Elevator
+18000022 = True
+
+Step off of Elevator
+18000511 = False
+18005029 = True
+
+Send Elevator Down
+18000510 = False
+18000511 = True
+18001510 = False
+
+Elevator Stopped at Bottom
+18000511 = False
+
+Opened Door to Outside World
+102 = True
+2200 = False
+1042368540 = True
+18000021 = True
+
+
+Walk up to Limgrave First Steps Grace
+1041372340 = True
+
+Limgrave - First Steps Grace
+
+3042 = True
+3061 = True
+76101 = True
+78100 = True
+1042372701 = True
+
+
+Guidance of Grace Tutorial Popup
+69080 = True
+710510 = True
+1042365001 = True
+
+
+Walk Away from Grace
+1043372732 = True
+
+1043372340 = True
+
+1042372701 = False
+
+
+Summoning Pools Tutorial Popup & Small Golden Effigy
+1731 = True
+60230 = True
+69260 = True
+710690 = True
+
+
+Running In and Out of Range of Grace
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+1042372701 = False
+
+1042372701 = True
+
+
+The Map Tutorial Popup
+69070 = True
+710500 = True
+1042362650 = True
+
+
+Talk to Varre
+3082 = True
+1042369202 = True
+1042369206 = True
+
+
+Talked to Varre x2
+1042369207 = True
+
+
+Talked to Varre x3
+1042369207 = True
+
+1042369208 = True
+
+Engaged with Boss
+9290 = True
+
+18002510 = True
+18002520 = True
+18005006 = True
+18005010 = True
+
+Died to Boss
+9290 = False
+1042365002 = True
+
+2000 = False
+
+Loading Screen & Respawn
+1041365007 = False
+1041372340 = False
+1042362215 = False
+1042362216 = False
+1042362217 = False
+1042362650 = False
+1042365001 = False
+1042365002 = False
+1042365009 = False
+1042365010 = False
+1042372610 = False
+1042375003 = False
+1042375005 = False
+1042382290 = False
+1043352200 = False
+1043362211 = False
+1043362212 = False
+1043362213 = False
+1043362215 = False
+1043362216 = False
+1043362217 = False
+1043372340 = False
+1043372732 = False
+1044332240 = False
+1044362300 = False
+1099002980 = False
+18002023 = False
+18002212 = False
+18002250 = False
+18002251 = False
+18002270 = False
+18002400 = False
+18002411 = False
+18002510 = False
+18002520 = False
+18002580 = False
+18002665 = False
+18002671 = False
+18002672 = False
+18002673 = False
+18002674 = False
+18002675 = False
+18002676 = False
+18002677 = False
+18002678 = False
+18002679 = False
+18002680 = False
+18002681 = False
+18002682 = False
+18002683 = False
+18002684 = False
+18002685 = False
+18002686 = False
+18002687 = False
+18002688 = False
+18002689 = False
+18002690 = False
+18002691 = False
+18002692 = False
+18002693 = False
+18002850 = False
+18002860 = False
+18005001 = False
+18005004 = False
+18005006 = False
+18005010 = False
+18005012 = False
+18005029 = False
+18005048 = False
+18005051 = False
+1242335065 = False
+
+530 = True
+531 = False
+551 = False
+554 = True
+571 = False
+572 = True
+2200 = False
+9804 = True
+9806 = False
+1041365007 = True
+1042362215 = True
+1042362216 = True
+1042362217 = True
+1042362650 = True
+1042365001 = True
+1042365009 = True
+1042365010 = True
+1042372610 = True
+1042372701 = True
+1042375003 = True
+1042375005 = True
+1043352200 = True
+1044332240 = True
+1044362300 = True
+1099002980 = True
+18002023 = True
+18002212 = True
+18002250 = True
+18002251 = True
+18002270 = True
+18002510 = True
+18002520 = True
+18002580 = True
+18002665 = True
+18002671 = True
+18002672 = True
+18002673 = True
+18002674 = True
+18002675 = True
+18002676 = True
+18002677 = True
+18002678 = True
+18002679 = True
+18002680 = True
+18002681 = True
+18002682 = True
+18002683 = True
+18002684 = True
+18002685 = True
+18002686 = True
+18002687 = True
+18002688 = True
+18002689 = True
+18002690 = True
+18002691 = True
+18002692 = True
+18002693 = True
+18002850 = True
+18002860 = True
+18005001 = True
+18005004 = True
+18005006 = True
+18005010 = True
+18005012 = True
+18005048 = True
+18005051 = True
+1242335065 = True
+
+1042382290 = True
+
+1041372340 = True
+
+1043362212 = True
+
+1043362215 = True
+
+1043362217 = True
+
+1043362211 = True
+1043362213 = True
+
+1043362216 = True
+
+1043372732 = True
+
+1042372701 = False
+1043372340 = True
+
+Engage Boss
+9290 = True
+
+Run to Church
+18002023 = False
+18002212 = False
+18002250 = False
+18002251 = False
+18002270 = False
+18002510 = False
+18002520 = False
+18002580 = False
+18002665 = False
+18002671 = False
+18002672 = False
+18002673 = False
+18002674 = False
+18002675 = False
+18002676 = False
+18002677 = False
+18002678 = False
+18002679 = False
+18002680 = False
+18002681 = False
+18002682 = False
+18002683 = False
+18002684 = False
+18002685 = False
+18002686 = False
+18002687 = False
+18002688 = False
+18002689 = False
+18002690 = False
+18002691 = False
+18002692 = False
+18002693 = False
+18002850 = False
+18002860 = False
+18005001 = False
+18005004 = False
+18005006 = False
+18005010 = False
+18005012 = False
+18005048 = False
+18005051 = False
+
+1042367030 = True
+
+Pickup Golden Rune [2]
+62120 = True
+
+Boss Disengage
+9290 = False
+1042365002 = True
+
+551 = True
+554 = False
+571 = True
+572 = False
+824 = True
+839 = True
+
+Touch Grace
+955 = True
+960 = True
+76100 = True
+78101 = True
+710730 = True
+1042365000 = True
+1042372701 = True
+
+Fast Travel to Sites of Grace Tutorial Popup
+69300 = True
+1042362660 = True
+
+Rest at Grace
+2200 = True
+9000 = True
+9020 = True
+
+9804 = False
+9808 = True
+1041372340 = False
+1042365000 = False
+1042365001 = False
+1042365002 = False
+1042382290 = False
+1043352200 = False
+1043362211 = False
+1043362212 = False
+1043362213 = False
+1043362215 = False
+1043362216 = False
+1043362217 = False
+1043372340 = False
+
+1042382290 = True
+1043372340 = True
+
+2200 = False
+
+1041372340 = True
+
+1043362216 = True
+
+1043362213 = True
+
+1043362211 = True
+
+1043362215 = True
+
+1043362212 = True
+
+1043362217 = True
+
+
+Allocate Flask Usage Tutorial
+720070 = True
+720080 = True
+
+Wait until Nightfall
+2200 = True
+
+530 = False
+532 = True
+551 = False
+553 = True
+821 = True
+
+2200 = False
+
+Wait until Noon
+2200 = True
+
+531 = True
+532 = False
+552 = True
+553 = False
+823 = True
+
+2200 = False
+
+Wait Until Morning
+2200 = True
+
+530 = True
+531 = False
+
+2200 = False
+
+Nightfall
+2200 = True
+
+530 = False
+532 = True
+551 = True
+552 = False
+822 = True
+
+2200 = False
+
+Nightfall
+2200 = True
+
+551 = False
+553 = True
+
+2200 = False
+
+Nightfall
+2200 = True
+
+2200 = False
+
+551 = True
+553 = False
+
+Leave Grace
+9000 = False
+9020 = False
+1042365000 = True
+1042365001 = True
+
+1042372701 = False
+
+Strengthening Armaments
+69310 = True
+710740 = True
+1042362656 = True
+
+Smithing Stone
+1042367060 = True
+
+Kale First Talk
+1042362712 = True
+1042369308 = True
+1042369319 = True
+
+Shop Menu
+1042369306 = True
+
+Buy Crafting Kit
+60120 = True
+710570 = True
+1042362713 = True
+1042369309 = True
+
+Close Shopping menu (Recommendation dialog option disappeared...)
+1042369307 = True
+
+About Kale
+1042362714 = True
+1042369313 = True
+1042369319 = False
+
+Leave Kale & Item Crafting Tutorial Popup
+1703 = True
+69130 = True
+
+Containers Tutorial Popup
+1704 = True
+69350 = True

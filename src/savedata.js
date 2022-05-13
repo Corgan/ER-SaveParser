@@ -243,15 +243,13 @@ class CharacterData {
         this.internal.flags = {};
         reader.seek(0x419, true); // Skip unknown stuff
         let flagsOffset = reader.offset;
-        
-        eventFlags.forEach(flag => {
-            let flagId = flag.id;
-            let name = flag.name;
 
+        let checkFlag = (flagId) => {
             let category = Math.floor(flagId / 1000);
             let subId = flagId - (category * 1000);
             if(offsetMap[category] == undefined)
-                return;
+                return 'invalid';
+            
             let checkMask = 1 << (7 - (subId & 7));
             let shiftedOffset = subId >> 3;
             let offset = offsetMap[category] + shiftedOffset;
@@ -259,12 +257,12 @@ class CharacterData {
             reader.seek(flagsOffset + offset);
 
             let checkBytes = reader.readUint32(false);
-
-            this.internal.flags[flagId] = (checkBytes & checkMask) != 0;
+            return (checkBytes & checkMask) != 0;
+        }
+        
+        eventFlags.forEach(flag => {
+            this.internal.flags[flag.id] = checkFlag(flag.id);
         });
-        
-
-        
 
         this.name = this.internal.name;
         this.stats = {

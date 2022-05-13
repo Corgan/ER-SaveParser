@@ -4,6 +4,9 @@ texconv.exe
 dcx/
 dds/
 
+esd/*
+!esd/er.py
+
 msg/
 
 yabber/
