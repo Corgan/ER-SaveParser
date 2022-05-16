@@ -4,10 +4,12 @@ texconv.exe
 dcx/
 dds/
 
-esd/*
-!esd/er.py
+esd/
 
 msg/
+
+DSMapStudio/
+emevd/
 
 yabber/
 
@@ -24,6 +26,9 @@ yapped/Paramdex/ER/*
 
 yapped/Paramdex/ER/Names/*
 
+!yapped/Paramdex/ER/Names/BonfireWarpParam.txt
+!yapped/Paramdex/ER/Names/BonfireWarpSubCategoryParam.txt
+!yapped/Paramdex/ER/Names/BonfireWarpTabParam.txt
 !yapped/Paramdex/ER/Names/EquipParamAccessory.txt
 !yapped/Paramdex/ER/Names/EquipParamGem.txt
 !yapped/Paramdex/ER/Names/EquipParamGoods.txt

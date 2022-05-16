@@ -427,7 +427,7 @@ tooltip {
                 let flagEl = document.getElementById('flags');
                 flagEl.innerHTML = '';
 
-                eventFlags.forEach((flag) => createElement('div', {
+                eventFlags.filter(flag => flag.type == "NG").forEach((flag) => createElement('div', {
                     classList: ['flag'],
                     text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
                     parent: flagEl

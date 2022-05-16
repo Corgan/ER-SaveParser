@@ -94,7 +94,11 @@ class DataReader {
             ret.type = this.readUint8();
             ret.id = this.readInt32NoCategory();
             if(bytes[3] == 0x80) { // Weapon
-                ret.extra = buf2hex(this.read(0xD).buffer);
+                let extra = this.read(0xD);
+                ret.extra = buf2hex(extra.buffer);
+                let ashLookup = new DataView(extra.buffer).getUint16(0x8, true);
+                if(ashLookup > 0)
+                    ret.ashLookup = ashLookup;
             } else if(bytes[3] == 0x90) { // Armor
                 ret.extra = buf2hex(this.read(0x8).buffer);
             } else if(bytes[3] == 0xC0) { // Ash of War
@@ -125,7 +129,8 @@ class DataReader {
             ret.lookup.unk = this.readUint8();
             ret.lookup.type = this.readUint8();
 
-            ret.id = this.lookup[ret.lookup.id].id;
+            ret.lookupEntry = this.lookup[ret.lookup.id];
+            ret.id = ret.lookupEntry.id;
         } else {
             ret.id = this.readInt32NoCategory();
         }
@@ -139,6 +144,11 @@ class DataReader {
 
             let weaponId = Math.trunc(ret.id / 100) * 100;
             ret.params = weapons.find(weapon => weapon.RowID == weaponId);
+
+            if(ret.lookupEntry.ashLookup) {
+                ret.ashLookup = this.lookup[ret.lookupEntry.ashLookup];
+                ret.socketedAsh = ashofwar.find(ash => ash.RowID == ret.ashLookup.id);
+            }
         }
         if(bytes[3] == 0x90) {
             ret.type = "armor";
