@@ -13,6 +13,35 @@ emevd/
 
 yabber/
 
+!xml/
+xml/*
+!xml/AccessoryCaption.fmg.xml
+!xml/AccessoryInfo.fmg.xml
+!xml/AccessoryName.fmg.xml
+!xml/ArtsCaption.fmg.xml
+!xml/ArtsName.fmg.xml
+!xml/GemCaption.fmg.xml
+!xml/GemEffect.fmg.xml
+!xml/GemInfo.fmg.xml
+!xml/GemName.fmg.xml
+!xml/GoodsCaption.fmg.xml
+!xml/GoodsDialog.fmg.xml
+!xml/GoodsInfo.fmg.xml
+!xml/GoodsInfo2.fmg.xml
+!xml/GoodsName.fmg.xml
+!xml/GR_MenuText.fmg.xml
+!xml/NPCName.fmg.xml
+!xml/PlaceName.fmg.xml
+!xml/ProtectorCaption.fmg.xml
+!xml/ProtectorInfo.fmg.xml
+!xml/ProtectorName.fmg.xml
+!xml/TalkMsg.fmg.xml
+!xml/WeaponCaption.fmg.xml
+!xml/WeaponEffect.fmg.xml
+!xml/WeaponInfo.fmg.xml
+!xml/WeaponName.fmg.xml
+
+
 !yapped/
 
 yapped/*
