@@ -27,7 +27,7 @@ let mapDrops = await parseParams('ItemLotParam_map');
 let playRegion = await parseParams('PlayRegionParam');
 let shopInventory = await parseParams('ShopLineupParam');
 let bonfireWarp = await parseParams('BonfireWarpParam');
-let bonfireSubcategory = await parseParams('BonfireWarpSubcategoryParam');
+let bonfireSubcategory = await parseParams('BonfireWarpSubCategoryParam');
 let bonfireTabs = await parseParams('BonfireWarpTabParam');
 
 let bonfire = { bonfires: bonfireWarp, subcategories: bonfireSubcategory, tabs: bonfireTabs };
