@@ -35,12 +35,13 @@ class CharacterData {
         reader.seek(0x04, true);
         this.timePlayed = reader.readInt32();
         reader.seek(0x04, true);
+
         if(this.version > 0x51) // Newer versions have an extra 16 bytes of padding
             reader.seek(0x10, true);
 
-        for(let i=0; i<0x1400; i++) { // Lookup Table
+        for(let i=0; i<0x1400; i++) // Lookup Table
             reader.parseLookupEntry();
-        }
+
         reader.seek(0x8, true);
 
         this.internal = {};
@@ -162,6 +163,7 @@ class CharacterData {
         }
 
         reader.seek(0x8, true); // Skip
+
         this.internal.equippedSpellIds = [];
         for(var i=0; i<0xC; i++) {
             let spellId = reader.readInt32();
@@ -302,7 +304,7 @@ class CharacterData {
         this.equipped = {};
         this.inventory = {};
 
-        this.inventory.all = this.internal.inventory.filter(item => item.params && !blacklist.includes(item.name));
+        this.inventory.all = this.internal.inventory.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
         
         this.inventory.tools = this.inventory.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3);
         this.inventory.ashes = this.inventory.all.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8);

@@ -1,10 +1,9 @@
-import maploot from './maploot.js'
+import bonfires from './bonfires.js'
 let eventflags = [];
 
 //let output = '';
 //Object.entries(maploot).forEach(([flagId, loot]) => loot.forEach(item => output += `eventflags.push({id: ${flagId}, item: { id: ${item.id}, name: "${item.name}", type: ${item.type}, qty: ${item.qty} }, type: 'pickup'})\n`));
 //console.log(output);
-
 
 eventflags.push({id: 114, item: { id: 8121, name: "Dark Moon Ring", type: 1, qty: 1 }, type: 'pickup'})
 eventflags.push({id: 171, item: { id: 8148, name: "Godrick's Great Rune", type: 1, qty: 1 }, type: 'pickup'})
@@ -3644,320 +3643,328 @@ eventflags.push({id: 11109764, name: "Ghost-Glovewort Picker's Bell Bearing [2]"
 eventflags.push({id: 11109765, name: "Ghost-Glovewort Picker's Bell Bearing [3]"});
 
 
-eventflags.push({id: 71000, name: "[Stormveil Castle] Godrick the Grafted"});
-eventflags.push({id: 71001, name: "[Stormveil Castle] Margit, the Fell Omen"});
-eventflags.push({id: 71002, name: "[Stormveil Castle] Castleward Tunnel"});
-eventflags.push({id: 71003, name: "[Stormveil Castle] Gateside Chamber"});
-eventflags.push({id: 71004, name: "[Stormveil Castle] Stormveil Cliffside"});
-eventflags.push({id: 71005, name: "[Stormveil Castle] Rampart Tower"});
-eventflags.push({id: 71006, name: "[Stormveil Castle] Liftside Chamber"});
-eventflags.push({id: 71007, name: "[Stormveil Castle] Secluded Cell"});
-eventflags.push({id: 71008, name: "[Stormveil Castle] Stormveil Main Gate"});
-eventflags.push({id: 71100, name: "[Leyndell, Royal Capital] Elden Throne"});
-eventflags.push({id: 71101, name: "[Leyndell, Royal Capital] Erdtree Sanctuary"});
-eventflags.push({id: 71102, name: "[Leyndell, Royal Capital] East Capital Rampart"});
-eventflags.push({id: 71103, name: "[Leyndell, Royal Capital] Lower Capital Church"});
-eventflags.push({id: 71104, name: "[Leyndell, Royal Capital] Avenue Balcony"});
-eventflags.push({id: 71105, name: "[Leyndell, Royal Capital] West Capital Rampart"});
-eventflags.push({id: 71107, name: "[Leyndell, Royal Capital] Queen's Bedchamber"});
-eventflags.push({id: 71108, name: "[Leyndell, Royal Capital] Fortified Manor, First Floor"});
-eventflags.push({id: 71109, name: "[Leyndell, Royal Capital] Divine Bridge"});
-eventflags.push({id: 71120, name: "[Leyndell, Ashen Capital] Elden Throne"});
-eventflags.push({id: 71121, name: "[Leyndell, Ashen Capital] Erdtree Sanctuary"});
-eventflags.push({id: 71122, name: "[Leyndell, Ashen Capital] East Capital Rampart"});
-eventflags.push({id: 71123, name: "[Leyndell, Ashen Capital] Leyndell, Capital of Ash"});
-eventflags.push({id: 71124, name: "[Leyndell, Ashen Capital] Queen's Bedchamber"});
-eventflags.push({id: 71125, name: "[Leyndell, Ashen Capital] Divine Bridge"});
-eventflags.push({id: 71190, name: "[Roundtable Hold] Table of Lost Grace"});
-eventflags.push({id: 71210, name: "[Ainsel River] Dragonkin Soldier of Nokstella"});
-eventflags.push({id: 71211, name: "[Ainsel River] Ainsel River Well Depths"});
-eventflags.push({id: 71212, name: "[Ainsel River] Ainsel River Sluice Gate"});
-eventflags.push({id: 71213, name: "[Ainsel River] Ainsel River Downstream"});
-eventflags.push({id: 71214, name: "[Ainsel River Main] Ainsel River Main"});
-eventflags.push({id: 71215, name: "[Ainsel River Main] Nokstella, Eternal City"});
-eventflags.push({id: 71216, name: "[Lake of Rot] Lake of Rot Shoreside"});
-eventflags.push({id: 71218, name: "[Lake of Rot] Grand Cloister"});
-eventflags.push({id: 71219, name: "[Ainsel River Main] Nokstella Waterfall Basin"});
-eventflags.push({id: 71220, name: "[Nokron, Eternal City] Great Waterfall Basin"});
-eventflags.push({id: 71221, name: "[Nokron, Eternal City] Mimic Tear"});
-eventflags.push({id: 71222, name: "[Siofra River] Siofra River Bank"});
-eventflags.push({id: 71223, name: "[Siofra River] Worshippers' Woods"});
-eventflags.push({id: 71224, name: "[Nokron, Eternal City] Ancestral Woods"});
-eventflags.push({id: 71225, name: "[Nokron, Eternal City] Aqueduct-Facing Cliffs"});
-eventflags.push({id: 71226, name: "[Nokron, Eternal City] Night's Sacred Ground"});
-eventflags.push({id: 71227, name: "[Siofra River] Below the Well"});
-eventflags.push({id: 71230, name: "[Deeproot Depths] Prince of Death's Throne"});
-eventflags.push({id: 71231, name: "[Deeproot Depths] Root-Facing Cliffs"});
-eventflags.push({id: 71232, name: "[Deeproot Depths] Great Waterfall Crest"});
-eventflags.push({id: 71233, name: "[Deeproot Depths] Deeproot Depths"});
-eventflags.push({id: 71234, name: "[Deeproot Depths] The Nameless Eternal City"});
-eventflags.push({id: 71235, name: "[Deeproot Depths] Across the Roots"});
-eventflags.push({id: 71240, name: "[Ainsel River] Astel, Naturalborn of the Void"});
-eventflags.push({id: 71250, name: "[Mohgwyn Palace] Cocoon of the Empyrean"});
-eventflags.push({id: 71251, name: "[Mohgwyn Palace] Palace Approach Ledge-Road"});
-eventflags.push({id: 71252, name: "[Mohgwyn Palace] Dynasty Mausoleum Entrance"});
-eventflags.push({id: 71253, name: "[Mohgwyn Palace] Dynasty Mausoleum Midpoint"});
-eventflags.push({id: 71270, name: "[Siofra River] Siofra River Well Depths"});
-eventflags.push({id: 71271, name: "[Nokron, Eternal City] Nokron, Eternal City"});
-eventflags.push({id: 71300, name: "[Crumbling Farum Azula] Maliketh, the Black Blade"});
-eventflags.push({id: 71301, name: "[Crumbling Farum Azula] Dragonlord Placidusax"});
-eventflags.push({id: 71302, name: "[Crumbling Farum Azula] Dragon Temple Altar"});
-eventflags.push({id: 71303, name: "[Crumbling Farum Azula] Crumbling Beast Grave"});
-eventflags.push({id: 71304, name: "[Crumbling Farum Azula] Crumbling Beast Grave Depths"});
-eventflags.push({id: 71305, name: "[Crumbling Farum Azula] Tempest-Facing Balcony"});
-eventflags.push({id: 71306, name: "[Crumbling Farum Azula] Dragon Temple"});
-eventflags.push({id: 71307, name: "[Crumbling Farum Azula] Dragon Temple Transept"});
-eventflags.push({id: 71308, name: "[Crumbling Farum Azula] Dragon Temple Lift"});
-eventflags.push({id: 71309, name: "[Crumbling Farum Azula] Dragon Temple Rooftop"});
-eventflags.push({id: 71310, name: "[Crumbling Farum Azula] Beside the Great Bridge"});
-eventflags.push({id: 71400, name: "[Academy of Raya Lucaria] Raya Lucaria Grand Library"});
-eventflags.push({id: 71401, name: "[Academy of Raya Lucaria] Debate Parlor"});
-eventflags.push({id: 71402, name: "[Academy of Raya Lucaria] Church of the Cuckoo"});
-eventflags.push({id: 71403, name: "[Academy of Raya Lucaria] Schoolhouse Classroom"});
-eventflags.push({id: 71500, name: "[Elphael, Brace of the Haligtree] Malenia, Goddess of Rot"});
-eventflags.push({id: 71501, name: "[Elphael, Brace of the Haligtree] Prayer Room"});
-eventflags.push({id: 71502, name: "[Elphael, Brace of the Haligtree] Elphael Inner Wall"});
-eventflags.push({id: 71503, name: "[Elphael, Brace of the Haligtree] Drainage Channel"});
-eventflags.push({id: 71504, name: "[Elphael, Brace of the Haligtree] Haligtree Roots"});
-eventflags.push({id: 71505, name: "[Miquella's Haligtree] Haligtree Promenade"});
-eventflags.push({id: 71506, name: "[Miquella's Haligtree] Haligtree Canopy"});
-eventflags.push({id: 71507, name: "[Miquella's Haligtree] Haligtree Town"});
-eventflags.push({id: 71508, name: "[Miquella's Haligtree] Haligtree Town Plaza"});
-eventflags.push({id: 71600, name: "[Volcano Manor] Rykard, Lord of Blasphemy"});
-eventflags.push({id: 71601, name: "[Volcano Manor] Temple of Eiglay"});
-eventflags.push({id: 71602, name: "[Volcano Manor] Volcano Manor"});
-eventflags.push({id: 71603, name: "[Volcano Manor] Prison Town Church"});
-eventflags.push({id: 71604, name: "[Volcano Manor] Guest Hall"});
-eventflags.push({id: 71605, name: "[Volcano Manor] Audience Pathway"});
-eventflags.push({id: 71606, name: "[Volcano Manor] Abductor Virgin"});
-eventflags.push({id: 71607, name: "[Volcano Manor] Subterranean Inquisition Chamber"});
-eventflags.push({id: 71800, name: "[Stranded Graveyard] Cave of Knowledge"});
-eventflags.push({id: 71801, name: "[Stranded Graveyard] Stranded Graveyard"});
-eventflags.push({id: 71900, name: "[Elden Throne] Fractured Marika"});
-eventflags.push({id: 73000, name: "[Weeping Peninsula] Tombsward Catacombs"});
-eventflags.push({id: 73001, name: "[Weeping Peninsula] Impaler's Catacombs"});
-eventflags.push({id: 73002, name: "[Limgrave] Stormfoot Catacombs"});
-eventflags.push({id: 73003, name: "[Liurnia of the Lakes] Road's End Catacombs"});
-eventflags.push({id: 73004, name: "[Limgrave] Murkwater Catacombs"});
-eventflags.push({id: 73005, name: "[Liurnia of the Lakes] Black Knife Catacombs"});
-eventflags.push({id: 73006, name: "[Liurnia of the Lakes] Cliffbottom Catacombs"});
-eventflags.push({id: 73007, name: "[Mt. Gelmir] Wyndham Catacombs"});
-eventflags.push({id: 73008, name: "[Altus Plateau] Sainted Hero's Grave"});
-eventflags.push({id: 73009, name: "[Mt. Gelmir] Gelmir Hero's Grave"});
-eventflags.push({id: 73010, name: "[Capital Outskirts] Auriza Hero's Grave"});
-eventflags.push({id: 73011, name: "[Stormhill] Deathtouched Catacombs"});
-eventflags.push({id: 73012, name: "[Altus Plateau] Unsightly Catacombs"});
-eventflags.push({id: 73013, name: "[Capital Outskirts] Auriza Side Tomb"});
-eventflags.push({id: 73014, name: "[Caelid] Minor Erdtree Catacombs"});
-eventflags.push({id: 73015, name: "[Caelid] Caelid Catacombs"});
-eventflags.push({id: 73016, name: "[Caelid] War-Dead Catacombs"});
-eventflags.push({id: 73017, name: "[Flame Peak] Giant-Conquering Hero's Grave"});
-eventflags.push({id: 73018, name: "[Flame Peak] Giants' Mountaintop Catacombs"});
-eventflags.push({id: 73019, name: "[Consecrated Snowfield] Consecrated Snowfield Catacombs"});
-eventflags.push({id: 73020, name: "[Forbidden Lands] Hidden Path to the Haligtree"});
-eventflags.push({id: 73100, name: "[Limgrave] Murkwater Cave"});
-eventflags.push({id: 73101, name: "[Weeping Peninsula] Earthbore Cave"});
-eventflags.push({id: 73102, name: "[Weeping Peninsula] Tombsward Cave"});
-eventflags.push({id: 73103, name: "[Limgrave] Groveside Cave"});
-eventflags.push({id: 73104, name: "[Liurnia of the Lakes] Stillwater Cave"});
-eventflags.push({id: 73105, name: "[Liurnia of the Lakes] Lakeside Crystal Cave"});
-eventflags.push({id: 73106, name: "[Liurnia of the Lakes] Academy Crystal Cave"});
-eventflags.push({id: 73107, name: "[Mt. Gelmir] Seethewater Cave"});
-eventflags.push({id: 73109, name: "[Mt. Gelmir] Volcano Cave"});
-eventflags.push({id: 73110, name: "[Greyoll's Dragonbarrow] Dragonbarrow Cave"});
-eventflags.push({id: 73111, name: "[Greyoll's Dragonbarrow] Sellia Hideaway"});
-eventflags.push({id: 73112, name: "[Consecrated Snowfield] Cave of the Forlorn"});
-eventflags.push({id: 73115, name: "[Limgrave] Coastal Cave"});
-eventflags.push({id: 73117, name: "[Limgrave] Highroad Cave"});
-eventflags.push({id: 73118, name: "[Altus Plateau] Perfumer's Grotto"});
-eventflags.push({id: 73119, name: "[Altus Plateau] Sage's Cave"});
-eventflags.push({id: 73120, name: "[Caelid] Abandoned Cave"});
-eventflags.push({id: 73121, name: "[Caelid] Gaol Cave"});
-eventflags.push({id: 73122, name: "[Mountaintops of the Giants] Spiritcaller's Cave"});
-eventflags.push({id: 73200, name: "[Weeping Peninsula] Morne Tunnel"});
-eventflags.push({id: 73201, name: "[Limgrave] Limgrave Tunnels"});
-eventflags.push({id: 73202, name: "[Liurnia of the Lakes] Raya Lucaria Crystal Tunnel"});
-eventflags.push({id: 73204, name: "[Altus Plateau] Old Altus Tunnel"});
-eventflags.push({id: 73205, name: "[Altus Plateau] Altus Tunnel"});
-eventflags.push({id: 73207, name: "[Caelid] Gael Tunnel"});
-eventflags.push({id: 73207, name: "[Caelid] Rear Gael Tunnel Entrance"});
-eventflags.push({id: 73208, name: "[Caelid] Sellia Crystal Tunnel"});
-eventflags.push({id: 73211, name: "[Consecrated Snowfield] Yelough Anix Tunnel"});
-eventflags.push({id: 73410, name: "[Stormhill] Limgrave Tower Bridge"});
-eventflags.push({id: 73412, name: "[Stormhill] Divine Tower of Limgrave"});
-eventflags.push({id: 73420, name: "[Liurnia of the Lakes] Study Hall Entrance"});
-eventflags.push({id: 73421, name: "[Liurnia of the Lakes] Liurnia Tower Bridge"});
-eventflags.push({id: 73422, name: "[Liurnia of the Lakes] Divine Tower of Liurnia"});
-eventflags.push({id: 73430, name: "[Capital Outskirts] Divine Tower of West Altus"});
-eventflags.push({id: 73431, name: "[Capital Outskirts] Sealed Tunnel"});
-eventflags.push({id: 73432, name: "[Capital Outskirts] Divine Tower of West Altus: Gate"});
-eventflags.push({id: 73440, name: "[Greyoll's Dragonbarrow] Divine Tower of Caelid"});
-eventflags.push({id: 73441, name: "[Greyoll's Dragonbarrow] Divine Tower of Caelid: Center"});
-eventflags.push({id: 73450, name: "[Forbidden Lands] Divine Tower of East Altus: Gate"});
-eventflags.push({id: 73451, name: "[Forbidden Lands] Divine Tower of East Altus"});
-eventflags.push({id: 73460, name: "[Greyoll's Dragonbarrow] Isolated Divine Tower"});
-eventflags.push({id: 73500, name: "[Subterranean Shunning-Grounds] Cathedral of the Forsaken"});
-eventflags.push({id: 73501, name: "[Subterranean Shunning-Grounds] Underground Roadside"});
-eventflags.push({id: 73502, name: "[Subterranean Shunning-Grounds] Forsaken Depths"});
-eventflags.push({id: 73503, name: "[Subterranean Shunning-Grounds] Leyndell Catacombs"});
-eventflags.push({id: 73504, name: "[Subterranean Shunning-Grounds] Frenzied Flame Proscription"});
-eventflags.push({id: 73900, name: "[Ruin-Strewn Precipice] Magma Wyrm"});
-eventflags.push({id: 73901, name: "[Ruin-Strewn Precipice] Ruin-Strewn Precipice"});
-eventflags.push({id: 73902, name: "[Ruin-Strewn Precipice] Ruin-Strewn Precipice Overlook"});
-eventflags.push({id: 76100, name: "[Limgrave] Church of Elleh"});
-eventflags.push({id: 76101, name: "[Limgrave] The First Step"});
-eventflags.push({id: 76102, name: "[Stormhill] Stormhill Shack"});
-eventflags.push({id: 76103, name: "[Limgrave] Artist's Shack"});
-eventflags.push({id: 76104, name: "[Limgrave] Third Church of Marika"});
-eventflags.push({id: 76105, name: "[Limgrave] Fort Haight West"});
-eventflags.push({id: 76106, name: "[Limgrave] Agheel Lake South"});
-eventflags.push({id: 76108, name: "[Limgrave] Agheel Lake North"});
-eventflags.push({id: 76110, name: "[Limgrave] Church of Dragon Communion"});
-eventflags.push({id: 76111, name: "[Limgrave] Gatefront"});
-eventflags.push({id: 76113, name: "[Limgrave] Seaside Ruins"});
-eventflags.push({id: 76114, name: "[Limgrave] Mistwood Outskirts"});
-eventflags.push({id: 76116, name: "[Limgrave] Murkwater Coast"});
-eventflags.push({id: 76117, name: "[Stormhill] Saintsbridge"});
-eventflags.push({id: 76118, name: "[Stormhill] Warmaster's Shack"});
-eventflags.push({id: 76119, name: "[Limgrave] Summonwater Village Outskirts"});
-eventflags.push({id: 76120, name: "[Limgrave] Waypoint Ruins Cellar"});
-eventflags.push({id: 76150, name: "[Weeping Peninsula] Church of Pilgrimage"});
-eventflags.push({id: 76151, name: "[Weeping Peninsula] Castle Morne Rampart"});
-eventflags.push({id: 76152, name: "[Weeping Peninsula] Tombsward"});
-eventflags.push({id: 76153, name: "[Weeping Peninsula] South of the Lookout Tower"});
-eventflags.push({id: 76154, name: "[Weeping Peninsula] Ailing Village Outskirts"});
-eventflags.push({id: 76155, name: "[Weeping Peninsula] Beside the Crater-Pocked Glade"});
-eventflags.push({id: 76156, name: "[Weeping Peninsula] Isolated Merchant's Shack"});
-eventflags.push({id: 76157, name: "[Weeping Peninsula] Bridge of Sacrifice"});
-eventflags.push({id: 76158, name: "[Weeping Peninsula] Castle Morne Lift"});
-eventflags.push({id: 76159, name: "[Weeping Peninsula] Behind the Castle"});
-eventflags.push({id: 76160, name: "[Weeping Peninsula] Beside the Rampart Gaol"});
-eventflags.push({id: 76161, name: "[Weeping Peninsula] Morne Moangrave"});
-eventflags.push({id: 76162, name: "[Weeping Peninsula] Fourth Church of Marika"});
-eventflags.push({id: 76200, name: "[Liurnia of the Lakes] Uld Palace Ruins"});
-eventflags.push({id: 76201, name: "[Liurnia of the Lakes] Liurnia Lake Shore"});
-eventflags.push({id: 76202, name: "[Liurnia of the Lakes] Laskyar Ruins"});
-eventflags.push({id: 76203, name: "[Liurnia of the Lakes] Scenic Isle"});
-eventflags.push({id: 76204, name: "[Liurnia of the Lakes] Academy Gate Town"});
-eventflags.push({id: 76205, name: "[Liurnia of the Lakes] South Raya Lucaria Gate"});
-eventflags.push({id: 76206, name: "[Liurnia of the Lakes] Main Academy Gate"});
-eventflags.push({id: 76207, name: "[Bellum Highway] East Raya Lucaria Gate"});
-eventflags.push({id: 76208, name: "[Bellum Highway] Bellum Church"});
-eventflags.push({id: 76209, name: "[Liurnia of the Lakes] Grand Lift of Dectus"});
-eventflags.push({id: 76210, name: "[Liurnia of the Lakes] Foot of the Four Belfries"});
-eventflags.push({id: 76211, name: "[Liurnia of the Lakes] Sorcerer's Isle"});
-eventflags.push({id: 76212, name: "[Liurnia of the Lakes] Northern Liurnia Lake Shore"});
-eventflags.push({id: 76213, name: "[Liurnia of the Lakes] Road to the Manor"});
-eventflags.push({id: 76214, name: "[Liurnia of the Lakes] Main Caria Manor Gate"});
-eventflags.push({id: 76215, name: "[Liurnia of the Lakes] Slumbering Wolf's Shack"});
-eventflags.push({id: 76216, name: "[Liurnia of the Lakes] Boilprawn Shack"});
-eventflags.push({id: 76217, name: "[Liurnia of the Lakes] Artist's Shack"});
-eventflags.push({id: 76218, name: "[Liurnia of the Lakes] Revenger's Shack"});
-eventflags.push({id: 76219, name: "[Liurnia of the Lakes] Folly on the Lake"});
-eventflags.push({id: 76220, name: "[Liurnia of the Lakes] Village of the Albinaurics"});
-eventflags.push({id: 76221, name: "[Liurnia of the Lakes] Liurnia Highway North"});
-eventflags.push({id: 76222, name: "[Liurnia of the Lakes] Gate Town Bridge"});
-eventflags.push({id: 76223, name: "[Liurnia of the Lakes] Eastern Liurnia Lake Shore"});
-eventflags.push({id: 76224, name: "[Liurnia of the Lakes] Church of Vows"});
-eventflags.push({id: 76225, name: "[Liurnia of the Lakes] Ruined Labyrinth"});
-eventflags.push({id: 76226, name: "[Liurnia of the Lakes] Mausoleum Compound"});
-eventflags.push({id: 76227, name: "[Liurnia of the Lakes] The Four Belfries"});
-eventflags.push({id: 76228, name: "[Liurnia of the Lakes] Ranni's Chamber"});
-eventflags.push({id: 76229, name: "[Liurnia of the Lakes] Ravine-Veiled Village"});
-eventflags.push({id: 76230, name: "[Liurnia of the Lakes] Manor Upper Level"});
-eventflags.push({id: 76231, name: "[Liurnia of the Lakes] Manor Lower Level"});
-eventflags.push({id: 76232, name: "[Liurnia of the Lakes] Royal Moongazing Grounds"});
-eventflags.push({id: 76233, name: "[Liurnia of the Lakes] Gate Town North"});
-eventflags.push({id: 76234, name: "[Liurnia of the Lakes] Eastern Tableland"});
-eventflags.push({id: 76235, name: "[Liurnia of the Lakes] The Ravine"});
-eventflags.push({id: 76236, name: "[Liurnia of the Lakes] Fallen Ruins of the Lake"});
-eventflags.push({id: 76237, name: "[Liurnia of the Lakes] Converted Tower"});
-eventflags.push({id: 76238, name: "[Liurnia of the Lakes] Behind Caria Manor"});
-eventflags.push({id: 76239, name: "[Bellum Highway] Frenzied Flame Village Outskirts"});
-eventflags.push({id: 76240, name: "[Bellum Highway] Church of Inhibition"});
-eventflags.push({id: 76241, name: "[Liurnia of the Lakes] Temple Quarter"});
-eventflags.push({id: 76242, name: "[Liurnia of the Lakes] East Gate Bridge Trestle"});
-eventflags.push({id: 76243, name: "[Liurnia of the Lakes] Crystalline Woods"});
-eventflags.push({id: 76244, name: "[Liurnia of the Lakes] Liurnia Highway South"});
-eventflags.push({id: 76245, name: "[Liurnia of the Lakes] Jarburg"});
-eventflags.push({id: 76247, name: "[Liurnia of the Lakes] Ranni's Chamber"});
-eventflags.push({id: 76250, name: "[Moonlight Altar] Moonlight Altar"});
-eventflags.push({id: 76251, name: "[Moonlight Altar] Cathedral of Manus Celes"});
-eventflags.push({id: 76252, name: "[Moonlight Altar] Altar South"});
-eventflags.push({id: 76300, name: "[Altus Plateau] Abandoned Coffin"});
-eventflags.push({id: 76301, name: "[Altus Plateau] Altus Plateau"});
-eventflags.push({id: 76302, name: "[Altus Plateau] Erdtree-Gazing Hill"});
-eventflags.push({id: 76303, name: "[Altus Plateau] Altus Highway Junction"});
-eventflags.push({id: 76304, name: "[Altus Plateau] Forest-Spanning Greatbridge"});
-eventflags.push({id: 76305, name: "[Altus Plateau] Rampartside Path"});
-eventflags.push({id: 76306, name: "[Altus Plateau] Bower of Bounty"});
-eventflags.push({id: 76307, name: "[Altus Plateau] Road of Iniquity Side Path"});
-eventflags.push({id: 76308, name: "[Altus Plateau] Windmill Village"});
-eventflags.push({id: 76309, name: "[Capital Outskirts] Outer Wall Phantom Tree"});
-eventflags.push({id: 76310, name: "[Capital Outskirts] Minor Erdtree Church"});
-eventflags.push({id: 76311, name: "[Capital Outskirts] Hermit Merchant's Shack"});
-eventflags.push({id: 76312, name: "[Capital Outskirts] Outer Wall Battleground"});
-eventflags.push({id: 76313, name: "[Altus Plateau] Windmill Heights"});
-eventflags.push({id: 76314, name: "[Capital Outskirts] Capital Rampart"});
-eventflags.push({id: 76350, name: "[Mt. Gelmir] Bridge of Iniquity"});
-eventflags.push({id: 76351, name: "[Mt. Gelmir] First Mt. Gelmir Campsite"});
-eventflags.push({id: 76352, name: "[Mt. Gelmir] Ninth Mt. Gelmir Campsite"});
-eventflags.push({id: 76353, name: "[Mt. Gelmir] Road of Iniquity"});
-eventflags.push({id: 76354, name: "[Mt. Gelmir] Seethewater River"});
-eventflags.push({id: 76355, name: "[Mt. Gelmir] Seethewater Terminus"});
-eventflags.push({id: 76356, name: "[Mt. Gelmir] Craftsman's Shack"});
-eventflags.push({id: 76357, name: "[Mt. Gelmir] Primeval Sorcerer Azur"});
-eventflags.push({id: 76320, name: "[Altus Plateau] Shaded Castle Ramparts"});
-eventflags.push({id: 76321, name: "[Altus Plateau] Shaded Castle Inner Gate"});
-eventflags.push({id: 76322, name: "[Altus Plateau] Castellan's Hall"});
-eventflags.push({id: 76400, name: "[Caelid] Smoldering Church"});
-eventflags.push({id: 76401, name: "[Caelid] Rotview Balcony"});
-eventflags.push({id: 76402, name: "[Caelid] Fort Gael North"});
-eventflags.push({id: 76403, name: "[Caelid] Caelem Ruins"});
-eventflags.push({id: 76404, name: "[Caelid] Cathedral of Dragon Communion"});
-eventflags.push({id: 76405, name: "[Caelid] Caelid Highway South"});
-eventflags.push({id: 76406, name: "[Swamp of Aeonia] Aeonia Swamp Shore"});
-eventflags.push({id: 76407, name: "[Swamp of Aeonia] Astray from Caelid Highway North"});
-eventflags.push({id: 76409, name: "[Caelid] Smoldering Wall"});
-eventflags.push({id: 76410, name: "[Caelid] Deep Siofra Well"});
-eventflags.push({id: 76411, name: "[Caelid] Southern Aeonia Swamp Bank"});
-eventflags.push({id: 76412, name: "[Swamp of Aeonia] Heart of Aeonia"});
-eventflags.push({id: 76413, name: "[Swamp of Aeonia] Inner Aeonia"});
-eventflags.push({id: 76414, name: "[Caelid] Sellia Backstreets"});
-eventflags.push({id: 76415, name: "[Caelid] Chair-Crypt of Sellia"});
-eventflags.push({id: 76416, name: "[Caelid] Sellia Under-Stair"});
-eventflags.push({id: 76417, name: "[Caelid] Impassable Greatbridge"});
-eventflags.push({id: 76418, name: "[Caelid] Church of the Plague"});
-eventflags.push({id: 76419, name: "[Caelid] Redmane Castle Plaza"});
-eventflags.push({id: 76420, name: "[Caelid] Chamber Outside the Plaza"});
-eventflags.push({id: 76422, name: "[Caelid] Starscourge Radahn"});
-eventflags.push({id: 76450, name: "[Greyoll's Dragonbarrow] Dragonbarrow West"});
-eventflags.push({id: 76451, name: "[Greyoll's Dragonbarrow] Isolated Merchant's Shack"});
-eventflags.push({id: 76452, name: "[Greyoll's Dragonbarrow] Dragonbarrow Fork"});
-eventflags.push({id: 76453, name: "[Greyoll's Dragonbarrow] Fort Faroth"});
-eventflags.push({id: 76454, name: "[Greyoll's Dragonbarrow] Bestial Sanctum"});
-eventflags.push({id: 76455, name: "[Greyoll's Dragonbarrow] Lenne's Rise"});
-eventflags.push({id: 76456, name: "[Greyoll's Dragonbarrow] Farum Greatbridge"});
-eventflags.push({id: 76500, name: "[Forbidden Lands] Forbidden Lands"});
-eventflags.push({id: 76501, name: "[Mountaintops of the Giants] Zamor Ruins"});
-eventflags.push({id: 76502, name: "[Forbidden Lands] Grand Lift of Rold"});
-eventflags.push({id: 76503, name: "[Mountaintops of the Giants] Ancient Snow Valley Ruins"});
-eventflags.push({id: 76504, name: "[Mountaintops of the Giants] Freezing Lake"});
-eventflags.push({id: 76505, name: "[Mountaintops of the Giants] First Church of Marika"});
-eventflags.push({id: 76506, name: "[Flame Peak] Giants' Gravepost"});
-eventflags.push({id: 76507, name: "[Flame Peak] Church of Repose"});
-eventflags.push({id: 76508, name: "[Flame Peak] Foot of the Forge"});
-eventflags.push({id: 76509, name: "[Flame Peak] Fire Giant"});
-eventflags.push({id: 76510, name: "[Flame Peak] Forge of the Giants"});
-eventflags.push({id: 76520, name: "[Mountaintops of the Giants] Whiteridge Road"});
-eventflags.push({id: 76521, name: "[Mountaintops of the Giants] Snow Valley Ruins Overlook"});
-eventflags.push({id: 76522, name: "[Mountaintops of the Giants] Castle Sol Main Gate"});
-eventflags.push({id: 76523, name: "[Mountaintops of the Giants] Church of the Eclipse"});
-eventflags.push({id: 76524, name: "[Mountaintops of the Giants] Castle Sol Rooftop"});
-eventflags.push({id: 76550, name: "[Consecrated Snowfield] Consecrated Snowfield"});
-eventflags.push({id: 76551, name: "[Consecrated Snowfield] Inner Consecrated Snowfield"});
-eventflags.push({id: 76652, name: "[Consecrated Snowfield] Ordina, Liturgical Town"});
-eventflags.push({id: 76653, name: "[Consecrated Snowfield] Apostate Derelict"});
+
+
+
+//let output = '';
+//Object.entries(bonfires).forEach(([id, bonfire]) => output += `eventflags.push({id: ${bonfire.eventFlag}, name: "${bonfire.name}", type: 'bonfire'})\n`);
+//console.log(output);
+
+
+eventflags.push({id: 71000, name: "Godrick the Grafted", type: 'bonfire'})
+eventflags.push({id: 71001, name: "Margit, the Fell Omen", type: 'bonfire'})
+eventflags.push({id: 71002, name: "Castleward Tunnel", type: 'bonfire'})
+eventflags.push({id: 71003, name: "Gateside Chamber", type: 'bonfire'})
+eventflags.push({id: 71004, name: "Stormveil Cliffside", type: 'bonfire'})
+eventflags.push({id: 71005, name: "Rampart Tower", type: 'bonfire'})
+eventflags.push({id: 71006, name: "Liftside Chamber", type: 'bonfire'})
+eventflags.push({id: 71007, name: "Secluded Cell", type: 'bonfire'})
+eventflags.push({id: 71008, name: "Stormveil Main Gate", type: 'bonfire'})
+eventflags.push({id: 71100, name: "Elden Throne", type: 'bonfire'})
+eventflags.push({id: 71101, name: "Erdtree Sanctuary", type: 'bonfire'})
+eventflags.push({id: 71102, name: "East Capital Rampart", type: 'bonfire'})
+eventflags.push({id: 71103, name: "Lower Capital Church", type: 'bonfire'})
+eventflags.push({id: 71104, name: "Avenue Balcony", type: 'bonfire'})
+eventflags.push({id: 71105, name: "West Capital Rampart", type: 'bonfire'})
+eventflags.push({id: 71107, name: "Queen's Bedchamber", type: 'bonfire'})
+eventflags.push({id: 71108, name: "Fortified Manor, First Floor", type: 'bonfire'})
+eventflags.push({id: 71109, name: "Divine Bridge", type: 'bonfire'})
+eventflags.push({id: 71120, name: "Elden Throne", type: 'bonfire'})
+eventflags.push({id: 71121, name: "Erdtree Sanctuary", type: 'bonfire'})
+eventflags.push({id: 71122, name: "East Capital Rampart", type: 'bonfire'})
+eventflags.push({id: 71123, name: "Leyndell, Capital of Ash", type: 'bonfire'})
+eventflags.push({id: 71124, name: "Queen's Bedchamber", type: 'bonfire'})
+eventflags.push({id: 71125, name: "Divine Bridge", type: 'bonfire'})
+eventflags.push({id: 71190, name: "Table of Lost Grace", type: 'bonfire'})
+eventflags.push({id: 71210, name: "Dragonkin Soldier of Nokstella", type: 'bonfire'})
+eventflags.push({id: 71211, name: "Ainsel River Well Depths", type: 'bonfire'})
+eventflags.push({id: 71212, name: "Ainsel River Sluice Gate", type: 'bonfire'})
+eventflags.push({id: 71213, name: "Ainsel River Downstream", type: 'bonfire'})
+eventflags.push({id: 71214, name: "Ainsel River Main", type: 'bonfire'})
+eventflags.push({id: 71215, name: "Nokstella, Eternal City", type: 'bonfire'})
+eventflags.push({id: 71216, name: "Lake of Rot Shoreside", type: 'bonfire'})
+eventflags.push({id: 71218, name: "Grand Cloister", type: 'bonfire'})
+eventflags.push({id: 71219, name: "Nokstella Waterfall Basin", type: 'bonfire'})
+eventflags.push({id: 71220, name: "Great Waterfall Basin", type: 'bonfire'})
+eventflags.push({id: 71221, name: "Mimic Tear", type: 'bonfire'})
+eventflags.push({id: 71222, name: "Siofra River Bank", type: 'bonfire'})
+eventflags.push({id: 71223, name: "Worshippers' Woods", type: 'bonfire'})
+eventflags.push({id: 71224, name: "Ancestral Woods", type: 'bonfire'})
+eventflags.push({id: 71225, name: "Aqueduct-Facing Cliffs", type: 'bonfire'})
+eventflags.push({id: 71226, name: "Night's Sacred Ground", type: 'bonfire'})
+eventflags.push({id: 71227, name: "Below the Well", type: 'bonfire'})
+eventflags.push({id: 71230, name: "Prince of Death's Throne", type: 'bonfire'})
+eventflags.push({id: 71231, name: "Root-Facing Cliffs", type: 'bonfire'})
+eventflags.push({id: 71232, name: "Great Waterfall Crest", type: 'bonfire'})
+eventflags.push({id: 71233, name: "Deeproot Depths", type: 'bonfire'})
+eventflags.push({id: 71234, name: "The Nameless Eternal City", type: 'bonfire'})
+eventflags.push({id: 71235, name: "Across the Roots", type: 'bonfire'})
+eventflags.push({id: 71240, name: "Astel, Naturalborn of the Void", type: 'bonfire'})
+eventflags.push({id: 71250, name: "Cocoon of the Empyrean", type: 'bonfire'})
+eventflags.push({id: 71251, name: "Palace Approach Ledge-Road", type: 'bonfire'})
+eventflags.push({id: 71252, name: "Dynasty Mausoleum Entrance", type: 'bonfire'})
+eventflags.push({id: 71253, name: "Dynasty Mausoleum Midpoint", type: 'bonfire'})
+eventflags.push({id: 71270, name: "Siofra River Well Depths", type: 'bonfire'})
+eventflags.push({id: 71271, name: "Nokron, Eternal City", type: 'bonfire'})
+eventflags.push({id: 71300, name: "Maliketh, the Black Blade", type: 'bonfire'})
+eventflags.push({id: 71301, name: "Dragonlord Placidusax", type: 'bonfire'})
+eventflags.push({id: 71302, name: "Dragon Temple Altar", type: 'bonfire'})
+eventflags.push({id: 71303, name: "Crumbling Beast Grave", type: 'bonfire'})
+eventflags.push({id: 71304, name: "Crumbling Beast Grave Depths", type: 'bonfire'})
+eventflags.push({id: 71305, name: "Tempest-Facing Balcony", type: 'bonfire'})
+eventflags.push({id: 71306, name: "Dragon Temple", type: 'bonfire'})
+eventflags.push({id: 71307, name: "Dragon Temple Transept", type: 'bonfire'})
+eventflags.push({id: 71308, name: "Dragon Temple Lift", type: 'bonfire'})
+eventflags.push({id: 71309, name: "Dragon Temple Rooftop", type: 'bonfire'})
+eventflags.push({id: 71310, name: "Beside the Great Bridge", type: 'bonfire'})
+eventflags.push({id: 71400, name: "Raya Lucaria Grand Library", type: 'bonfire'})
+eventflags.push({id: 71401, name: "Debate Parlor", type: 'bonfire'})
+eventflags.push({id: 71402, name: "Church of the Cuckoo", type: 'bonfire'})
+eventflags.push({id: 71403, name: "Schoolhouse Classroom", type: 'bonfire'})
+eventflags.push({id: 71500, name: "Malenia, Goddess of Rot", type: 'bonfire'})
+eventflags.push({id: 71501, name: "Prayer Room", type: 'bonfire'})
+eventflags.push({id: 71502, name: "Elphael Inner Wall", type: 'bonfire'})
+eventflags.push({id: 71503, name: "Drainage Channel", type: 'bonfire'})
+eventflags.push({id: 71504, name: "Haligtree Roots", type: 'bonfire'})
+eventflags.push({id: 71505, name: "Haligtree Promenade", type: 'bonfire'})
+eventflags.push({id: 71506, name: "Haligtree Canopy", type: 'bonfire'})
+eventflags.push({id: 71507, name: "Haligtree Town", type: 'bonfire'})
+eventflags.push({id: 71508, name: "Haligtree Town Plaza", type: 'bonfire'})
+eventflags.push({id: 71600, name: "Rykard, Lord of Blasphemy", type: 'bonfire'})
+eventflags.push({id: 71601, name: "Temple of Eiglay", type: 'bonfire'})
+eventflags.push({id: 71602, name: "Volcano Manor", type: 'bonfire'})
+eventflags.push({id: 71603, name: "Prison Town Church", type: 'bonfire'})
+eventflags.push({id: 71604, name: "Guest Hall", type: 'bonfire'})
+eventflags.push({id: 71605, name: "Audience Pathway", type: 'bonfire'})
+eventflags.push({id: 71606, name: "Abductor Virgin", type: 'bonfire'})
+eventflags.push({id: 71607, name: "Subterranean Inquisition Chamber", type: 'bonfire'})
+eventflags.push({id: 71800, name: "Cave of Knowledge", type: 'bonfire'})
+eventflags.push({id: 71801, name: "Stranded Graveyard", type: 'bonfire'})
+eventflags.push({id: 71900, name: "Fractured Marika", type: 'bonfire'})
+eventflags.push({id: 73000, name: "Tombsward Catacombs", type: 'bonfire'})
+eventflags.push({id: 73001, name: "Impaler's Catacombs", type: 'bonfire'})
+eventflags.push({id: 73002, name: "Stormfoot Catacombs", type: 'bonfire'})
+eventflags.push({id: 73003, name: "Road's End Catacombs", type: 'bonfire'})
+eventflags.push({id: 73004, name: "Murkwater Catacombs", type: 'bonfire'})
+eventflags.push({id: 73005, name: "Black Knife Catacombs", type: 'bonfire'})
+eventflags.push({id: 73006, name: "Cliffbottom Catacombs", type: 'bonfire'})
+eventflags.push({id: 73007, name: "Wyndham Catacombs", type: 'bonfire'})
+eventflags.push({id: 73008, name: "Sainted Hero's Grave", type: 'bonfire'})
+eventflags.push({id: 73009, name: "Gelmir Hero's Grave", type: 'bonfire'})
+eventflags.push({id: 73010, name: "Auriza Hero's Grave", type: 'bonfire'})
+eventflags.push({id: 73011, name: "Deathtouched Catacombs", type: 'bonfire'})
+eventflags.push({id: 73012, name: "Unsightly Catacombs", type: 'bonfire'})
+eventflags.push({id: 73013, name: "Auriza Side Tomb", type: 'bonfire'})
+eventflags.push({id: 73014, name: "Minor Erdtree Catacombs", type: 'bonfire'})
+eventflags.push({id: 73015, name: "Caelid Catacombs", type: 'bonfire'})
+eventflags.push({id: 73016, name: "War-Dead Catacombs", type: 'bonfire'})
+eventflags.push({id: 73017, name: "Giant-Conquering Hero's Grave", type: 'bonfire'})
+eventflags.push({id: 73018, name: "Giants' Mountaintop Catacombs", type: 'bonfire'})
+eventflags.push({id: 73019, name: "Consecrated Snowfield Catacombs", type: 'bonfire'})
+eventflags.push({id: 73020, name: "Hidden Path to the Haligtree", type: 'bonfire'})
+eventflags.push({id: 73100, name: "Murkwater Cave", type: 'bonfire'})
+eventflags.push({id: 73101, name: "Earthbore Cave", type: 'bonfire'})
+eventflags.push({id: 73102, name: "Tombsward Cave", type: 'bonfire'})
+eventflags.push({id: 73103, name: "Groveside Cave", type: 'bonfire'})
+eventflags.push({id: 73104, name: "Stillwater Cave", type: 'bonfire'})
+eventflags.push({id: 73105, name: "Lakeside Crystal Cave", type: 'bonfire'})
+eventflags.push({id: 73106, name: "Academy Crystal Cave", type: 'bonfire'})
+eventflags.push({id: 73107, name: "Seethewater Cave", type: 'bonfire'})
+eventflags.push({id: 73109, name: "Volcano Cave", type: 'bonfire'})
+eventflags.push({id: 73110, name: "Dragonbarrow Cave", type: 'bonfire'})
+eventflags.push({id: 73111, name: "Sellia Hideaway", type: 'bonfire'})
+eventflags.push({id: 73112, name: "Cave of the Forlorn", type: 'bonfire'})
+eventflags.push({id: 73115, name: "Coastal Cave", type: 'bonfire'})
+eventflags.push({id: 73117, name: "Highroad Cave", type: 'bonfire'})
+eventflags.push({id: 73118, name: "Perfumer's Grotto", type: 'bonfire'})
+eventflags.push({id: 73119, name: "Sage's Cave", type: 'bonfire'})
+eventflags.push({id: 73120, name: "Abandoned Cave", type: 'bonfire'})
+eventflags.push({id: 73121, name: "Gaol Cave", type: 'bonfire'})
+eventflags.push({id: 73122, name: "Spiritcaller Cave", type: 'bonfire'})
+eventflags.push({id: 73200, name: "Morne Tunnel", type: 'bonfire'})
+eventflags.push({id: 73201, name: "Limgrave Tunnels", type: 'bonfire'})
+eventflags.push({id: 73202, name: "Raya Lucaria Crystal Tunnel", type: 'bonfire'})
+eventflags.push({id: 73204, name: "Old Altus Tunnel", type: 'bonfire'})
+eventflags.push({id: 73205, name: "Altus Tunnel", type: 'bonfire'})
+eventflags.push({id: 73207, name: "Gael Tunnel", type: 'bonfire'})
+eventflags.push({id: 73207, name: "Rear Gael Tunnel Entrance", type: 'bonfire'})
+eventflags.push({id: 73208, name: "Sellia Crystal Tunnel", type: 'bonfire'})
+eventflags.push({id: 73211, name: "Yelough Anix Tunnel", type: 'bonfire'})
+eventflags.push({id: 73410, name: "Limgrave Tower Bridge", type: 'bonfire'})
+eventflags.push({id: 73412, name: "Divine Tower of Limgrave", type: 'bonfire'})
+eventflags.push({id: 73420, name: "Study Hall Entrance", type: 'bonfire'})
+eventflags.push({id: 73421, name: "Liurnia Tower Bridge", type: 'bonfire'})
+eventflags.push({id: 73422, name: "Divine Tower of Liurnia", type: 'bonfire'})
+eventflags.push({id: 73430, name: "Divine Tower of West Altus", type: 'bonfire'})
+eventflags.push({id: 73431, name: "Sealed Tunnel", type: 'bonfire'})
+eventflags.push({id: 73432, name: "Divine Tower of West Altus: Gate", type: 'bonfire'})
+eventflags.push({id: 73440, name: "Divine Tower of Caelid: Basement", type: 'bonfire'})
+eventflags.push({id: 73441, name: "Divine Tower of Caelid: Center", type: 'bonfire'})
+eventflags.push({id: 73450, name: "Divine Tower of East Altus: Gate", type: 'bonfire'})
+eventflags.push({id: 73451, name: "Divine Tower of East Altus", type: 'bonfire'})
+eventflags.push({id: 73460, name: "Isolated Divine Tower", type: 'bonfire'})
+eventflags.push({id: 73500, name: "Cathedral of the Forsaken", type: 'bonfire'})
+eventflags.push({id: 73501, name: "Underground Roadside", type: 'bonfire'})
+eventflags.push({id: 73502, name: "Forsaken Depths", type: 'bonfire'})
+eventflags.push({id: 73503, name: "Leyndell Catacombs", type: 'bonfire'})
+eventflags.push({id: 73504, name: "Frenzied Flame Proscription", type: 'bonfire'})
+eventflags.push({id: 73900, name: "Magma Wyrm Makar", type: 'bonfire'})
+eventflags.push({id: 73901, name: "Ruin-Strewn Precipice", type: 'bonfire'})
+eventflags.push({id: 73902, name: "Ruin-Strewn Precipice Overlook", type: 'bonfire'})
+eventflags.push({id: 76156, name: "Isolated Merchant's Shack", type: 'bonfire'})
+eventflags.push({id: 76162, name: "Fourth Church of Marika", type: 'bonfire'})
+eventflags.push({id: 76110, name: "Church of Dragon Communion", type: 'bonfire'})
+eventflags.push({id: 76102, name: "Stormhill Shack", type: 'bonfire'})
+eventflags.push({id: 76152, name: "Tombsward", type: 'bonfire'})
+eventflags.push({id: 76100, name: "Church of Elleh", type: 'bonfire'})
+eventflags.push({id: 76101, name: "The First Step", type: 'bonfire'})
+eventflags.push({id: 76111, name: "Gatefront", type: 'bonfire'})
+eventflags.push({id: 76118, name: "Warmaster's Shack", type: 'bonfire'})
+eventflags.push({id: 76161, name: "Morne Moangrave", type: 'bonfire'})
+eventflags.push({id: 76158, name: "Castle Morne Lift", type: 'bonfire'})
+eventflags.push({id: 76159, name: "Behind the Castle", type: 'bonfire'})
+eventflags.push({id: 76160, name: "Beside the Rampart Gaol", type: 'bonfire'})
+eventflags.push({id: 76150, name: "Church of Pilgrimage", type: 'bonfire'})
+eventflags.push({id: 76113, name: "Seaside Ruins", type: 'bonfire'})
+eventflags.push({id: 76108, name: "Agheel Lake North", type: 'bonfire'})
+eventflags.push({id: 76116, name: "Murkwater Coast", type: 'bonfire'})
+eventflags.push({id: 76117, name: "Saintsbridge", type: 'bonfire'})
+eventflags.push({id: 76151, name: "Castle Morne Rampart", type: 'bonfire'})
+eventflags.push({id: 76153, name: "South of the Lookout Tower", type: 'bonfire'})
+eventflags.push({id: 76154, name: "Ailing Village Outskirts", type: 'bonfire'})
+eventflags.push({id: 76157, name: "Bridge of Sacrifice", type: 'bonfire'})
+eventflags.push({id: 76106, name: "Agheel Lake South", type: 'bonfire'})
+eventflags.push({id: 76120, name: "Waypoint Ruins Cellar", type: 'bonfire'})
+eventflags.push({id: 76114, name: "Mistwood Outskirts", type: 'bonfire'})
+eventflags.push({id: 76103, name: "Artist's Shack", type: 'bonfire'})
+eventflags.push({id: 76119, name: "Summonwater Village Outskirts", type: 'bonfire'})
+eventflags.push({id: 76155, name: "Beside the Crater-Pocked Glade", type: 'bonfire'})
+eventflags.push({id: 76105, name: "Fort Haight West", type: 'bonfire'})
+eventflags.push({id: 76104, name: "Third Church of Marika", type: 'bonfire'})
+eventflags.push({id: 76252, name: "Altar South", type: 'bonfire'})
+eventflags.push({id: 76218, name: "Revenger's Shack", type: 'bonfire'})
+eventflags.push({id: 76210, name: "Foot of the Four Belfries", type: 'bonfire'})
+eventflags.push({id: 76227, name: "The Four Belfries", type: 'bonfire'})
+eventflags.push({id: 76250, name: "Moonlight Altar", type: 'bonfire'})
+eventflags.push({id: 76220, name: "Village of the Albinaurics", type: 'bonfire'})
+eventflags.push({id: 76237, name: "Converted Tower", type: 'bonfire'})
+eventflags.push({id: 76241, name: "Temple Quarter", type: 'bonfire'})
+eventflags.push({id: 76243, name: "Crystalline Woods", type: 'bonfire'})
+eventflags.push({id: 76211, name: "Sorcerer's Isle", type: 'bonfire'})
+eventflags.push({id: 76212, name: "Northern Liurnia Lake Shore", type: 'bonfire'})
+eventflags.push({id: 76213, name: "Road to the Manor", type: 'bonfire'})
+eventflags.push({id: 76247, name: "Ranni's Chamber", type: 'bonfire'})
+eventflags.push({id: 76251, name: "Cathedral of Manus Celes", type: 'bonfire'})
+eventflags.push({id: 76219, name: "Folly on the Lake", type: 'bonfire'})
+eventflags.push({id: 76205, name: "South Raya Lucaria Gate", type: 'bonfire'})
+eventflags.push({id: 76206, name: "Main Academy Gate", type: 'bonfire'})
+eventflags.push({id: 76242, name: "East Gate Bridge Trestle", type: 'bonfire'})
+eventflags.push({id: 76230, name: "Manor Upper Level", type: 'bonfire'})
+eventflags.push({id: 76231, name: "Manor Lower Level", type: 'bonfire'})
+eventflags.push({id: 76232, name: "Royal Moongazing Grounds", type: 'bonfire'})
+eventflags.push({id: 76214, name: "Main Caria Manor Gate", type: 'bonfire'})
+eventflags.push({id: 76215, name: "Slumbering Wolf's Shack", type: 'bonfire'})
+eventflags.push({id: 76216, name: "Boilprawn Shack", type: 'bonfire'})
+eventflags.push({id: 76236, name: "Fallen Ruins of the Lake", type: 'bonfire'})
+eventflags.push({id: 76233, name: "Gate Town North", type: 'bonfire'})
+eventflags.push({id: 76207, name: "East Raya Lucaria Gate", type: 'bonfire'})
+eventflags.push({id: 76208, name: "Bellum Church", type: 'bonfire'})
+eventflags.push({id: 76235, name: "The Ravine", type: 'bonfire'})
+eventflags.push({id: 76238, name: "Behind Caria Manor", type: 'bonfire'})
+eventflags.push({id: 76203, name: "Scenic Isle", type: 'bonfire'})
+eventflags.push({id: 76204, name: "Academy Gate Town", type: 'bonfire'})
+eventflags.push({id: 76224, name: "Church of Vows", type: 'bonfire'})
+eventflags.push({id: 76226, name: "Mausoleum Compound", type: 'bonfire'})
+eventflags.push({id: 76240, name: "Church of Inhibition", type: 'bonfire'})
+eventflags.push({id: 76201, name: "Liurnia Lake Shore", type: 'bonfire'})
+eventflags.push({id: 76202, name: "Laskyar Ruins", type: 'bonfire'})
+eventflags.push({id: 76222, name: "Gate Town Bridge", type: 'bonfire'})
+eventflags.push({id: 76217, name: "Artist's Shack", type: 'bonfire'})
+eventflags.push({id: 76223, name: "Eastern Liurnia Lake Shore", type: 'bonfire'})
+eventflags.push({id: 76234, name: "Eastern Tableland", type: 'bonfire'})
+eventflags.push({id: 76225, name: "Ruined Labyrinth", type: 'bonfire'})
+eventflags.push({id: 76239, name: "Frenzied Flame Village Outskirts", type: 'bonfire'})
+eventflags.push({id: 76209, name: "Grand Lift of Dectus", type: 'bonfire'})
+eventflags.push({id: 76229, name: "Ravine-Veiled Village", type: 'bonfire'})
+eventflags.push({id: 76200, name: "Lake-Facing Cliffs", type: 'bonfire'})
+eventflags.push({id: 76244, name: "Liurnia Highway South", type: 'bonfire'})
+eventflags.push({id: 76221, name: "Liurnia Highway North", type: 'bonfire'})
+eventflags.push({id: 76245, name: "Jarburg", type: 'bonfire'})
+eventflags.push({id: 76355, name: "Seethewater Terminus", type: 'bonfire'})
+eventflags.push({id: 76356, name: "Craftsman's Shack", type: 'bonfire'})
+eventflags.push({id: 76352, name: "Ninth Mt. Gelmir Campsite", type: 'bonfire'})
+eventflags.push({id: 76353, name: "Road of Iniquity", type: 'bonfire'})
+eventflags.push({id: 76300, name: "Abandoned Coffin", type: 'bonfire'})
+eventflags.push({id: 76354, name: "Seethewater River", type: 'bonfire'})
+eventflags.push({id: 76357, name: "Primeval Sorcerer Azur", type: 'bonfire'})
+eventflags.push({id: 76301, name: "Altus Plateau", type: 'bonfire'})
+eventflags.push({id: 76302, name: "Erdtree-Gazing Hill", type: 'bonfire'})
+eventflags.push({id: 76351, name: "First Mt. Gelmir Campsite", type: 'bonfire'})
+eventflags.push({id: 76303, name: "Altus Highway Junction", type: 'bonfire'})
+eventflags.push({id: 76350, name: "Bridge of Iniquity", type: 'bonfire'})
+eventflags.push({id: 76320, name: "Shaded Castle Ramparts", type: 'bonfire'})
+eventflags.push({id: 76321, name: "Shaded Castle Inner Gate", type: 'bonfire'})
+eventflags.push({id: 76322, name: "Castellan's Hall", type: 'bonfire'})
+eventflags.push({id: 76304, name: "Forest-Spanning Greatbridge", type: 'bonfire'})
+eventflags.push({id: 76306, name: "Bower of Bounty", type: 'bonfire'})
+eventflags.push({id: 76307, name: "Road of Iniquity Side Path", type: 'bonfire'})
+eventflags.push({id: 76305, name: "Rampartside Path", type: 'bonfire'})
+eventflags.push({id: 76308, name: "Windmill Village", type: 'bonfire'})
+eventflags.push({id: 76309, name: "Outer Wall Phantom Tree", type: 'bonfire'})
+eventflags.push({id: 76313, name: "Windmill Heights", type: 'bonfire'})
+eventflags.push({id: 76310, name: "Minor Erdtree Church", type: 'bonfire'})
+eventflags.push({id: 76311, name: "Hermit Merchant's Shack", type: 'bonfire'})
+eventflags.push({id: 76312, name: "Outer Wall Battleground", type: 'bonfire'})
+eventflags.push({id: 76314, name: "Capital Rampart", type: 'bonfire'})
+eventflags.push({id: 76400, name: "Smoldering Church", type: 'bonfire'})
+eventflags.push({id: 76401, name: "Rotview Balcony", type: 'bonfire'})
+eventflags.push({id: 76402, name: "Fort Gael North", type: 'bonfire'})
+eventflags.push({id: 76403, name: "Caelem Ruins", type: 'bonfire'})
+eventflags.push({id: 76404, name: "Cathedral of Dragon Communion", type: 'bonfire'})
+eventflags.push({id: 76405, name: "Caelid Highway South", type: 'bonfire'})
+eventflags.push({id: 76406, name: "Aeonia Swamp Shore", type: 'bonfire'})
+eventflags.push({id: 76407, name: "Astray from Caelid Highway North", type: 'bonfire'})
+eventflags.push({id: 76409, name: "Smoldering Wall", type: 'bonfire'})
+eventflags.push({id: 76410, name: "Deep Siofra Well", type: 'bonfire'})
+eventflags.push({id: 76450, name: "Dragonbarrow West", type: 'bonfire'})
+eventflags.push({id: 76451, name: "Isolated Merchant's Shack", type: 'bonfire'})
+eventflags.push({id: 76411, name: "Southern Aeonia Swamp Bank", type: 'bonfire'})
+eventflags.push({id: 76412, name: "Heart of Aeonia", type: 'bonfire'})
+eventflags.push({id: 76413, name: "Inner Aeonia", type: 'bonfire'})
+eventflags.push({id: 76414, name: "Sellia Backstreets", type: 'bonfire'})
+eventflags.push({id: 76415, name: "Chair-Crypt of Sellia", type: 'bonfire'})
+eventflags.push({id: 76416, name: "Sellia Under-Stair", type: 'bonfire'})
+eventflags.push({id: 76417, name: "Impassable Greatbridge", type: 'bonfire'})
+eventflags.push({id: 76418, name: "Church of the Plague", type: 'bonfire'})
+eventflags.push({id: 76452, name: "Dragonbarrow Fork", type: 'bonfire'})
+eventflags.push({id: 76419, name: "Redmane Castle Plaza", type: 'bonfire'})
+eventflags.push({id: 76420, name: "Chamber Outside the Plaza", type: 'bonfire'})
+eventflags.push({id: 76453, name: "Fort Faroth", type: 'bonfire'})
+eventflags.push({id: 76454, name: "Bestial Sanctum", type: 'bonfire'})
+eventflags.push({id: 76422, name: "Starscourge Radahn", type: 'bonfire'})
+eventflags.push({id: 76455, name: "Lenne's Rise", type: 'bonfire'})
+eventflags.push({id: 76456, name: "Farum Greatbridge", type: 'bonfire'})
+eventflags.push({id: 76500, name: "Forbidden Lands", type: 'bonfire'})
+eventflags.push({id: 76653, name: "Apostate Derelict", type: 'bonfire'})
+eventflags.push({id: 76652, name: "Ordina, Liturgical Town", type: 'bonfire'})
+eventflags.push({id: 76501, name: "Zamor Ruins", type: 'bonfire'})
+eventflags.push({id: 76502, name: "Grand Lift of Rold", type: 'bonfire'})
+eventflags.push({id: 76550, name: "Consecrated Snowfield", type: 'bonfire'})
+eventflags.push({id: 76551, name: "Inner Consecrated Snowfield", type: 'bonfire'})
+eventflags.push({id: 76507, name: "Church of Repose", type: 'bonfire'})
+eventflags.push({id: 76503, name: "Ancient Snow Valley Ruins", type: 'bonfire'})
+eventflags.push({id: 76521, name: "Snow Valley Ruins Overlook", type: 'bonfire'})
+eventflags.push({id: 76522, name: "Castle Sol Main Gate", type: 'bonfire'})
+eventflags.push({id: 76523, name: "Church of the Eclipse", type: 'bonfire'})
+eventflags.push({id: 76524, name: "Castle Sol Rooftop", type: 'bonfire'})
+eventflags.push({id: 76508, name: "Foot of the Forge", type: 'bonfire'})
+eventflags.push({id: 76506, name: "Giants' Gravepost", type: 'bonfire'})
+eventflags.push({id: 76520, name: "Whiteridge Road", type: 'bonfire'})
+eventflags.push({id: 76504, name: "Freezing Lake", type: 'bonfire'})
+eventflags.push({id: 76509, name: "Fire Giant", type: 'bonfire'})
+eventflags.push({id: 76510, name: "Forge of the Giants", type: 'bonfire'})
+eventflags.push({id: 76505, name: "First Church of Marika", type: 'bonfire'})
+
 
 
 eventflags.push({id: 10000800, name: "Godrick the Grafted - Stormveil Castle"});

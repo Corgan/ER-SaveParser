@@ -1,5 +1,6 @@
 import { weapons, armor, goods, talismans, ashofwar } from './lookup.js'
 import { buf2hex } from './util.js'
+import textLookup from './textlookup.js'
 
 class DataReader {
     constructor(data) {
@@ -149,28 +150,40 @@ class DataReader {
                 ret.ashLookup = this.lookup[ret.lookupEntry.ashLookup];
                 ret.socketedAsh = ashofwar.find(ash => ash.RowID == ret.ashLookup.id);
             }
+
+            if(textLookup.weapon[weaponId])
+                ret.text = textLookup.weapon[weaponId];
         }
         if(bytes[3] == 0x90) {
             ret.type = "armor";
             ret.params = armor.find(armor => armor.RowID == ret.id);
+
+            if(textLookup.armor[ret.id])
+                ret.text = textLookup.armor[ret.id];
         }
         if(bytes[3] == 0xA0) {
             ret.type = "talisman";
             ret.params = talismans.find(talisman => talisman.RowID == ret.id);
+
+            if(textLookup.talisman[ret.id])
+                ret.text = textLookup.talisman[ret.id];
         }
         if(bytes[3] == 0xB0) {
             ret.type = "goods";
             ret.params = goods.find(good => good.RowID == ret.id);
             if(ret.params && (ret.params.goodsType == 7 || ret.params.goodsType == 8))
                 ret.base = Math.trunc(ret.id / 100) * 100;
+
+            if(textLookup.good[ret.id])
+                ret.text = textLookup.good[ret.id];
         }
         if(bytes[3] == 0xC0) {
             ret.type = "ashofwar";
             ret.params = ashofwar.find(ash => ash.RowID == ret.id);
+
+            if(textLookup.ashofwar[ret.id])
+                ret.text = textLookup.ashofwar[ret.id];
         }
-        
-        if(ret.params && ret.params.RowName)
-            ret.name = ret.params.RowName;
         
         return ret;
     }

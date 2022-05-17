@@ -21,7 +21,6 @@ xml/*
 !xml/ArtsCaption.fmg.xml
 !xml/ArtsName.fmg.xml
 !xml/GemCaption.fmg.xml
-!xml/GemEffect.fmg.xml
 !xml/GemInfo.fmg.xml
 !xml/GemName.fmg.xml
 !xml/GoodsCaption.fmg.xml

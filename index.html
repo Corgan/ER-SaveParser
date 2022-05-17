@@ -3,17 +3,26 @@
     <head>
         <script type="module" src="src/tooltipper.js"></script>
         <style>
-tooltip {
+
+.item-tooltip {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    grid-template-columns: max-content;
+    grid-gap: 10px;
     background-color: #424242;
     color: #fff;
-    border-radius: 0.125rem;
-    line-height: 24px;
-    height: 24px;
-    white-space: nowrap;
-    padding: 0 0.5rem;
+    border-radius: 2px;
+    max-width: 500px;
+    max-height: 300px;
+    padding: 3px 5px;
     pointer-events: none;
     transform-origin: center;
     z-index: 999;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .item-icon {
@@ -42,7 +51,8 @@ tooltip {
     grid-template-areas:
         'stats inventory'
         'equipment inventory'
-        'empty inventory';
+        'empty inventory'
+        'bonfires flags';
     grid-gap: 10px;
 }
 
@@ -202,6 +212,75 @@ tooltip {
     grid-auto-rows: auto;
     grid-gap: 2px;
 }
+
+#character #character-bonfires {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-area: bonfires;
+    grid-gap: 10px;
+}
+
+#bonfire-tab-select {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    gap: 1px;
+}
+
+#bonfire-tab-select > .title {
+    display: inline-block;
+    border-radius: 2px;
+    background-color: rgba(100, 100, 100, 1);
+    font-size: 16px;
+    padding: 2px 5px;
+    color: white;
+}
+
+#bonfire-tab-select > .title.active {
+    font-weight: bold;
+}
+
+#bonfire-tab-content {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 600px;
+    overflow-y: scroll;
+}
+
+#bonfire-tab-content > .tab:not(.active) {
+    display: none;
+}
+
+#bonfire-tab-content .tab {
+    display: flex;
+    flex-direction: column;
+}
+
+#bonfire-tab-content .tab .group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+
+#bonfire-tab-content .tab .group .title {
+    font-weight: bold;
+}
+
+#bonfire-tab-content .tab .group .warp {
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+}
+
+#character #character-flags {
+    display: grid;
+    grid-auto-columns: max-content;
+    grid-auto-rows: max-content;
+    grid-area: flags;
+    grid-gap: 10px;
+}
           </style>
     </head>
     <body>
@@ -267,10 +346,14 @@ tooltip {
                 <div id="tab-select"></div>
                 <div id="tab-content"></div>
             </div>
-        </div>
+            <div id="character-bonfires">
+                <div id="bonfire-tab-select"></div>
+                <div id="bonfire-tab-content"></div>
+            </div>
 
-        <div id="flags">
-
+            <div id="character-flags">
+    
+            </div>
         </div>
 
         <script type="module">
@@ -279,8 +362,12 @@ tooltip {
             import { roundtable_names, build_output } from './src/roundtable_names.js'
             import { roundtable } from './src/roundtable.js'
             import eventFlags from './src/eventflags.js'
+            import textLookup from './src/textlookup.js'
+            import { bonfires, tabs as bonfireTabs } from './src/bonfires.js'
 
             window.lookup = lookup;
+            window.bonfires = bonfires;
+            window.textLookup = textLookup;
             window.roundtable = roundtable;
             window.roundtable_names = roundtable_names;
             window.build_output = build_output;
@@ -294,6 +381,8 @@ tooltip {
                     elem.classList.add(...options.classList);
                 if (options.text !== undefined)
                     elem.textContent = options.text;
+                if (options.html !== undefined)
+                    elem.innerHTML = options.html;
                 if (options.parent !== undefined)
                     options.parent.appendChild(elem);
                 if (options.children !== undefined)
@@ -317,12 +406,22 @@ tooltip {
 
                 let sortGroup = (a,b) => { return a.params.sortId - b.params.sortId; }
 
+                let renderTooltip = (item) => {
+                    let tt = `<div class='item-tooltip'>`;
+                    if(item.text.name)
+                        tt += `<span class='item-name'>${item.text.name}${item.level > 0 ? ` +${item.level}` : ''}</span>`;
+                    if(item.text.info)
+                        tt += `<span class='item-info'>${item.text.info}</span>`;
+                    tt += `</div>`
+                    return tt;
+                }
+
                 let renderItem = (item, slotName="Empty") => {
                     if(!item || !item.params)
                         return createElement("div", {
                         classList: ['item-icon'],
                         attributes: [
-                            ['tooltip', item && item.name || slotName]
+                            ['tooltip', `<div class='item-tooltip'><span class='item-name'>${slotName}</span></div>`]
                         ]
                     });
                     let icon = createElement("div", {
@@ -331,7 +430,7 @@ tooltip {
                             ['backgroundImage', `url('images/MENU_Knowledge_${String(item.params.iconId || item.params.iconIdM || item.params.iconIdF).padStart(5, 0)}.png')`]
                         ],
                         attributes: [
-                            ['tooltip', `${item.name}${item.level > 0 ? ` +${item.level}` : ''}`]
+                            ['tooltip', renderTooltip(item)]
                         ]
                     });
 
@@ -424,7 +523,52 @@ tooltip {
                     tabContent.appendChild(tabEl);
                 });
 
-                let flagEl = document.getElementById('flags');
+                
+                let bonfireTabSelect = document.getElementById('bonfire-tab-select');
+                bonfireTabSelect.innerHTML = '';
+                let bonfireTabContent = document.getElementById('bonfire-tab-content')
+                bonfireTabContent.innerHTML = '';
+
+                Object.entries(bonfireTabs).sort(([,a],[,b]) => a.sortId-b.sortId).forEach(([id, tab], i) => {
+                    let tabTitle = document.createElement('span');
+                    tabTitle.classList.add('title');
+                    if(i == 0)
+                        tabTitle.classList.add('active');
+
+                    tabTitle.appendChild(document.createTextNode(tab.name));
+                    tabTitle.addEventListener('click', e => {
+                        let selectChildren = [...bonfireTabSelect.children];
+                        let contentChildren = [...bonfireTabContent.children];
+                        let oldIndex = selectChildren.findIndex(e => e.classList.contains('active'));
+                        let newIndex = selectChildren.indexOf(e.target);
+                        selectChildren[oldIndex].classList.remove('active');
+                        contentChildren[oldIndex].classList.remove('active');
+                        selectChildren[newIndex].classList.add('active');
+                        contentChildren[newIndex].classList.add('active');
+                    });
+                    bonfireTabSelect.appendChild(tabTitle);
+
+                    let tabEl = document.createElement('div');
+                    tabEl.classList.add('tab');
+                    if(i == 0)
+                        tabEl.classList.add('active');
+                    
+                    tab.subcategories.sort((a,b) => a.sortId-b.sortId).forEach(subcat => {
+                        if(subcat.bonfires.length == 0)
+                            return;
+                        let group = document.createElement('div');
+                        group.classList.add('group');
+                        createElement('div', { className: 'title', text: subcat.name, parent: group });
+                        subcat.bonfires.sort((a,b) => a.sortId-b.sortId).forEach(warp => {
+                            let found = character.internal.flags[warp.eventFlag];
+                            group.appendChild(createElement('div', { html: `${found ? '&#9989;' : '&#10060;'} ${warp.name}` }));
+                        })
+                        tabEl.appendChild(group);
+                    })
+                    bonfireTabContent.appendChild(tabEl);
+                });
+
+                let flagEl = document.getElementById('character-flags');
                 flagEl.innerHTML = '';
 
                 eventFlags.filter(flag => flag.type == "NG").forEach((flag) => createElement('div', {

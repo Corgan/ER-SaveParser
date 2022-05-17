@@ -108,19 +108,19 @@ class Tooltipper {
     placeTooltip(el, tooltip) {
       const elBounds = el.getBoundingClientRect();
       const tipBounds = tooltip.getBoundingClientRect();
-      let tooltipLeft = elBounds.left + elBounds.width / 2 - tipBounds.width / 2;
-      if (tooltipLeft + tipBounds.width > window.innerWidth - 4) {
-        const diff = tooltipLeft + tipBounds.width - window.innerWidth + 4;
-        tooltipLeft -= diff;
+
+      let tooltipLeft = elBounds.left + (elBounds.width / 2) - (tipBounds.width / 2);
+      if (tooltipLeft + tipBounds.width > document.documentElement.clientWidth - 4) {
+        tooltipLeft -= tooltipLeft + tipBounds.width - document.documentElement.clientWidth + 4;
       } else if (tooltipLeft < 4) {
         tooltipLeft = 4;
       }
-      let tooltipTop = elBounds.top - tipBounds.height - window.scrollY;
-      if (tooltipTop + tipBounds.height + window.scrollY < 4) {
-        tooltipTop = elBounds.top + elBounds.height + window.scrollY;
-      } else {
-        tooltipTop = elBounds.top - tipBounds.height + window.scrollY;
-      }
+      tooltipLeft += window.scrollX;
+
+      let tooltipTop = elBounds.top - tipBounds.height + window.scrollY;
+      if (tooltipTop - window.scrollY < 4)
+        tooltipTop = tooltipTop + elBounds.height + tipBounds.height;
+
       tooltip.style.top = `${tooltipTop}px`;
       tooltip.style.left = `${tooltipLeft}px`;
     }
