@@ -3,7 +3,7 @@ import { CSV } from './csv.js'
 let fixColumnName = (field) => field.replace(/ /, '');
 
 let parseParams = async (name) => await CSV.fetch({
-    url: `params/${name}.csv`,
+    url: `csv/${name}.csv`,
     delimiter: ";",
     lineterminator: "\n"
   }
