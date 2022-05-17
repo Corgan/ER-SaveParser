@@ -303,6 +303,7 @@ class CharacterData {
         
         this.equipped = {};
         this.inventory = {};
+        this.storage = {};
 
         this.inventory.all = this.internal.inventory.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
         
@@ -328,6 +329,32 @@ class CharacterData {
         this.inventory.weapons = [...this.inventory.melee, ...this.inventory.rangedcatalyst, ...this.inventory.arrowbolts, ...this.inventory.shields];
         this.inventory.armor = [...this.inventory.head, ...this.inventory.chest, ...this.inventory.arms, ...this.inventory.legs];
         this.inventory.spells = [...this.inventory.sorceries, ...this.inventory.incantations];
+
+        
+        this.storage.all = this.internal.storage.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
+        
+        this.storage.tools = this.storage.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3);
+        this.storage.ashes = this.storage.all.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8);
+        this.storage.crafting = this.storage.all.filter(item => item.params.goodsType == 2);
+        this.storage.bolstering = this.storage.all.filter(item => item.params.goodsType == 14);
+        this.storage.keyitems = this.storage.all.filter(item => item.params.goodsType == 1 || item.params.goodsType == 10 || item.params.goodsType == 11);
+        this.storage.sorceries = this.storage.all.filter(item => item.params.goodsType == 5 || item.params.goodsType == 17);
+        this.storage.incantations = this.storage.all.filter(item => item.params.goodsType == 16 || item.params.goodsType == 18);
+        this.storage.ashofwar = this.storage.all.filter(item => item.type == "ashofwar");
+        this.storage.melee = this.storage.all.filter(item => [1,3,5,7,9,11,13,14,15,16,17,19,21,23,24,25,28,29,31,33,35,37,39,41].includes(item.params.wepType));
+        this.storage.rangedcatalyst = this.storage.all.filter(item => [50,51,53,55,56,57,59,61].includes(item.params.wepType));
+        this.storage.arrowbolts = this.storage.all.filter(item => [81,83,85,86].includes(item.params.wepType));
+        this.storage.shields = this.storage.all.filter(item => [65,67,69,87].includes(item.params.wepType));
+        this.storage.head = this.storage.all.filter(item => item.params.protectorCategory == 0);
+        this.storage.chest = this.storage.all.filter(item => item.params.protectorCategory == 1);
+        this.storage.arms = this.storage.all.filter(item => item.params.protectorCategory == 2);
+        this.storage.legs = this.storage.all.filter(item => item.params.protectorCategory == 3);
+        this.storage.talismans = this.storage.all.filter(item => item.params.accessoryCategory == 0);
+        this.storage.info = this.storage.all.filter(item => item.params.goodsType == 12);
+
+        this.storage.weapons = [...this.storage.melee, ...this.storage.rangedcatalyst, ...this.storage.arrowbolts, ...this.storage.shields];
+        this.storage.armor = [...this.storage.head, ...this.storage.chest, ...this.storage.arms, ...this.storage.legs];
+        this.storage.spells = [...this.storage.sorceries, ...this.storage.incantations];
 
         this.equipped.leftWeapon1 = this.inventory.weapons.find(item => item.lookup.id == this.internal.leftWeapon1Lookup.id) || { name: "Unarmed" };
         this.equipped.rightWeapon1 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon1Lookup.id) || { name: "Unarmed" };

@@ -52,7 +52,9 @@
         'stats inventory'
         'equipment inventory'
         'empty inventory'
-        'bonfires flags';
+        'bonfires storage'
+        'bonfires storage'
+        'flags storage';
     grid-gap: 10px;
 }
 
@@ -166,14 +168,22 @@
     grid-gap: 10px;
 }
 
-#tab-select {
+#character #character-storage {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-area: storage;
+    grid-gap: 10px;
+}
+
+.tab-select {
     display: flex;
     flex-wrap: wrap;
     min-width: 600px;
     gap: 1px;
 }
 
-#tab-select > .title {
+.tab-select > .title {
     display: inline-block;
     border-radius: 2px;
     background-color: rgba(100, 100, 100, 1);
@@ -182,11 +192,11 @@
     color: white;
 }
 
-#tab-select > .title.active {
+.tab-select > .title.active {
     font-weight: bold;
 }
 
-#tab-content {
+.tab-content {
     display: grid;
     grid-auto-columns: max-content;
     grid-auto-rows: max-content;
@@ -195,18 +205,18 @@
     overflow-y: scroll;
 }
 
-#tab-content > .tab:not(.active) {
+.tab-content > .tab:not(.active) {
     display: none;
 }
 
-#tab-content .tab {
+.tab-content .tab {
     display: grid;
     grid-auto-columns: max-content;
     grid-auto-rows: max-content;
     grid-gap: 10px;
 }
 
-#tab-content .tab .group {
+.tab-content .tab .group {
     display: grid;
     grid-template-columns: repeat(5, 96px);
     grid-auto-rows: auto;
@@ -343,16 +353,22 @@
                 <div id="equipped-flask" class="stat"></div>
             </div>
             <div id="character-inventory">
-                <div id="tab-select"></div>
-                <div id="tab-content"></div>
+                <span class="item-name">Inventory</span>
+                <div class="tab-select"></div>
+                <div class="tab-content"></div>
             </div>
             <div id="character-bonfires">
+                <span class="item-name">Graces</span>
                 <div id="bonfire-tab-select"></div>
                 <div id="bonfire-tab-content"></div>
             </div>
+            <div id="character-storage">
+                <span class="item-name">Storage</span>
+                <div class="tab-select"></div>
+                <div class="tab-content"></div>
+            </div>
 
             <div id="character-flags">
-    
             </div>
         </div>
 
@@ -412,6 +428,8 @@
                         tt += `<span class='item-name'>${item.text.name}${item.level > 0 ? ` +${item.level}` : ''}</span>`;
                     if(item.text.info)
                         tt += `<span class='item-info'>${item.text.info}</span>`;
+                    if(item.socketedAsh)
+                        tt += `<span class='item-socket'>${item.socketedAsh.RowName}</span>`;
                     tt += `</div>`
                     return tt;
                 }
@@ -463,65 +481,71 @@
                 })
 
                 let tabs = {};
-                tabs.tools = { name: "Tools", data: character.inventory.tools };
-                tabs.ashes = { name: "Ashes", data: character.inventory.ashes };
-                tabs.crafting = { name: "Crafting Materials", data: character.inventory.crafting };
-                tabs.bolstering = { name: "Bolstering Materials", data: character.inventory.bolstering };
-                tabs.keyitems = { name: "Key Items", data: character.inventory.keyitems };
-                tabs.sorceries = { name: "Sorceries", data: character.inventory.sorceries };
-                tabs.incantations = { name: "Incantations", data: character.inventory.incantations };
-                tabs.ashofwar = { name: "Ashes of War", data: character.inventory.ashofwar };
-                tabs.melee = { name: "Melee Armaments", data: character.inventory.melee };
-                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", data:  character.inventory.rangedcatalyst };
-                tabs.arrowbolts = { name: "Arrows/Bolts", data: character.inventory.arrowbolts };
-                tabs.shields = { name: "Shields", data: character.inventory.shields };
-                tabs.head = { name: "Head", data: character.inventory.head };
-                tabs.chest = { name: "Chest", data: character.inventory.chest };
-                tabs.arms = { name: "Arms", data: character.inventory.arms };
-                tabs.legs = { name: "Legs", data: character.inventory.legs };
-                tabs.talismans = { name: "Talismans", data: character.inventory.talismans };
-                tabs.info = { name: "Info", data: character.inventory.info };
+                tabs.tools = { name: "Tools", inventory: character.inventory.tools, storage: character.storage.tools };
+                tabs.ashes = { name: "Ashes", inventory: character.inventory.ashes, storage: character.storage.ashes };
+                tabs.crafting = { name: "Crafting Materials", inventory: character.inventory.crafting, storage: character.storage.crafting };
+                tabs.bolstering = { name: "Bolstering Materials", inventory: character.inventory.bolstering, storage: character.storage.bolstering };
+                tabs.keyitems = { name: "Key Items", inventory: character.inventory.keyitems, storage: character.storage.keyitems };
+                tabs.sorceries = { name: "Sorceries", inventory: character.inventory.sorceries, storage: character.storage.sorceries };
+                tabs.incantations = { name: "Incantations", inventory: character.inventory.incantations, storage: character.storage.incantations };
+                tabs.ashofwar = { name: "Ashes of War", inventory: character.inventory.ashofwar, storage: character.storage.ashofwar };
+                tabs.melee = { name: "Melee Armaments", inventory: character.inventory.melee, storage: character.storage.melee };
+                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", inventory:  character.inventory.rangedcatalyst, storage:  character.storage.rangedcatalyst };
+                tabs.arrowbolts = { name: "Arrows/Bolts", inventory: character.inventory.arrowbolts, storage: character.storage.arrowbolts };
+                tabs.shields = { name: "Shields", inventory: character.inventory.shields, storage: character.storage.shields };
+                tabs.head = { name: "Head", inventory: character.inventory.head, storage: character.storage.head };
+                tabs.chest = { name: "Chest", inventory: character.inventory.chest, storage: character.storage.chest };
+                tabs.arms = { name: "Arms", inventory: character.inventory.arms, storage: character.storage.arms };
+                tabs.legs = { name: "Legs", inventory: character.inventory.legs, storage: character.storage.legs };
+                tabs.talismans = { name: "Talismans", inventory: character.inventory.talismans, storage: character.storage.talismans };
+                tabs.info = { name: "Info", inventory: character.inventory.info, storage: character.storage.info };
 
-                let tabSelect = document.getElementById('tab-select');
-                tabSelect.innerHTML = '';
-                let tabContent = document.getElementById('tab-content')
-                tabContent.innerHTML = '';
 
-                Object.entries(tabs).forEach(([id, tab], i) => {
-                    let tabTitle = document.createElement('span');
-                    tabTitle.classList.add('title');
-                    if(i == 0)
-                        tabTitle.classList.add('active');
+                let fillItems = (parent, type) => {
+                    let tabSelect = parent.querySelector('.tab-select');
+                    tabSelect.innerHTML = '';
+                    let tabContent = parent.querySelector('.tab-content')
+                    tabContent.innerHTML = '';
 
-                    tabTitle.appendChild(document.createTextNode(tab.name));
-                    tabTitle.addEventListener('click', e => {
-                        let selectChildren = [...tabSelect.children];
-                        let contentChildren = [...tabContent.children];
-                        let oldIndex = selectChildren.findIndex(e => e.classList.contains('active'));
-                        let newIndex = selectChildren.indexOf(e.target);
-                        selectChildren[oldIndex].classList.remove('active');
-                        contentChildren[oldIndex].classList.remove('active');
-                        selectChildren[newIndex].classList.add('active');
-                        contentChildren[newIndex].classList.add('active');
-                    });
-                    tabSelect.appendChild(tabTitle);
+                    Object.entries(tabs).forEach(([id, tab], i) => {
+                        let tabTitle = document.createElement('span');
+                        tabTitle.classList.add('title');
+                        if(i == 0)
+                            tabTitle.classList.add('active');
 
-                    let tabEl = document.createElement('div');
-                    tabEl.classList.add('tab');
-                    if(i == 0)
-                        tabEl.classList.add('active');
-                    
-                    let items = new Set(tab.data.map(item => item.params.sortGroupId));
-                    Array.from(items).sort((a,b) => a-b).forEach(groupId => {
-                        let group = document.createElement('div');
-                        group.classList.add('group');
-                        tab.data.filter(item => item.params.sortGroupId == groupId).sort(sortGroup).forEach(item => {
-                            group.appendChild(renderItem(item));
+                        tabTitle.appendChild(document.createTextNode(tab.name));
+                        tabTitle.addEventListener('click', e => {
+                            let selectChildren = [...tabSelect.children];
+                            let contentChildren = [...tabContent.children];
+                            let oldIndex = selectChildren.findIndex(e => e.classList.contains('active'));
+                            let newIndex = selectChildren.indexOf(e.target);
+                            selectChildren[oldIndex].classList.remove('active');
+                            contentChildren[oldIndex].classList.remove('active');
+                            selectChildren[newIndex].classList.add('active');
+                            contentChildren[newIndex].classList.add('active');
+                        });
+                        tabSelect.appendChild(tabTitle);
+
+                        let tabEl = document.createElement('div');
+                        tabEl.classList.add('tab');
+                        if(i == 0)
+                            tabEl.classList.add('active');
+                        
+                        let items = new Set(tab[type].map(item => item.params.sortGroupId));
+                        Array.from(items).sort((a,b) => a-b).forEach(groupId => {
+                            let group = document.createElement('div');
+                            group.classList.add('group');
+                            tab[type].filter(item => item.params.sortGroupId == groupId).sort(sortGroup).forEach(item => {
+                                group.appendChild(renderItem(item));
+                            })
+                            tabEl.appendChild(group);
                         })
-                        tabEl.appendChild(group);
-                    })
-                    tabContent.appendChild(tabEl);
-                });
+                        tabContent.appendChild(tabEl);
+                    });
+                }
+
+                fillItems(document.getElementById('character-inventory'), 'inventory')
+                fillItems(document.getElementById('character-storage'), 'storage')
 
                 
                 let bonfireTabSelect = document.getElementById('bonfire-tab-select');
