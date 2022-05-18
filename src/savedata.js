@@ -362,22 +362,37 @@ class CharacterData {
         this.equipped.rightWeapon2 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon2Lookup.id) || { name: "Unarmed" };
         this.equipped.leftWeapon3 = this.inventory.weapons.find(item => item.lookup.id == this.internal.leftWeapon3Lookup.id) || { name: "Unarmed" };
         this.equipped.rightWeapon3 = this.inventory.weapons.find(item => item.lookup.id == this.internal.rightWeapon3Lookup.id) || { name: "Unarmed" };
+        this.equipped.leftWeapon1.equipped = true;
+        this.equipped.rightWeapon1.equipped = true;
+        this.equipped.leftWeapon2.equipped = true;
+        this.equipped.rightWeapon2.equipped = true;
+        this.equipped.leftWeapon3.equipped = true;
+        this.equipped.rightWeapon3.equipped = true;
 
         this.equipped.arrow1 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.arrow1Lookup.id) || { name: "Arrow" };
         this.equipped.bolt1 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.bolt1Lookup.id) || { name: "Bolt" };
         this.equipped.arrow2 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.arrow2Lookup.id) || { name: "Arrow" };
         this.equipped.bolt2 = this.inventory.arrowbolts.find(item => item.lookup.id == this.internal.bolt2Lookup.id) || { name: "Bolt" };
+        this.equipped.arrow1.equipped = true;
+        this.equipped.bolt1.equipped = true;
+        this.equipped.arrow2.equipped = true;
+        this.equipped.bolt2.equipped = true;
 
         this.equipped.head = this.inventory.armor.find(item => item.lookup.id == this.internal.headLookup.id) || { name: "Head" };
         this.equipped.chest = this.inventory.armor.find(item => item.lookup.id == this.internal.chestLookup.id) || { name: "Body" };
         this.equipped.arms = this.inventory.armor.find(item => item.lookup.id == this.internal.armsLookup.id) || { name: "Arms" };
         this.equipped.legs = this.inventory.armor.find(item => item.lookup.id == this.internal.legsLookup.id) || { name: "Legs" };
+        this.equipped.head.equipped = true;
+        this.equipped.chest.equipped = true;
+        this.equipped.arms.equipped = true;
+        this.equipped.legs.equipped = true;
 
         this.equipped.talismans = [];
         this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman1Id && item.type == "talisman") || { name: "Talisman" });
         this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman2Id && item.type == "talisman") || { name: "Talisman" });
         this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman3Id && item.type == "talisman") || { name: "Talisman" });
         this.equipped.talismans.push(this.inventory.talismans.find(item => item.id == this.internal.talisman4Id && item.type == "talisman") || { name: "Talisman" });
+        this.equipped.talismans.forEach(talisman => talisman.equipped = true);
 
         this.equipped.quick = [];
         this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick1Id) || { name: "Quick Slot" });
@@ -390,6 +405,7 @@ class CharacterData {
         this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick8Id) || { name: "Quick Slot" });
         this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick9Id) || { name: "Quick Slot" });
         this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick10Id) || { name: "Quick Slot" });
+        this.equipped.quick.forEach(quick => quick.equipped = true);
 
         this.equipped.pouch = [];
         this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch1Id) || { name: "Pouch" });
@@ -398,13 +414,15 @@ class CharacterData {
         this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch4Id) || { name: "Pouch" });
         this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch5Id) || { name: "Pouch" });
         this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch6Id) || { name: "Pouch" });
+        this.equipped.pouch.forEach(pouch => pouch.pouch = true);
 
         this.equipped.flask = [];
         this.equipped.flask.push(this.inventory.all.find(item => item.id == this.internal.flask1Id) || { name: "Left Flask" });
         this.equipped.flask.push(this.inventory.all.find(item => item.id == this.internal.flask2Id) || { name: "Right Flask" });
+        this.equipped.flask.forEach(flask => flask.flask = true);
 
         this.equipped.spells = this.internal.equippedSpellIds.map(spellId => this.inventory.spells.find(item => item.id == spellId && item.type == "goods") || { name: "Spell Slot" });
-
+        this.equipped.spells.forEach(spell => spell.spell = true);
 
     }
 

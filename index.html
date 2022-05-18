@@ -4,11 +4,10 @@
         <script type="module" src="src/tooltipper.js"></script>
         <style>
 
-.item-tooltip {
+.tooltip {
     display: grid;
     grid-template-rows: max-content max-content;
     grid-template-columns: max-content;
-    grid-gap: 10px;
     background-color: #424242;
     color: #fff;
     border-radius: 2px;
@@ -25,7 +24,7 @@
     font-size: 18px;
 }
 
-.item-icon {
+.item {
     box-sizing: border-box;
     display: inline-block;
     position: relative;
@@ -33,14 +32,43 @@
     width: 96px;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: rgba(50, 50, 50, 1);
+    background-image: linear-gradient(rgba(47,47,44,1), rgba(106,105,90,1));
 }
 
-.item-icon > .qty {
+.item > .icon {
     position: absolute;
-    bottom: 8px;
+    top: 0px;
+    left: 0px;
+    height: 96px;
+    width: 96px;
+}
+
+.item > .equipped {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: white;
+    height: 16px;
+    width: 16px;
+    image-rendering: -webkit-optimize-contrast;
+    background-repeat: no-repeat;
+}
+
+.item > .qty {
+    position: absolute;
+    bottom: 4px;
     right: 8px;
     color: white;
+}
+
+.item > .infusion {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    bottom: 4px;
+    right: 4px;
+    background-color: rgba(47,47,44,1);
+    image-rendering: -webkit-optimize-contrast;
 }
 
 #character {
@@ -177,23 +205,25 @@
 }
 
 .tab-select {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 600px;
-    gap: 1px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 4px 7px;
 }
 
 .tab-select > .title {
     display: inline-block;
     border-radius: 2px;
-    background-color: rgba(100, 100, 100, 1);
+    background-color: rgba(50, 50, 50, 1);
     font-size: 16px;
     padding: 2px 5px;
+    height: 45px;
+    width: 45px;
     color: white;
 }
 
 .tab-select > .title.active {
-    font-weight: bold;
+    background-color: rgba(10, 10, 10, 1);
 }
 
 .tab-content {
@@ -389,6 +419,61 @@
             window.build_output = build_output;
             window.savedata = null;
 
+            let infusions = {
+                0: {
+                    name: "Standard",
+                    icon: "MENU_FL_40141.png"
+                },
+                1: {
+                    name: "Heavy",
+                    icon: "MENU_FL_40142.png"
+                },
+                2: {
+                    name: "Keen",
+                    icon: "MENU_FL_40143.png"
+                },
+                3: {
+                    name: "Quality",
+                    icon: "MENU_FL_40144.png"
+                },
+                4: {
+                    name: "Fire",
+                    icon: "MENU_FL_40148.png"
+                },
+                5: {
+                    name: "Flame Art",
+                    icon: "MENU_FL_40148.png"
+                },
+                6: {
+                    name: "Lightning",
+                    icon: "MENU_FL_40150.png"
+                },
+                7: {
+                    name: "Sacred",
+                    icon: "MENU_FL_40145.png"
+                },
+                8: {
+                    name: "Magic",
+                    icon: "MENU_FL_40146.png"
+                },
+                9: {
+                    name: "Cold",
+                    icon: "MENU_FL_40147.png"
+                },
+                10: {
+                    name: "Poison",
+                    icon: "MENU_FL_40172.png"
+                },
+                11: {
+                    name: "Blood",
+                    icon: "MENU_FL_40173.png"
+                },
+                12: {
+                    name: "Occult",
+                    icon: "MENU_FL_40151.png"
+                }
+            }
+
             function createElement(tagName, options={}) {
                 const elem = document.createElement(tagName);
                 if (options.className !== undefined)
@@ -423,7 +508,7 @@
                 let sortGroup = (a,b) => { return a.params.sortId - b.params.sortId; }
 
                 let renderTooltip = (item) => {
-                    let tt = `<div class='item-tooltip'>`;
+                    let tt = `<div class='tooltip'>`;
                     if(item.text.name)
                         tt += `<span class='item-name'>${item.text.name}${item.level > 0 ? ` +${item.level}` : ''}</span>`;
                     if(item.text.info)
@@ -434,23 +519,85 @@
                     return tt;
                 }
 
-                let renderItem = (item, slotName="Empty") => {
+                let renderItem = (item, inventory=false, slotName="Empty") => {
                     if(!item || !item.params)
                         return createElement("div", {
-                        classList: ['item-icon'],
+                        classList: ['item'],
                         attributes: [
-                            ['tooltip', `<div class='item-tooltip'><span class='item-name'>${slotName}</span></div>`]
+                            ['tooltip', `<div class='tooltip'><span class='item-name'>${slotName}</span></div>`]
                         ]
                     });
+
                     let icon = createElement("div", {
-                        classList: ['item-icon'],
-                        style: [
-                            ['backgroundImage', `url('images/MENU_Knowledge_${String(item.params.iconId || item.params.iconIdM || item.params.iconIdF).padStart(5, 0)}.png')`]
-                        ],
+                        classList: ['item'],
                         attributes: [
                             ['tooltip', renderTooltip(item)]
                         ]
                     });
+
+                    createElement('div', {
+                        classList: ['icon'],
+                        style: [
+                            ['backgroundImage', `url('images/MENU_ItemIcon_${String(item.params.iconId || item.params.iconIdM || item.params.iconIdF).padStart(5, 0)}.png')`],
+                            ['backgroundSize', `contain`]
+                        ],
+                        parent: icon
+                    })
+
+                    if(item.equipped && inventory) {
+                        createElement('div', {
+                            classList: ['equipped'],
+                            style: [
+                                ['backgroundImage', `url('images/MENU_EquMark.png')`],
+                                ['backgroundSize', `contain`]
+                            ],
+                            parent: icon
+                        })
+                    }
+
+                    if(item.pouch && inventory) {
+                        createElement('div', {
+                            classList: ['equipped'],
+                            style: [
+                                ['backgroundImage', `url('images/MENU_FL_Inv.png')`],
+                                ['backgroundSize', `contain`]
+                            ],
+                            parent: icon
+                        })
+                    }
+
+                    if(item.spell && inventory) {
+                        createElement('div', {
+                            classList: ['equipped'],
+                            style: [
+                                ['backgroundImage', `url('images/MENU_40177_Magic.png')`],
+                                ['backgroundSize', `contain`]
+                            ],
+                            parent: icon
+                        })
+                    }
+
+                    if(item.flask && inventory) {
+                        createElement('div', {
+                            classList: ['equipped'],
+                            style: [
+                                ['backgroundImage', `url('images/MENU_40181_Elixer.png')`],
+                                ['backgroundSize', `contain`]
+                            ],
+                            parent: icon
+                        })
+                    }
+
+                    if(item.infusion > 0) {
+                        createElement('div', {
+                            classList: ['infusion'],
+                            style: [
+                                ['backgroundImage', `url('images/${infusions[item.infusion].icon}')`],
+                                ['backgroundSize', `contain`]
+                            ],
+                            parent: icon
+                        })
+                    }
 
                     if(item.qty > 1) {
                         createElement('div', {
@@ -481,24 +628,114 @@
                 })
 
                 let tabs = {};
-                tabs.tools = { name: "Tools", inventory: character.inventory.tools, storage: character.storage.tools };
-                tabs.ashes = { name: "Ashes", inventory: character.inventory.ashes, storage: character.storage.ashes };
-                tabs.crafting = { name: "Crafting Materials", inventory: character.inventory.crafting, storage: character.storage.crafting };
-                tabs.bolstering = { name: "Bolstering Materials", inventory: character.inventory.bolstering, storage: character.storage.bolstering };
-                tabs.keyitems = { name: "Key Items", inventory: character.inventory.keyitems, storage: character.storage.keyitems };
-                tabs.sorceries = { name: "Sorceries", inventory: character.inventory.sorceries, storage: character.storage.sorceries };
-                tabs.incantations = { name: "Incantations", inventory: character.inventory.incantations, storage: character.storage.incantations };
-                tabs.ashofwar = { name: "Ashes of War", inventory: character.inventory.ashofwar, storage: character.storage.ashofwar };
-                tabs.melee = { name: "Melee Armaments", inventory: character.inventory.melee, storage: character.storage.melee };
-                tabs.rangedcatalyst = { name: "Ranged Weapons / Catalysts", inventory:  character.inventory.rangedcatalyst, storage:  character.storage.rangedcatalyst };
-                tabs.arrowbolts = { name: "Arrows/Bolts", inventory: character.inventory.arrowbolts, storage: character.storage.arrowbolts };
-                tabs.shields = { name: "Shields", inventory: character.inventory.shields, storage: character.storage.shields };
-                tabs.head = { name: "Head", inventory: character.inventory.head, storage: character.storage.head };
-                tabs.chest = { name: "Chest", inventory: character.inventory.chest, storage: character.storage.chest };
-                tabs.arms = { name: "Arms", inventory: character.inventory.arms, storage: character.storage.arms };
-                tabs.legs = { name: "Legs", inventory: character.inventory.legs, storage: character.storage.legs };
-                tabs.talismans = { name: "Talismans", inventory: character.inventory.talismans, storage: character.storage.talismans };
-                tabs.info = { name: "Info", inventory: character.inventory.info, storage: character.storage.info };
+                tabs.tools = {
+                    name: "Tools",
+                    inventory: character.inventory.tools,
+                    storage: character.storage.tools,
+                    icon: "MENU_Tab_00.png"
+                };
+                tabs.ashes = {
+                    name: "Ashes",
+                    inventory: character.inventory.ashes,
+                    storage: character.storage.ashes,
+                    icon: "MENU_Tab_29_Buddy.png"
+                };
+                tabs.crafting = {
+                    name: "Crafting Materials",
+                    inventory: character.inventory.crafting,
+                    storage: character.storage.crafting,
+                    icon: "MENU_Tab_01.png"
+                };
+                tabs.bolstering = {
+                    name: "Bolstering Materials",
+                    inventory: character.inventory.bolstering,
+                    storage: character.storage.bolstering,
+                    icon: "MENU_Tab_19.png"
+                };
+                tabs.keyitems = {
+                    name: "Key Items",
+                    inventory: character.inventory.keyitems,
+                    storage: character.storage.keyitems,
+                    icon: "MENU_Tab_03.png"
+                };
+                tabs.sorceries = {
+                    name: "Sorceries",
+                    inventory: character.inventory.sorceries,
+                    storage: character.storage.sorceries,
+                    icon: "MENU_Tab_30_PyroxeneMagic.png"
+                };
+                tabs.incantations = {
+                    name: "Incantations",
+                    inventory: character.inventory.incantations,
+                    storage: character.storage.incantations,
+                    icon: "MENU_Tab_31_FaithMagic.png"
+                };
+                tabs.ashofwar = {
+                    name: "Ashes of War",
+                    inventory: character.inventory.ashofwar,
+                    storage: character.storage.ashofwar,
+                    icon: "MENU_Tab_32_MagicStone.png"
+                };
+                tabs.melee = {
+                    name: "Melee Armaments",
+                    inventory: character.inventory.melee,
+                    storage: character.storage.melee,
+                    icon: "MENU_Tab_07.png"
+                };
+                tabs.rangedcatalyst = {
+                    name: "Ranged Weapons / Catalysts",
+                    inventory: character.inventory.rangedcatalyst,
+                    storage: character.storage.rangedcatalyst,
+                    icon: "MENU_Tab_08.png"
+                };
+                tabs.arrowbolts = {
+                    name: "Arrows/Bolts",
+                    inventory: character.inventory.arrowbolts,
+                    storage: character.storage.arrowbolts,
+                    icon: "MENU_Tab_14.png"
+                };
+                tabs.shields = {
+                    name: "Shields",
+                    inventory: character.inventory.shields,
+                    storage: character.storage.shields,
+                    icon: "MENU_Tab_09.png"
+                };
+                tabs.head = {
+                    name: "Head",
+                    inventory: character.inventory.head,
+                    storage: character.storage.head,
+                    icon: "MENU_Tab_10.png"
+                };
+                tabs.chest = {
+                    name: "Chest",
+                    inventory: character.inventory.chest,
+                    storage: character.storage.chest,
+                    icon: "MENU_Tab_11.png"
+                };
+                tabs.arms = {
+                    name: "Arms",
+                    inventory: character.inventory.arms,
+                    storage: character.storage.arms,
+                    icon: "MENU_Tab_12.png"
+                };
+                tabs.legs = {
+                    name: "Legs",
+                    inventory: character.inventory.legs,
+                    storage: character.storage.legs,
+                    icon: "MENU_Tab_13.png"
+                };
+                tabs.talismans = {
+                    name: "Talismans",
+                    inventory: character.inventory.talismans,
+                    storage: character.storage.talismans,
+                    icon: "MENU_Tab_15.png"
+                };
+                tabs.info = {
+                    name: "Info",
+                    inventory: character.inventory.info,
+                    storage: character.storage.info,
+                    icon: "MENU_Tab_04.png"
+                };
 
 
                 let fillItems = (parent, type) => {
@@ -508,17 +745,28 @@
                     tabContent.innerHTML = '';
 
                     Object.entries(tabs).forEach(([id, tab], i) => {
-                        let tabTitle = document.createElement('span');
+                        let tabTitle = createElement('span', {
+                            style: [
+                                ['padding', `3px`],
+                                ['backgroundImage', `url('images/${tab.icon}')`],
+                                ['backgroundSize', `contain`],
+                                ['backgroundPosition', 'center'],
+                                ['backgroundRepeat', `no-repeat`],
+                                ['backgroundOrigin', `content-box`]
+                            ],
+                        attributes: [
+                            ['tooltip', `<div class='tooltip'><div class='item-name'>${tab.name}</div></div>`]
+                        ]
+                        });
                         tabTitle.classList.add('title');
                         if(i == 0)
                             tabTitle.classList.add('active');
 
-                        tabTitle.appendChild(document.createTextNode(tab.name));
                         tabTitle.addEventListener('click', e => {
                             let selectChildren = [...tabSelect.children];
                             let contentChildren = [...tabContent.children];
                             let oldIndex = selectChildren.findIndex(e => e.classList.contains('active'));
-                            let newIndex = selectChildren.indexOf(e.target);
+                            let newIndex = selectChildren.indexOf(e.currentTarget);
                             selectChildren[oldIndex].classList.remove('active');
                             contentChildren[oldIndex].classList.remove('active');
                             selectChildren[newIndex].classList.add('active');
@@ -536,7 +784,7 @@
                             let group = document.createElement('div');
                             group.classList.add('group');
                             tab[type].filter(item => item.params.sortGroupId == groupId).sort(sortGroup).forEach(item => {
-                                group.appendChild(renderItem(item));
+                                group.appendChild(renderItem(item, true));
                             })
                             tabEl.appendChild(group);
                         })

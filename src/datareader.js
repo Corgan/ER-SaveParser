@@ -143,6 +143,8 @@ class DataReader {
             ret.base = Math.trunc(ret.id / 10000) * 10000;
             ret.level = ret.id % 100;
 
+            ret.infusion = Math.trunc((ret.id % 10000) / 100);
+
             let weaponId = Math.trunc(ret.id / 100) * 100;
             ret.params = weapons.find(weapon => weapon.RowID == weaponId);
 
