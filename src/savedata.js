@@ -307,7 +307,7 @@ class CharacterData {
 
         this.inventory.all = this.internal.inventory.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
         
-        this.inventory.tools = this.inventory.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3);
+        this.inventory.tools = this.inventory.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3 || item.params.goodsType == 9);
         this.inventory.ashes = this.inventory.all.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8);
         this.inventory.crafting = this.inventory.all.filter(item => item.params.goodsType == 2);
         this.inventory.bolstering = this.inventory.all.filter(item => item.params.goodsType == 14);
@@ -333,7 +333,7 @@ class CharacterData {
         
         this.storage.all = this.internal.storage.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
         
-        this.storage.tools = this.storage.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3);
+        this.storage.tools = this.storage.all.filter(item => item.params.goodsType == 0 || item.params.goodsType == 3 || item.params.goodsType == 9);
         this.storage.ashes = this.storage.all.filter(item => item.params.goodsType == 7 || item.params.goodsType == 8);
         this.storage.crafting = this.storage.all.filter(item => item.params.goodsType == 2);
         this.storage.bolstering = this.storage.all.filter(item => item.params.goodsType == 14);
