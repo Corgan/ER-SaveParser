@@ -329,6 +329,7 @@ class CharacterData {
         this.inventory.weapons = [...this.inventory.melee, ...this.inventory.rangedcatalyst, ...this.inventory.arrowbolts, ...this.inventory.shields];
         this.inventory.armor = [...this.inventory.head, ...this.inventory.chest, ...this.inventory.arms, ...this.inventory.legs];
         this.inventory.spells = [...this.inventory.sorceries, ...this.inventory.incantations];
+        this.inventory.quickItems = [...this.inventory.tools, ...this.inventory.ashes];
 
         
         this.storage.all = this.internal.storage.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
@@ -395,25 +396,25 @@ class CharacterData {
         this.equipped.talismans.forEach(talisman => talisman.equipped = true);
 
         this.equipped.quick = [];
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick1Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick2Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick3Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick4Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick5Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick6Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick7Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick8Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick9Id) || { name: "Quick Slot" });
-        this.equipped.quick.push(this.inventory.all.find(item => item.id == this.internal.quick10Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick1Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick2Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick3Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick4Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick5Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick6Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick7Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick8Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick9Id) || { name: "Quick Slot" });
+        this.equipped.quick.push(this.inventory.quickItems.find(item => item.id == this.internal.quick10Id) || { name: "Quick Slot" });
         this.equipped.quick.forEach(quick => quick.equipped = true);
 
         this.equipped.pouch = [];
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch1Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch2Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch3Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch4Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch5Id) || { name: "Pouch" });
-        this.equipped.pouch.push(this.inventory.all.find(item => item.id == this.internal.pouch6Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch1Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch2Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch3Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch4Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch5Id) || { name: "Pouch" });
+        this.equipped.pouch.push(this.inventory.quickItems.find(item => item.id == this.internal.pouch6Id) || { name: "Pouch" });
         this.equipped.pouch.forEach(pouch => pouch.pouch = true);
 
         this.equipped.flask = [];
