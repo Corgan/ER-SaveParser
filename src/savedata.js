@@ -80,6 +80,7 @@ class CharacterData {
         this.internal.focus2 = reader.readInt32();
         reader.seek(0x8, true); // Skip
         let name = new Uint16Array(reader.read(0x20).buffer);
+        this.internal.nameBuffer = name;
         this.internal.name = String.fromCharCode.apply(null, name.slice(0, name.indexOf(0)));
         reader.seek(0xFC, true); // Skip the rest for now
         reader.seek(0xD0, true); // Skip padding
@@ -222,7 +223,175 @@ class CharacterData {
         this.internal.flask1Id = reader.readInt32NoCategory();
         this.internal.flask2Id = reader.readInt32NoCategory();
         reader.seek(0x8, true); // Skip
-        reader.seek(0x12B, true); // Skip Face Data
+
+        //Start Character Customization Data
+        reader.read(0x4, true); // FACE
+        //reader.seek(0x127, true); // Skip Face Data
+
+        this.internal.customization = {}
+        this.internal.customization.AlterBody = {}
+        this.internal.customization.AlterFaceAndHair = {}
+        this.internal.customization.AlterFaceAndHair.FaceTemplate = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.BrowRidge = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Eyes = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Nostrils = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin = {}
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Jaw = {}
+        this.internal.customization.AlterFaceAndHair.Hair = {}
+        this.internal.customization.AlterFaceAndHair.Eyebrows = {}
+        this.internal.customization.AlterFaceAndHair.FacialHair = {}
+        this.internal.customization.AlterFaceAndHair.Eyelashes = {}
+        this.internal.customization.AlterFaceAndHair.Eyes = {}
+        this.internal.customization.AlterFaceAndHair.SkinFeatures = {}
+        this.internal.customization.AlterFaceAndHair.Cosmetics = {}
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch = {}
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark = {}
+
+        reader.seek(0x8, true); // Skip
+        this.internal.customization.BaseStructure = reader.readUint8();
+        reader.seek(0xB, true); // Skip
+        this.internal.customization.AlterFaceAndHair.Eyebrows.Brow = reader.readUint8();
+        reader.seek(0x3, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FacialHair.Beard = reader.readUint8();
+        reader.seek(0x3, true); // Skip
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.Eyepatch = reader.readUint8();
+        reader.seek(0x3, true); // Skip
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TattooMark = reader.readUint8();
+        reader.seek(0x3, true); // Skip
+        this.internal.customization.AlterFaceAndHair.Eyelashes.Eyelashes = reader.readUint8();
+        reader.seek(0x3, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FaceTemplate.ApparentAge = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceTemplate.FacialAesthetic = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceTemplate.FormEmphasis = reader.readUint8();
+        reader.seek(0x1, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FaceStructure.BrowRidge.BrowRidgeHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.BrowRidge.InnerBrowRidge = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.BrowRidge.OuterBrowRidge = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks.CheekboneHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks.CheekboneDepth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks.CheekboneWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks.CheekboneProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Cheeks.Cheeks = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinTipPosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinLength = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinDepth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Chin.ChinWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Eyes.EyePosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Eyes.EyeSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Eyes.EyeSlant = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Eyes.EyeSpacing = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.NoseSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.NoseForeheadRatio = reader.readUint8();
+        reader.seek(0x1, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.FaceProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.VertFaceRatio = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.FacialFeatureSlant = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.FacialBalance.HorizFaceRatio = reader.readUint8();
+        reader.seek(0x1, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.ForeheadDepth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.ForheadProtrusion = reader.readUint8();
+        reader.seek(0x1, true); // Skip
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Jaw.JawProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Jaw.JawWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Jaw.LowerJaw = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Jaw.JawContour = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.LipShape = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.LipSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.LipFullness = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.MouthExpression = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.LipProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Lips.LipThickness = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.MouthProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.MouthSlant = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.Occlusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.MouthPosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.MouthWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Mouth.MouthChinDistance = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseRidgeDepth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseRidgeLength = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NosePosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseTipHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Nostrils.NostrilSlant = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Nostrils.NostrilSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.Nostrils.NostrilWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseProtrusion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.NoseBridgeHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.BridgeProtrusion1 = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.BridgeProtrusion2 = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.ForeheadGlabella.NoseBridgeWidth = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseHeight = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FaceStructure.NoseRidge.NoseSlant = reader.readUint8();
+        reader.seek(0x40, true); // Skip
+        this.internal.customization.AlterBody.Head = reader.readUint8();
+        this.internal.customization.AlterBody.Chest = reader.readUint8();
+        this.internal.customization.AlterBody.Abdomen = reader.readUint8();
+        this.internal.customization.AlterBody.Arms = reader.readUint8();
+        this.internal.customization.AlterBody.Legs = reader.readUint8();
+        this.internal.customization.AlterBody.ArmsR = reader.readUint8();
+        this.internal.customization.AlterBody.LegsR = reader.readUint8();
+        this.internal.customization.AlterSkinColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.SkinFeatures.SkinLuster = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.SkinFeatures.Pores = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FacialHair.Stubble = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.SkinFeatures.DarkCircles = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.SkinFeatures.DarkCircleColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.Cheeks = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.CheeksColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.Eyeliner = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.EyelinerColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.EyeshadowLower = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.EyeshadowLowerColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.EyeshadowUpper = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.EyeshadowUpperColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.Lipstick = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Cosmetics.LipstickColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.PositionHoriz = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.PositionVert = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.Angle = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.Expansion = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TattooMarkColor = reader.readRGB();
+        reader.seek(0x1, true); // Skip
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.Flip = reader.readUint8();
+        this.internal.customization.AlterBody.BodyHair = reader.readUint8();
+        this.internal.customization.AlterBody.BodyHairColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.RightIrisColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.RightIrisSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyes.REyeClouding = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyes.RCloudingColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.REyeWhiteColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.REyePosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyes.LeftIrisColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.LeftIrisSize = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyes.LEyeClouding = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyes.LCloudingColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.LEyeWhiteColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyes.LEyePosition = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Hair.HairColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Hair.Luster = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Hair.RootDarkness = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Hair.WhiteHairs = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FacialHair.BeardColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.FacialHair.Luster = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FacialHair.RootDarkness = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.FacialHair.WhiteHairs = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyebrows.BrowColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.Eyebrows.Luster = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyebrows.RootDarkness = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyebrows.WhiteHairs = reader.readUint8();
+        this.internal.customization.AlterFaceAndHair.Eyelashes.EyelashColor = reader.readRGB();
+        this.internal.customization.AlterFaceAndHair.TattooMarkEyepatch.EyepatchColor = reader.readRGB();
+        reader.seek(0x15, true); // Skip
+        reader.seek(0x8, true); // Skip
 
         this.internal.storage = [];
         this.internal.storageCount = reader.readInt32();
@@ -304,6 +473,33 @@ class CharacterData {
         this.equipped = {};
         this.inventory = {};
         this.storage = {};
+        this.customization = JSON.parse(JSON.stringify(this.internal.customization));
+        this.customization.AlterFaceAndHair.Eyebrows.Brow++;
+        this.customization.AlterFaceAndHair.FacialHair.Beard++;
+        this.customization.AlterFaceAndHair.Eyelashes.Eyelashes++;
+
+        this.customization.AlterBody.Musculature = Math.trunc(this.customization.BaseStructure / 100);
+        this.customization.AlterFaceAndHair.FaceTemplate.BoneStructure = Math.trunc((this.customization.BaseStructure % 100) / 10) + 1;
+        this.customization.Age = Math.trunc(this.customization.BaseStructure % 10);
+
+        let ageMap = ['Young', 'Mature', 'Aged'];
+        let musculatureMap = ['Standard', 'Muscular'];
+        this.customization.Age = ageMap[this.customization.Age];
+        this.customization.AlterBody.Musculature = musculatureMap[this.customization.AlterBody.Musculature];
+
+        let hairMap = [0, 113, 112, 1, 3, 100, 5, 10, 101, 9, 8, 6, 7, 115, 114, 2, 4, 102, 103, 104, 105, 106, 107, 109, 108, 110, 111];
+        let eyepatchMap = [0, 2, 1, 10];
+
+        let tattooMarkMap = {}
+        for(var i=0; i<19; i++)
+            tattooMarkMap[i] = i+1;
+        for(var i=20; i<=38; i++)
+            tattooMarkMap[i] = i;
+
+        this.customization.AlterFaceAndHair.Hair.Hair = hairMap.indexOf(this.internal.customization.AlterFaceAndHair.Hair.Hair) + 1;
+        this.customization.AlterFaceAndHair.TattooMarkEyepatch.Eyepatch = eyepatchMap.indexOf(this.customization.AlterFaceAndHair.TattooMarkEyepatch.Eyepatch) + 1;
+        this.customization.AlterFaceAndHair.TattooMarkEyepatch.TattooMark = tattooMarkMap[this.customization.AlterFaceAndHair.TattooMarkEyepatch.TattooMark];
+        this.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.Flip = (this.customization.AlterFaceAndHair.TattooMarkEyepatch.TweakTattooMark.Flip == 0);
 
         this.inventory.all = this.internal.inventory.filter(item => item.params && item.text && !blacklist.includes(item.text.name));
         

@@ -283,17 +283,19 @@ typedef struct {
     struct {
         ubyte unk1[0x8];
         ubyte BaseStructure;
-        ubyte unk2[0xB];
+        ubyte unk433[0x3];
+        ubyte UnkStructure;
+        ubyte unk133[0x7];
         ubyte FaceAndHairEyebrowsBrow;
         ubyte unk3[0x3];
         ubyte FaceAndHairBeardBeard;
         ubyte unk4[0x3];
         ubyte FaceAndHairTattooMarkEyepatchEyepatch;
-        ubyte unk5[0x7];
-        ubyte FaceAndHairEyelashesEyelashes;
-        ubyte unk6;
+        ubyte unk5[0x3];
         ubyte FaceAndHairTattooMarkEyepatchTatooMark;
-        ubyte unk7;
+        ubyte unk6[0x3];
+        ubyte FaceAndHairEyelashesEyelashes;
+        ubyte unk7[0x3];
         ubyte FaceAndHairFaceTemplateApparentAge;
         ubyte FaceAndHairFaceTemplateFacialAesthetic;
         ubyte FaceAndHairFaceTemplateFormEmphasis;

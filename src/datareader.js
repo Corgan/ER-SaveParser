@@ -77,6 +77,16 @@ class DataReader {
         return ret;
     }
 
+    readRGB(consume=true) {
+        let r = this.view.getUint8(this.offset, true);
+        let g = this.view.getUint8(this.offset+1, true);
+        let b = this.view.getUint8(this.offset+2, true);
+
+        if(consume)
+            this.offset += 3;
+        return { r: r, g: g, b: b };
+    }
+
     seek(offset, relative=false) {
         if(relative) {
             this.offset += offset;
