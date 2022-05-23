@@ -19,6 +19,22 @@
     z-index: 999;
 }
 
+.colorbox {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-right: 5px;
+}
+
+progress {
+    margin-right: 5px;
+    text-align: right;
+    display: inline-block;
+}
+
 .item-name {
     font-weight: bold;
     font-size: 18px;
@@ -330,6 +346,44 @@
     grid-area: customization;
     grid-gap: 10px;
 }
+
+#character-customization .list {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    margin-left: 20px;
+    width: 100%;
+}
+
+#character-customization .list-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+    width: 100%;
+    grid-template-areas:
+        'left right';
+}
+
+#character-customization .list-item .left {
+    position: relative;
+    grid-area: left;
+    align-self: start;
+}
+
+#character-customization .list-item .right {
+    position: relative;
+    grid-area: right;
+    align-self: end;
+}
+
+progress::after {
+    position: relative;
+    content: attr(value);
+    right: -30px;
+}
+
           </style>
     </head>
     <body>
@@ -411,222 +465,221 @@
             </div>
 
             <div id="character-customization">
-                <ul>
-                    <li>Age: <span id="customization-Age" class="stat"></span></li>
-                    <li>Alter Skin Color: <span id="customization-AlterSkinColor-r" class="stat"></span> <span id="customization-AlterSkinColor-g" class="stat"></span> <span id="customization-AlterSkinColor-b" class="stat"></span></li>
-                    <li>Alter Face & Hair</li>
-                    <ul>
-                        <li>Adjust Face Template</li>
-                        <ul>
-                            <li>Bone Structure: <span id="customization-AlterFaceAndHair-FaceTemplate-BoneStructure" class="stat"></span></li>
-                            <li>Form Emphasis: <span id="customization-AlterFaceAndHair-FaceTemplate-FormEmphasis" class="stat"></span></li>
-                            <li>Apparent Age: <span id="customization-AlterFaceAndHair-FaceTemplate-ApparentAge" class="stat"></span></li>
-                            <li>Facial Aesthetic: <span id="customization-AlterFaceAndHair-FaceTemplate-FacialAesthetic" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Face Structure</li>
-                        <ul>
-                            <li>Facial Balance</li>
-                            <ul>
-                                <li>Nose Size: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-NoseSize" class="stat"></span></li>
-                                <li>Nose/Forehead Ratio: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-NoseForeheadRatio" class="stat"></span></li>
-                                <li>Face Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-FaceProtrusion" class="stat"></span></li>
-                                <li>Vert. Face Ratio: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-VertFaceRatio" class="stat"></span></li>
-                                <li>Facial Feature Slant: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-FacialFeatureSlant" class="stat"></span></li>
-                                <li>Horiz. Face Ratio: <span id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-HorizFaceRatio" class="stat"></span></li>
-                            </ul>
-                            <li>Forehead/Glabella</li>
-                            <ul>
-                                <li>Forehead Depth: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-ForeheadDepth" class="stat"></span></li>
-                                <li>Forehead Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-ForheadProtrusion" class="stat"></span></li>
-                                <li>Nose Bridge Height: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-NoseBridgeHeight" class="stat"></span></li>
-                                <li>Bridge Protrusion 1: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-BridgeProtrusion1" class="stat"></span></li>
-                                <li>Bridge Protrusion 2: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-BridgeProtrusion2" class="stat"></span></li>
-                                <li>Nose Bridge Width: <span id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-NoseBridgeWidth" class="stat"></span></li>
-                            </ul>
-                            <li>Brow Ridge</li>
-                            <ul>
-                                <li>Brow Ridge Height: <span id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-BrowRidgeHeight" class="stat"></span></li>
-                                <li>Inner Brow Ridge: <span id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-InnerBrowRidge" class="stat"></span></li>
-                                <li>Outer Brow Ridge: <span id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-OuterBrowRidge" class="stat"></span></li>
-                            </ul>
-                            <li>Eyes</li>
-                            <ul>
-                                <li>Eye Position: <span id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyePosition" class="stat"></span></li>
-                                <li>Eye Size: <span id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSize" class="stat"></span></li>
-                                <li>Eye Slant: <span id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSlant" class="stat"></span></li>
-                                <li>Eye Spacing: <span id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSpacing" class="stat"></span></li>
-                            </ul>
-                            <li>Nose Ridge</li>
-                            <ul>
-                                <li>Nose Ridge Depth: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseRidgeDepth" class="stat"></span></li>
-                                <li>Nose Ridge Length: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseRidgeLength" class="stat"></span></li>
-                                <li>Nose Position: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NosePosition" class="stat"></span></li>
-                                <li>Nose Tip Height: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseTipHeight" class="stat"></span></li>
-                                <li>Nose Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseProtrusion" class="stat"></span></li>
-                                <li>Nose Height: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseHeight" class="stat"></span></li>
-                                <li>Nose Slant: <span id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseSlant" class="stat"></span></li>
-                            </ul>
-                            <li>Nostrils</li>
-                            <ul>
-                                <li>Nostril Slant: <span id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilSlant" class="stat"></span></li>
-                                <li>Nostril Size: <span id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilSize" class="stat"></span></li>
-                                <li>Nostril Width: <span id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilWidth" class="stat"></span></li>
-                            </ul>
-                            <li>Cheeks</li>
-                            <ul>
-                                <li>Cheekbone Height: <span id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneHeight" class="stat"></span></li>
-                                <li>Cheekbone Depth: <span id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneDepth" class="stat"></span></li>
-                                <li>Cheekbone Width: <span id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneWidth" class="stat"></span></li>
-                                <li>Cheekbone Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneProtrusion" class="stat"></span></li>
-                                <li>Cheeks: <span id="customization-AlterFaceAndHair-FaceStructure-Cheeks-Cheeks" class="stat"></span></li>
-                            </ul>
-                            <li>Lips</li>
-                            <ul>
-                                <li>Lip Shape: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-LipShape" class="stat"></span></li>
-                                <li>Mouth Expression: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-MouthExpression" class="stat"></span></li>
-                                <li>Lip Fullness: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-LipFullness" class="stat"></span></li>
-                                <li>Lip Size: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-LipSize" class="stat"></span></li>
-                                <li>Lip Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-LipProtrusion" class="stat"></span></li>
-                                <li>Lip Thickness: <span id="customization-AlterFaceAndHair-FaceStructure-Lips-LipThickness" class="stat"></span></li>
-                            </ul>
-                            <li>Mouth</li>
-                            <ul>
-                                <li>Mouth Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthProtrusion" class="stat"></span></li>
-                                <li>Mouth Slant: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthSlant" class="stat"></span></li>
-                                <li>Occlusion: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-Occlusion" class="stat"></span></li>
-                                <li>Mouth Position: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthPosition" class="stat"></span></li>
-                                <li>Mouth Width: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthWidth" class="stat"></span></li>
-                                <li>Mouth-Chin Distance: <span id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthChinDistance" class="stat"></span></li>
-                            </ul>
-                            <li>Chin</li>
-                            <ul>
-                                <li>Chin Tip Position: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinTipPosition" class="stat"></span></li>
-                                <li>Chin Length: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinLength" class="stat"></span></li>
-                                <li>Chin Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinProtrusion" class="stat"></span></li>
-                                <li>Chin Depth: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinDepth" class="stat"></span></li>
-                                <li>Chin Size: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinSize" class="stat"></span></li>
-                                <li>Chin Height: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinHeight" class="stat"></span></li>
-                                <li>Chin Width: <span id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinWidth" class="stat"></span></li>
-                            </ul>
-                            <li>Jaw</li>
-                            <ul>
-                                <li>Jaw Protrusion: <span id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawProtrusion" class="stat"></span></li>
-                                <li>Jaw Width: <span id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawWidth" class="stat"></span></li>
-                                <li>Lower Jaw: <span id="customization-AlterFaceAndHair-FaceStructure-Jaw-LowerJaw" class="stat"></span></li>
-                                <li>Jaw Contour: <span id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawContour" class="stat"></span></li>
-                            </ul>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Hair</li>
-                        <ul>
-                            <li>Hair: <span id="customization-AlterFaceAndHair-Hair-Hair" class="stat"></span></li>
-                            <li>Hair Color: <span id="customization-AlterFaceAndHair-Hair-HairColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Hair-HairColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Hair-HairColor-b" class="stat"></span></li>
-                            <li>Luster: <span id="customization-AlterFaceAndHair-Hair-Luster" class="stat"></span></li>
-                            <li>Root Darkness: <span id="customization-AlterFaceAndHair-Hair-RootDarkness" class="stat"></span></li>
-                            <li>White Hairs: <span id="customization-AlterFaceAndHair-Hair-WhiteHairs" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Eyebrows</li>
-                        <ul>
-                            <li>Brow: <span id="customization-AlterFaceAndHair-Eyebrows-Brow" class="stat"></span></li>
-                            <li>Brow Color: <span id="customization-AlterFaceAndHair-Eyebrows-BrowColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyebrows-BrowColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyebrows-BrowColor-b" class="stat"></span></li>
-                            <li>Luster: <span id="customization-AlterFaceAndHair-Eyebrows-Luster" class="stat"></span></li>
-                            <li>Root Darkness: <span id="customization-AlterFaceAndHair-Eyebrows-RootDarkness" class="stat"></span></li>
-                            <li>White Hairs: <span id="customization-AlterFaceAndHair-Eyebrows-WhiteHairs" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Facial Hair</li>
-                        <ul>
-                            <li>Beard: <span id="customization-AlterFaceAndHair-FacialHair-Beard" class="stat"></span></li>
-                            <li>Beard Color: <span id="customization-AlterFaceAndHair-FacialHair-BeardColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-FacialHair-BeardColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-FacialHair-BeardColor-b" class="stat"></span></li>
-                            <li>Luster: <span id="customization-AlterFaceAndHair-FacialHair-Luster" class="stat"></span></li>
-                            <li>Root Darkness: <span id="customization-AlterFaceAndHair-FacialHair-RootDarkness" class="stat"></span></li>
-                            <li>White Hairs: <span id="customization-AlterFaceAndHair-FacialHair-WhiteHairs" class="stat"></span></li>
-                            <li>Stubble: <span id="customization-AlterFaceAndHair-FacialHair-Stubble" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Eyelashes</li>
-                        <ul>
-                            <li>Eyelashes: <span id="customization-AlterFaceAndHair-Eyelashes-Eyelashes" class="stat"></span></li>
-                            <li>Eyelash Color: <span id="customization-AlterFaceAndHair-Eyelashes-EyelashColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyelashes-EyelashColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyelashes-EyelashColor-b" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Eyes</li>
-                        <ul>
-                            <li>Right Iris Size: <span id="customization-AlterFaceAndHair-Eyes-RightIrisSize" class="stat"></span></li>
-                            <li>Right Iris Color: <span id="customization-AlterFaceAndHair-Eyes-RightIrisColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RightIrisColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RightIrisColor-b" class="stat"></span></li>
-                            <li>R Eye Clouding: <span id="customization-AlterFaceAndHair-Eyes-REyeClouding" class="stat"></span></li>
-                            <li>R Clouding Color: <span id="customization-AlterFaceAndHair-Eyes-RCloudingColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RCloudingColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RCloudingColor-b" class="stat"></span></li>
-                            <li>R Eye White Color: <span id="customization-AlterFaceAndHair-Eyes-REyeWhiteColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-REyeWhiteColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-REyeWhiteColor-b" class="stat"></span></li>
-                            <li>R Eye Position: <span id="customization-AlterFaceAndHair-Eyes-REyePosition" class="stat"></span></li>
-                            <li>Left Iris Size: <span id="customization-AlterFaceAndHair-Eyes-LeftIrisSize" class="stat"></span></li>
-                            <li>Left Iris Color: <span id="customization-AlterFaceAndHair-Eyes-LeftIrisColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RightIrisColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-RightIrisColor-b" class="stat"></span></li>
-                            <li>L Eye Clouding: <span id="customization-AlterFaceAndHair-Eyes-LEyeClouding" class="stat"></span></li>
-                            <li>L Clouding Color: <span id="customization-AlterFaceAndHair-Eyes-LCloudingColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-LCloudingColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-LCloudingColor-b" class="stat"></span></li>
-                            <li>L Eye White Color: <span id="customization-AlterFaceAndHair-Eyes-LEyeWhiteColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-LEyeWhiteColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Eyes-LEyeWhiteColor-b" class="stat"></span></li>
-                            <li>L Eye Position: <span id="customization-AlterFaceAndHair-Eyes-LEyePosition" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Skin Features</li>
-                        <ul>
-                            <li>Pores: <span id="customization-AlterFaceAndHair-SkinFeatures-Pores" class="stat"></span></li>
-                            <li>Skin Luster: <span id="customization-AlterFaceAndHair-SkinFeatures-SkinLuster" class="stat"></span></li>
-                            <li>Dark Circles: <span id="customization-AlterFaceAndHair-SkinFeatures-DarkCircles" class="stat"></span></li>
-                            <li>Dark Circle Color: <span id="customization-AlterFaceAndHair-SkinFeatures-DarkCircleColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-SkinFeatures-DarkCircleColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-SkinFeatures-DarkCircleColor-b" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Cosmetics</li>
-                        <ul>
-                            <li>Eyeliner: <span id="customization-AlterFaceAndHair-Cosmetics-Eyeliner" class="stat"></span></li>
-                            <li>Eyeliner Color: <span id="customization-AlterFaceAndHair-Cosmetics-EyelinerColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyelinerColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyelinerColor-b" class="stat"></span></li>
-                            <li>Eyeshadow (Upper): <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpper" class="stat"></span></li>
-                            <li>Eyeshadow (Upper) Color: <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpperColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpperColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpperColor-b" class="stat"></span></li>
-                            <li>Eyeshadow (Lower): <span id="customization-AlterFaceAndHair-Cosmetics-Eyeliner" class="stat"></span></li>
-                            <li>Eyeshadow (Lower) Color: <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowLowerColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowLowerColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-EyeshadowLowerColor-b" class="stat"></span></li>
-                            <li>Cheeks: <span id="customization-AlterFaceAndHair-Cosmetics-Cheeks" class="stat"></span></li>
-                            <li>Cheeks Color: <span id="customization-AlterFaceAndHair-Cosmetics-CheeksColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-CheeksColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-CheeksColor-b" class="stat"></span></li>
-                            <li>Lipstick: <span id="customization-AlterFaceAndHair-Cosmetics-Lipstick" class="stat"></span></li>
-                            <li>Lipstick Color: <span id="customization-AlterFaceAndHair-Cosmetics-LipstickColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-LipstickColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-Cosmetics-LipstickColor-b" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <ul>
-                        <li>Tatoo/Mark/Eyepatch</li>
-                        <ul>
-                            <li>Tattoo/Mark: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMark" class="stat"></span></li>
-                            <li>Tattoo/Mark Color: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMarkColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMarkColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMarkColor-b" class="stat"></span></li>
-                            <li>Tweak Tattoo/Mark</li>
-                            <ul>
-                                <li>Position (Vert.): <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-PositionVert" class="stat"></span></li>
-                                <li>Position (Horiz.): <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-PositionHoriz" class="stat"></span></li>
-                                <li>Angle: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Angle" class="stat"></span></li>
-                                <li>Expansion: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Expansion" class="stat"></span></li>
-                                <li>Flip: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Flip" class="stat"></span></li>
-                            </ul>
-                            <li>Eyepatch: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-Eyepatch" class="stat"></span></li>
-                            <li>Eyepatch Color: <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-EyepatchColor-r" class="stat"></span> <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-EyepatchColor-g" class="stat"></span> <span id="customization-AlterFaceAndHair-TattooMarkEyepatch-EyepatchColor-b" class="stat"></span></li>
-                        </ul>
-                    </ul>
-                    <li>Alter Body</li>
-                    <ul>
-                        <li>Head: <span id="customization-AlterBody-Head" class="stat"></span></li>
-                        <li>Chest: <span id="customization-AlterBody-Chest" class="stat"></span></li>
-                        <li>Abdomen: <span id="customization-AlterBody-Abdomen" class="stat"></span></li>
-                        <li>Arms: <span id="customization-AlterBody-Arms" class="stat"></span></li>
-                        <li>Legs: <span id="customization-AlterBody-Legs" class="stat"></span></li>
-                        <li>Body Hair: <span id="customization-AlterBody-BodyHair" class="stat"></span></li>
-                        <li>Body Hair Color: <span id="customization-AlterBody-BodyHairColor-r" class="stat"></span> <span id="customization-AlterBody-BodyHairColor-g" class="stat"></span> <span id="customization-AlterBody-BodyHairColor-b" class="stat"></span></li>
-                        <li>Musculature: <span id="customization-AlterBody-Musculature" class="stat"></span></li>
-                        </ul>
-                </ul>
+                <div class="list">
+                    <div class="list-item"><span class="left">Age:</span><span id="customization-Age" class="stat"></span></div>
+                    <div class="list-item"><span class="left">Alter Skin Color:</span><color id="customization-AlterSkinColor" class="stat"></color></div>
+                    <div class="list-item"><span class="left">Alter Face & Hair</span></div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Adjust Face Template</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Bone Structure:</span><span id="customization-AlterFaceAndHair-FaceTemplate-BoneStructure" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Form Emphasis:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceTemplate-FormEmphasis" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Apparent Age:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceTemplate-ApparentAge" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Facial Aesthetic:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceTemplate-FacialAesthetic" class="stat"></progress></span></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Face Structure</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Facial Balance</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Nose Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-NoseSize" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose/Forehead Ratio:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-NoseForeheadRatio" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Face Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-FaceProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Vert. Face Ratio:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-VertFaceRatio" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Facial Feature Slant:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-FacialFeatureSlant" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Horiz. Face Ratio:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-FacialBalance-HorizFaceRatio" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Forehead/Glabella</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Forehead Depth:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-ForeheadDepth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Forehead Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-ForheadProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Bridge Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-NoseBridgeHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Bridge Protrusion 1:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-BridgeProtrusion1" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Bridge Protrusion 2:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-BridgeProtrusion2" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Bridge Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-ForeheadGlabella-NoseBridgeWidth" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Brow Ridge</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Brow Ridge Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-BrowRidgeHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Inner Brow Ridge:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-InnerBrowRidge" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Outer Brow Ridge:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-BrowRidge-OuterBrowRidge" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Eyes</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Eye Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyePosition" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Eye Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSize" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Eye Slant:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSlant" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Eye Spacing:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Eyes-EyeSpacing" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Nose Ridge</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Nose Ridge Depth:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseRidgeDepth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Ridge Length:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseRidgeLength" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NosePosition" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Tip Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseTipHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nose Slant:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-NoseRidge-NoseSlant" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Nostrils</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Nostril Slant:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilSlant" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nostril Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilSize" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Nostril Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Nostrils-NostrilWidth" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Cheeks</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Cheekbone Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Cheekbone Depth:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneDepth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Cheekbone Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneWidth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Cheekbone Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Cheeks-CheekboneProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Cheeks:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Cheeks-Cheeks" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Lips</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Lip Shape:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-LipShape" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Mouth Expression:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-MouthExpression" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Lip Fullness:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-LipFullness" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Lip Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-LipSize" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Lip Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-LipProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Lip Thickness:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Lips-LipThickness" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Mouth</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Mouth Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Mouth Slant:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthSlant" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Occlusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-Occlusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Mouth Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthPosition" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Mouth Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthWidth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Mouth-Chin Distance:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Mouth-MouthChinDistance" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Chin</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Chin Tip Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinTipPosition" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Length:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinLength" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Depth:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinDepth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinSize" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Height:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinHeight" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Chin Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Chin-ChinWidth" class="stat"></progress></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Jaw</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Jaw Protrusion:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawProtrusion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Jaw Width:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawWidth" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Lower Jaw:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Jaw-LowerJaw" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Jaw Contour:</span><span class="right"><progress id="customization-AlterFaceAndHair-FaceStructure-Jaw-JawContour" class="stat"></progress></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Hair</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Hair:</span><span id="customization-AlterFaceAndHair-Hair-Hair" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Hair Color:</span><color id="customization-AlterFaceAndHair-Hair-HairColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Luster:</span><span class="right"><progress id="customization-AlterFaceAndHair-Hair-Luster" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Root Darkness:</span><span class="right"><progress id="customization-AlterFaceAndHair-Hair-RootDarkness" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">White Hairs:</span><span class="right"><progress id="customization-AlterFaceAndHair-Hair-WhiteHairs" class="stat"></progress></span></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Eyebrows</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Brow:</span><span id="customization-AlterFaceAndHair-Eyebrows-Brow" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Brow Color:</span><color id="customization-AlterFaceAndHair-Eyebrows-BrowColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Luster:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyebrows-Luster" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Root Darkness:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyebrows-RootDarkness" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">White Hairs:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyebrows-WhiteHairs" class="stat"></progress></span></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Facial Hair</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Beard:</span><span id="customization-AlterFaceAndHair-FacialHair-Beard" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Beard Color:</span><color id="customization-AlterFaceAndHair-FacialHair-BeardColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Luster:</span><span class="right"><progress id="customization-AlterFaceAndHair-FacialHair-Luster" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Root Darkness:</span><span class="right"><progress id="customization-AlterFaceAndHair-FacialHair-RootDarkness" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">White Hairs:</span><span class="right"><progress id="customization-AlterFaceAndHair-FacialHair-WhiteHairs" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Stubble:</span><span class="right"><progress id="customization-AlterFaceAndHair-FacialHair-Stubble" class="stat"></progress></span></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Eyelashes</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Eyelashes:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyelashes-Eyelashes" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Eyelash Color:</span><color id="customization-AlterFaceAndHair-Eyelashes-EyelashColor" class="stat"></color></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Eyes</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Right Iris Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-RightIrisSize" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Right Iris Color:</span><color id="customization-AlterFaceAndHair-Eyes-RightIrisColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">R Eye Clouding:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-REyeClouding" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">R Clouding Color:</span><color id="customization-AlterFaceAndHair-Eyes-RCloudingColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">R Eye White Color:</span><color id="customization-AlterFaceAndHair-Eyes-REyeWhiteColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">R Eye Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-REyePosition" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Left Iris Size:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-LeftIrisSize" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Left Iris Color:</span><color id="customization-AlterFaceAndHair-Eyes-LeftIrisColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">L Eye Clouding:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-LEyeClouding" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">L Clouding Color:</span><color id="customization-AlterFaceAndHair-Eyes-LCloudingColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">L Eye White Color:</span><color id="customization-AlterFaceAndHair-Eyes-LEyeWhiteColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">L Eye Position:</span><span class="right"><progress id="customization-AlterFaceAndHair-Eyes-LEyePosition" class="stat"></progress></span></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Skin Features</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Pores:</span><span class="right"><progress id="customization-AlterFaceAndHair-SkinFeatures-Pores" class="stat"></progress></span></span></div>
+                            <div class="list-item"><span class="left">Skin Luster:</span><span class="right"><progress id="customization-AlterFaceAndHair-SkinFeatures-SkinLuster" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Dark Circles:</span><span class="right"><progress id="customization-AlterFaceAndHair-SkinFeatures-DarkCircles" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Dark Circle Color:</span><color id="customization-AlterFaceAndHair-SkinFeatures-DarkCircleColor" class="stat"></color></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Cosmetics</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Eyeliner:</span><span class="right"><progress id="customization-AlterFaceAndHair-Cosmetics-Eyeliner" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Eyeliner Color:</span><color id="customization-AlterFaceAndHair-Cosmetics-EyelinerColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Eyeshadow (Upper):</span><span class="right"><progress id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpper" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Eyeshadow (Upper) Color:</span><color id="customization-AlterFaceAndHair-Cosmetics-EyeshadowUpperColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Eyeshadow (Lower):</span><span class="right"><progress id="customization-AlterFaceAndHair-Cosmetics-Eyeliner" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Eyeshadow (Lower) Color:</span><color id="customization-AlterFaceAndHair-Cosmetics-EyeshadowLowerColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Cheeks Color:</span><color id="customization-AlterFaceAndHair-Cosmetics-CheeksColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Lipstick:</span><span class="right"><progress id="customization-AlterFaceAndHair-Cosmetics-Lipstick" class="stat"></progress></span></div>
+                            <div class="list-item"><span class="left">Lipstick Color:</span><color id="customization-AlterFaceAndHair-Cosmetics-LipstickColor" class="stat"></color></div>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Tatoo/Mark/Eyepatch</span></div>
+                        <div class="list">
+                            <div class="list-item"><span class="left">Tattoo/Mark:</span><span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMark" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Tattoo/Mark Color:</span><color id="customization-AlterFaceAndHair-TattooMarkEyepatch-TattooMarkColor" class="stat"></color></div>
+                            <div class="list-item"><span class="left">Tweak Tattoo/Mark</span></div>
+                            <div class="list">
+                                <div class="list-item"><span class="left">Position (Vert.):</span><span class="right"><progress id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-PositionVert" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Position (Horiz.):</span><span class="right"><progress id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-PositionHoriz" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Angle:</span><span class="right"><progress id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Angle" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Expansion:</span><span class="right"><progress id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Expansion" class="stat"></progress></span></div>
+                                <div class="list-item"><span class="left">Flip:</span><span id="customization-AlterFaceAndHair-TattooMarkEyepatch-TweakTattooMark-Flip" class="stat"></span></div>
+                            </div>
+                            <div class="list-item"><span class="left">Eyepatch:</span><span id="customization-AlterFaceAndHair-TattooMarkEyepatch-Eyepatch" class="stat"></span></div>
+                            <div class="list-item"><span class="left">Eyepatch Color:</span><color id="customization-AlterFaceAndHair-TattooMarkEyepatch-EyepatchColor" class="stat"></color></div>
+                        </div>
+                    </div>
+                    <div class="list-item"><span class="left">Alter Body</span></div>
+                    <div class="list">
+                        <div class="list-item"><span class="left">Head:</span><span class="right"><progress id="customization-AlterBody-Head" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Chest:</span><span class="right"><progress id="customization-AlterBody-Chest" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Abdomen:</span><span class="right"><progress id="customization-AlterBody-Abdomen" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Arms:</span><span class="right"><progress id="customization-AlterBody-Arms" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Legs:</span><span class="right"><progress id="customization-AlterBody-Legs" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Body Hair:</span><span class="right"><progress id="customization-AlterBody-BodyHair" class="stat"></progress></span></div>
+                        <div class="list-item"><span class="left">Body Hair Color:</span><color id="customization-AlterBody-BodyHairColor" class="stat"></color></div>
+                        <div class="list-item"><span class="left">Musculature:</span><span id="customization-AlterBody-Musculature" class="stat"></span></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -845,9 +898,28 @@
                             stat.forEach(item => el.appendChild(renderItem(item)));
                         } else if (typeof stat == "object") {
                             el.innerHTML = '';
-                            el.appendChild(renderItem(stat));
+                            if(stat.r !== undefined && stat.g !== undefined && stat.b !== undefined) {
+                                createElement('span', {
+                                    classList: ['colorbox'],
+                                    text: ' ',
+                                    style: [
+                                        ['backgroundColor', `rgb(${stat.r},${stat.g},${stat.b})`]
+                                    ],
+                                    parent: el
+                                })
+                                el.appendChild(document.createTextNode(`${stat.r}, ${stat.g}, ${stat.b}`));
+                            } else {
+                                el.appendChild(renderItem(stat));
+                            }
                         } else if(stat !== undefined) {
-                            el.innerHTML = stat;
+                            el.innerHTML = '';
+                            if(el.nodeName == 'PROGRESS' && !isNaN(parseInt(stat))) {
+                                el.max = 255;
+                                el.value = parseInt(stat);
+                                el.innerHTML = stat;
+                            } else {
+                                el.innerHTML = stat;
+                            }
                         } else {
                             el.innerHTML = '';
                             el.appendChild(renderItem(stat));
@@ -1071,11 +1143,17 @@
                 let flagEl = document.getElementById('character-flags');
                 flagEl.innerHTML = '';
 
-                eventFlags.filter(flag => flag.type == "NG").forEach((flag) => createElement('div', {
+                eventFlags.filter(flag => flag.type == "NG" && character.internal.flags[flag.id]).forEach((flag) => createElement('div', {
                     classList: ['flag'],
                     text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
                     parent: flagEl
-                }))
+                }));
+                
+                eventFlags.filter(flag => flag.type == "boss_kill" && character.internal.flags[flag.id]).forEach((flag) => createElement('div', {
+                    classList: ['flag'],
+                    text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
+                    parent: flagEl
+                }));
 
                 document.getElementById('character').classList.remove('hide');
             }
