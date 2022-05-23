@@ -813,11 +813,11 @@ progress::after {
                 document.querySelector("#jsonExport textarea").value = JSON.stringify({
                     name: character.name,
                     timePlayed: character.timePlayed,
-                    customization: character.customization,
+                    stats: character.stats,
                     equipped: character.equipped,
                     inventory: character.inventory,
-                    stats: character.stats,
                     storage: character.storage,
+                    customization: character.customization,
                     flags: character.internal.flags,
                     version: character.version,
                 }, null, 2);
