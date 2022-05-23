@@ -100,13 +100,16 @@ class DataReader {
         let bytes = this.read(0x8, false);
         if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
             ret.hex =  buf2hex(bytes.buffer);
+            Object.defineProperty(ret, 'hex', { enumerable: false });
             ret.ref = this.readUint16();
             ret.unk = this.readUint8();
+            Object.defineProperty(ret, 'unk', { enumerable: false });
             ret.type = this.readUint8();
             ret.id = this.readInt32NoCategory();
             if(bytes[3] == 0x80) { // Weapon
                 let extra = this.read(0xD);
                 ret.extra = buf2hex(extra.buffer);
+                Object.defineProperty(ret, 'extra', { enumerable: false });
                 let ashLookup = new DataView(extra.buffer).getUint16(0x8, true);
                 if(ashLookup > 0)
                     ret.ashLookup = ashLookup;
@@ -122,10 +125,12 @@ class DataReader {
     }
 
     readLookupEntry() {
-        let id = this.readUint16();
-        let unk = this.readUint8();
-        let type = this.readUint8();
-        return { id: id, unk: unk, type: type };
+        let ret = { }
+        ret.id = this.readUint16();
+        ret.unk = this.readUint8();
+        Object.defineProperty(ret, 'unk', { enumerable: false });
+        ret.type = this.readUint8();
+        return ret;
     }
 
     readInventoryItem() {
@@ -133,20 +138,24 @@ class DataReader {
 
         let bytes = this.read(4, false);
         ret.hex = buf2hex(bytes.buffer);
+        Object.defineProperty(ret, 'hex', { enumerable: false });
 
         if((bytes[3] == 0xC0 || bytes[3] == 0x80 || bytes[3] == 0x90)) {
             ret.lookup = {};
             ret.lookup.id = this.readUint16();
             ret.lookup.unk = this.readUint8();
+            Object.defineProperty(ret, 'lookup', { enumerable: false });
             ret.lookup.type = this.readUint8();
 
             ret.lookupEntry = this.lookup[ret.lookup.id];
+            Object.defineProperty(ret, 'lookupEntry', { enumerable: false });
             ret.id = ret.lookupEntry.id;
         } else {
             ret.id = this.readInt32NoCategory();
         }
         ret.qty = this.readInt32();
         ret.handle = this.readUint32();
+        Object.defineProperty(ret, 'handle', { enumerable: false });
 
         if(bytes[3] == 0x80) {
             ret.type = "weapon";
@@ -161,6 +170,7 @@ class DataReader {
             if(ret.lookupEntry.ashLookup) {
                 ret.ashLookup = this.lookup[ret.lookupEntry.ashLookup];
                 ret.socketedAsh = ashofwar.find(ash => ash.RowID == ret.ashLookup.id);
+                Object.defineProperty(ret, 'socketedAsh', { enumerable: false });
             }
 
             if(textLookup.weapon[weaponId])
@@ -196,6 +206,8 @@ class DataReader {
             if(textLookup.ashofwar[ret.id])
                 ret.text = textLookup.ashofwar[ret.id];
         }
+        Object.defineProperty(ret, 'params', { enumerable: false });
+        Object.defineProperty(ret, 'text', { enumerable: false });
         
         return ret;
     }

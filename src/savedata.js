@@ -29,6 +29,7 @@ class SaveData {
 class CharacterData {
     constructor(reader) {
         this.reader = reader;
+        Object.defineProperty(this, 'reader', { enumerable: false });
 
         reader.seek(0x10);
         this.version = reader.readInt32();
@@ -46,6 +47,7 @@ class CharacterData {
 
         this.internal = {};
 
+        Object.defineProperty(this, 'internal', { enumerable: false });
         //Character Info
         this.internal.health = reader.readInt32();
         this.internal.baseMaxHealth = reader.readInt32();

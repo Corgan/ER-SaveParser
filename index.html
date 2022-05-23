@@ -390,6 +390,7 @@ progress::after {
         <div>
             <input type="file" accept=".sl2">
             <select id="characters" style="display: none;"></select>
+            <button id="export" style="display: none;">Export as JSON</button>
         </div>
 
         <div id="character" class="hide">
@@ -776,6 +777,27 @@ progress::after {
                 if (options.id !== undefined)
                     elem.id = options.id;
                 return elem;
+            }
+
+            function exportCharacter() {
+                let slot = parseInt(document.querySelector('#characters').value);
+
+                if(slot < 0 || slot > 10)
+                    return;
+
+                let character = savedata.characters[slot];
+
+                navigator.clipboard.writeText(JSON.stringify({
+                    name: character.name,
+                    timePlayed: character.timePlayed,
+                    customization: character.customization,
+                    equipped: character.equipped,
+                    inventory: character.inventory,
+                    stats: character.stats,
+                    storage: character.storage,
+                    flags: character.internal.flags,
+                    version: character.version,
+                }))
             }
 
             function renderCharacter() {
@@ -1183,6 +1205,7 @@ progress::after {
                     }
 
                     if(selectEl.options.length > 0) {
+                        document.getElementById('export').style.display = 'inline-block';
                         selectEl.style.display = 'inline-block';
                         selectEl.value = 0;
                         renderCharacter();
@@ -1196,6 +1219,7 @@ progress::after {
 
             document.querySelector('input').addEventListener('change', showFile);
             document.querySelector('#characters').addEventListener('change', renderCharacter);
+            document.querySelector('#export').addEventListener('click', exportCharacter);
         </script>
     </body>
 </html>
