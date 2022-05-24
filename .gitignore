@@ -69,3 +69,8 @@ yapped/Paramdex/ER/Names/*
 !yapped/Paramdex/ER/Names/Magic.txt
 !yapped/Paramdex/ER/Names/NpcParam.txt
 !yapped/Paramdex/ER/Names/PlayRegionParam.txt
+
+EldenFlagScanner/*.user
+EldenFlagScanner/.vs
+EldenFlagScanner/*/bin
+EldenFlagScanner/*/obj
