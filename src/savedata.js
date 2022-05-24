@@ -434,7 +434,11 @@ class CharacterData {
         }
         
         eventFlags.forEach(flag => {
-            this.internal.flags[flag.id] = checkFlag(flag.id);
+            if(Array.isArray(flag.id)) {
+                flag.id.forEach(id => this.internal.flags[id] = checkFlag(id));
+            } else {
+                this.internal.flags[flag.id] = checkFlag(flag.id)
+            }
         });
 
         this.name = this.internal.name;

@@ -25,6 +25,7 @@ let talismans = await parseParams('EquipParamAccessory');
 let ashofwar = await parseParams('EquipParamGem');
 let mapDrops = await parseParams('ItemLotParam_map');
 let playRegion = await parseParams('PlayRegionParam');
+let gameArea = await parseParams('GameAreaParam');
 let shopInventory = await parseParams('ShopLineupParam');
 let bonfireWarp = await parseParams('BonfireWarpParam');
 let bonfireSubcategory = await parseParams('BonfireWarpSubCategoryParam');
@@ -32,5 +33,5 @@ let bonfireTabs = await parseParams('BonfireWarpTabParam');
 
 let bonfire = { bonfires: bonfireWarp, subcategories: bonfireSubcategory, tabs: bonfireTabs };
 
-let all = { weapons, customweapon, armor, goods, talismans, ashofwar, mapDrops, shopInventory, playRegion, bonfire };
-export { all as default, weapons, customweapon, armor, goods, talismans, ashofwar, mapDrops, shopInventory, playRegion, bonfire };
+let all = { weapons, customweapon, armor, goods, talismans, ashofwar, mapDrops, shopInventory, playRegion, gameArea, bonfire };
+export { all as default, weapons, customweapon, armor, goods, talismans, ashofwar, mapDrops, shopInventory, playRegion, gameArea, bonfire };

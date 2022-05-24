@@ -1195,15 +1195,29 @@ progress::after {
                 let flagEl = document.getElementById('character-flags');
                 flagEl.innerHTML = '';
 
-                eventFlags.filter(flag => flag.type == "NG" && character.internal.flags[flag.id]).forEach((flag) => createElement('div', {
+                let lookupFlag = (flag) => {
+                    if(Array.isArray(flag.id)) {
+                        return flag.id.reduce((bool, id) => bool || character.internal.flags[id], false)
+                    } else {
+                        return character.internal.flags[flag.id]
+                    }
+                }
+
+                eventFlags.filter(flag => flag.type == "NG" && lookupFlag(flag)).forEach((flag) => createElement('div', {
                     classList: ['flag'],
-                    text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
+                    text: `${flag.id} - ${flag.name} = ${lookupFlag(flag)}`,
                     parent: flagEl
                 }));
                 
-                eventFlags.filter(flag => flag.type == "boss_kill" && character.internal.flags[flag.id]).forEach((flag) => createElement('div', {
+                eventFlags.filter(flag => flag.type == "boss_kill"  && lookupFlag(flag)).forEach((flag) => createElement('div', {
                     classList: ['flag'],
-                    text: `${flag.id} - ${flag.name} = ${character.internal.flags[flag.id]}`,
+                    text: `${flag.id} - ${flag.name} = ${lookupFlag(flag)}`,
+                    parent: flagEl
+                }));
+                
+                eventFlags.filter(flag => flag.type == "boss_kill" && !lookupFlag(flag)).forEach((flag) => createElement('div', {
+                    classList: ['flag'],
+                    text: `${flag.id} - ${flag.name} = ${lookupFlag(flag)}`,
                     parent: flagEl
                 }));
 

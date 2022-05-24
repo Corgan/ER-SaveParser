@@ -59,6 +59,7 @@ yapped/Paramdex/ER/Names/*
 !yapped/Paramdex/ER/Names/BonfireWarpParam.txt
 !yapped/Paramdex/ER/Names/BonfireWarpSubCategoryParam.txt
 !yapped/Paramdex/ER/Names/BonfireWarpTabParam.txt
+!yapped/Paramdex/ER/Names/GameAreaParam.txt
 !yapped/Paramdex/ER/Names/EquipParamAccessory.txt
 !yapped/Paramdex/ER/Names/EquipParamGem.txt
 !yapped/Paramdex/ER/Names/EquipParamGoods.txt
@@ -66,3 +67,5 @@ yapped/Paramdex/ER/Names/*
 !yapped/Paramdex/ER/Names/EquipParamWeapon.txt
 !yapped/Paramdex/ER/Names/SwordArtsParam.txt
 !yapped/Paramdex/ER/Names/Magic.txt
+!yapped/Paramdex/ER/Names/NpcParam.txt
+!yapped/Paramdex/ER/Names/PlayRegionParam.txt
