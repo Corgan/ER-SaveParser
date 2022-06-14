@@ -242,7 +242,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 3262;Devourer's Scepter +7 - Blank;12200000;0;7;
 3270;Eleonora's Poleblade +2 - Blank;10050000;0;2;
 3271;Blank +0 - No Skill;34950000;30900;0;
-3290;Great epee +8 - Repeating Thrust;6020000;10900;8;
+3290;Great Epee +8 - Repeating Thrust;6020000;10900;8;
 3291;Blank +10 - No Skill;33920000;30900;10;
 3292;Blank +0 - Blank;6900000;0;0;
 3293;Blank +0 - No Skill;33930000;30900;0;
@@ -358,7 +358,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10056;Keen Uchigatana +25 - Impaling Thrust;9000200;10100;25;
 10057;Keen Twinblade +25 - Impaling Thrust;10000200;10100;25;
 10058;Keen Rapier +25 - Impaling Thrust;5020200;10100;25;
-10059;Keen Great epee +25 - Impaling Thrust;6020200;10100;25;
+10059;Keen Great Epee +25 - Impaling Thrust;6020200;10100;25;
 10065;Keen Short Spear +25 - Impaling Thrust;16000200;10100;25;
 10066;Keen Lance +25 - Impaling Thrust;17060200;10100;25;
 10067;Keen Halberd +25 - Impaling Thrust;18000200;10100;25;
@@ -367,7 +367,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10106;Keen Uchigatana +25 - Piercing Fang;9000200;10200;25;
 10107;Keen Twinblade +25 - Piercing Fang;10000200;10200;25;
 10108;Keen Rapier +25 - Piercing Fang;5020200;10200;25;
-10109;Keen Great epee +25 - Piercing Fang;6020200;10200;25;
+10109;Keen Great Epee +25 - Piercing Fang;6020200;10200;25;
 10115;Keen Short Spear +25 - Piercing Fang;16000200;10200;25;
 10116;Keen Lance +25 - Piercing Fang;17060200;10200;25;
 10117;Keen Halberd +25 - Piercing Fang;18000200;10200;25;
@@ -385,7 +385,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10167;Keen Halberd +25 - Spinning Slash;18000200;10300;25;
 10168;Keen Scythe +25 - Spinning Slash;19000200;10300;25;
 10207;Quality Twinblade +25 - Charge Forth;10000300;10500;25;
-10209;Quality Great epee +25 - Charge Forth;6020300;10500;25;
+10209;Quality Great Epee +25 - Charge Forth;6020300;10500;25;
 10215;Quality Short Spear +25 - Charge Forth;16000300;10500;25;
 10216;Quality Lance +25 - Charge Forth;17060300;10500;25;
 10217;Quality Halberd +25 - Charge Forth;18000300;10500;25;
@@ -413,7 +413,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10356;Blood Uchigatana +25 - Blood Tax;9001100;10800;25;
 10357;Bloody Twinblade +25 - Blood Tax;10001100;10800;25;
 10358;Blood Rapier +25 - Blood Tax;5021100;10800;25;
-10359;Blood Great epee +25 - Blood Tax;6021100;10800;25;
+10359;Blood Great Epee +25 - Blood Tax;6021100;10800;25;
 10365;Blood Short Spear +25 - Blood Tax;16001100;10800;25;
 10366;Bloody Lance +25 - Blood Tax;17061100;10800;25;
 10367;Blood Halberd +25 - Blood Tax;18001100;10800;25;
@@ -423,7 +423,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10406;Keen Uchigatana +25 - Repeating Thrust;9000200;10900;25;
 10407;Keen Twinblade +25 - Repeating Thrust;10000200;10900;25;
 10408;Keen Rapier +25 - Repeating Thrust;5020200;10900;25;
-10409;Keen Great epee +25 - Repeating Thrust;6020200;10900;25;
+10409;Keen Great Epee +25 - Repeating Thrust;6020200;10900;25;
 10415;Keen Short Spear +25 - Repeating Thrust;16000200;10900;25;
 10416;Keen Lance +25 - Repeating Thrust;17060200;10900;25;
 10417;Keen Halberd +25 - Repeating Thrust;18000200;10900;25;
@@ -456,7 +456,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10752;Quality Bastard Sword +25 - Giant Hunt;3000300;11600;25;
 10753;Quality Greatsword +25 - Giant Hunt;4000300;11600;25;
 10757;Quality Twinblade +25 - Giant Hunt;10000300;11600;25;
-10759;Quality Great epee +25 - Giant Hunt;6020300;11600;25;
+10759;Quality Great Epee +25 - Giant Hunt;6020300;11600;25;
 10765;Quality Short Spear +25 - Giant Hunt;16000300;11600;25;
 10766;Quality Lance +25 - Giant Hunt;17060300;11600;25;
 10767;Quality Halberd +25 - Giant Hunt;18000300;11600;25;
@@ -483,7 +483,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 10917;Magic Halberd +25 - Spinning Weapon;18000800;12000;25;
 10918;Magic Scythe +25 - Spinning Weapon;19000800;12000;25;
 10957;Quality Twinblade +25 - Storm Assault;10000300;12200;25;
-10959;Quality Great epee +25 - Storm Assault;6020300;12200;25;
+10959;Quality Great Epee +25 - Storm Assault;6020300;12200;25;
 10965;Quality Short Spear +25 - Storm Assault;16000300;12200;25;
 10966;Quality Lance +25 - Storm Assault;17060300;12200;25;
 10967;Quality Halberd +25 - Storm Assault;18000300;12200;25;
@@ -521,7 +521,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11106;Magic Uchigatana +25 - Glintblade Phalanx;9000800;20000;25;
 11107;Magic Twinblade +25 - Glintblade Phalanx;10000800;20000;25;
 11108;Magic Rapier +25 - Glintblade Phalanx;5020800;20000;25;
-11109;Magic Great epee +25 - Glintblade Phalanx;6020800;20000;25;
+11109;Magic Great Epee +25 - Glintblade Phalanx;6020800;20000;25;
 11115;Magic Short Spear +25 - Glintblade Phalanx;16000800;20000;25;
 11116;Magic Lance +25 - Glintblade Phalanx;17060800;20000;25;
 11117;Magic Halberd +25 - Glintblade Phalanx;18000800;20000;25;
@@ -534,7 +534,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11156;Sacred Uchigatana +25 - Sacred Blade;9000700;20100;25;
 11157;Sacred Twinblade +25 - Sacred Blade;10000700;20100;25;
 11158;Sacred Rapier +25 - Sacred Blade;5020700;20100;25;
-11159;Sacred Great epee +25 - Sacred Blade;6020700;20100;25;
+11159;Sacred Great Epee +25 - Sacred Blade;6020700;20100;25;
 11160;Sacred Battle Axe +25 - Sacred Blade;14000700;20100;25;
 11161;Sacred Greataxe +25 - Sacred Blade;15000700;20100;25;
 11162;Sacred Mace +25 - Sacred Blade;11000700;20100;25;
@@ -559,7 +559,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11256;Magic Uchigatana +25 - Glintstone Pebble;9000800;20300;25;
 11257;Magic Twinblade +25 - Glintstone Pebble;10000800;20300;25;
 11258;Magic Rapier +25 - Glintstone Pebble;5020800;20300;25;
-11259;Magic Great epee +25 - Glintstone Pebble;6020800;20300;25;
+11259;Magic Great Epee +25 - Glintstone Pebble;6020800;20300;25;
 11265;Magic Short Spear +25 - Glintstone Pebble;16000800;20300;25;
 11266;Magic Lance +25 - Glintstone Pebble;17060800;20300;25;
 11267;Magic Halberd +25 - Glintstone Pebble;18000800;20300;25;
@@ -571,7 +571,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11306;Blood Uchigatana +25 - Bloody Slash;9001100;20400;25;
 11307;Bloody Twinblade +25 - Bloody Slash;10001100;20400;25;
 11308;Blood Rapier +25 - Bloody Slash;5021100;20400;25;
-11309;Blood Great epee +25 - Bloody Slash;6021100;20400;25;
+11309;Blood Great Epee +25 - Bloody Slash;6021100;20400;25;
 11369;Blood Caestus +25 - Lifesteal Fist;21001100;20500;25;
 11370;Blood Hookclaws +25 - Lifesteal Fist;22001100;20500;25;
 11402;Fire Bastard Sword +25 - Eruption;3000400;20700;25;
@@ -594,7 +594,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11506;Magic Uchigatana +25 - Gravitas;9000800;20900;25;
 11507;Magic Twinblade +25 - Gravitas;10000800;20900;25;
 11508;Magic Rapier +25 - Gravitas;5020800;20900;25;
-11509;Magic Great epee +25 - Gravitas;6020800;20900;25;
+11509;Magic Great Epee +25 - Gravitas;6020800;20900;25;
 11510;Magic Battle Axe +25 - Gravitas;14000800;20900;25;
 11511;Magic Greataxe +25 - Gravitas;15000800;20900;25;
 11512;Magic Mace +25 - Gravitas;11000800;20900;25;
@@ -631,7 +631,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11706;Fire Uchigatana +25 - Flaming Strike;9000400;21400;25;
 11707;Fire Twinblade +25 - Flaming Strike;10000400;21400;25;
 11708;Fire Rapier +25 - Flaming Strike;5020400;21400;25;
-11709;Fire Great epee +25 - Flaming Strike;6020400;21400;25;
+11709;Fire Great Epee +25 - Flaming Strike;6020400;21400;25;
 11710;Fire Battle Axe +25 - Flaming Strike;14000400;21400;25;
 11711;Fire Greataxe +25 - Flaming Strike;15000400;21400;25;
 11712;Fire Mace +25 - Flaming Strike;11000400;21400;25;
@@ -653,7 +653,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11756;Lightning Uchigatana +25 - Thunderbolt;9000600;21600;25;
 11757;Lightning Twinblade +25 - Thunderbolt;10000600;21600;25;
 11758;Lightning Rapier +25 - Thunderbolt;5020600;21600;25;
-11759;Lightning Great epee +25 - Thunderbolt;6020600;21600;25;
+11759;Lightning Great Epee +25 - Thunderbolt;6020600;21600;25;
 11760;Lightning Battle Axe +25 - Thunderbolt;14000600;21600;25;
 11761;Lightning Greataxe +25 - Thunderbolt;15000600;21600;25;
 11762;Lightning Mace +25 - Thunderbolt;11000600;21600;25;
@@ -676,7 +676,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11806;Lightning Uchigatana +25 - Lightning Slash;9000600;21700;25;
 11807;Lightning Twinblade +25 - Lightning Slash;10000600;21700;25;
 11808;Lightning Rapier +25 - Lightning Slash;5020600;21700;25;
-11809;Lightning Great epee +25 - Lightning Slash;6020600;21700;25;
+11809;Lightning Great Epee +25 - Lightning Slash;6020600;21700;25;
 11810;Lightning Battle Axe +25 - Lightning Slash;14000600;21700;25;
 11811;Lightning Greataxe +25 - Lightning Slash;15000600;21700;25;
 11812;Lightning Mace +25 - Lightning Slash;11000600;21700;25;
@@ -691,7 +691,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11856;Magic Uchigatana +25 - Carian Grandeur;9000800;21800;25;
 11857;Magic Twinblade +25 - Carian Grandeur;10000800;21800;25;
 11858;Magic Rapier +25 - Carian Grandeur;5020800;21800;25;
-11859;Magic Great epee +25 - Carian Grandeur;6020800;21800;25;
+11859;Magic Great Epee +25 - Carian Grandeur;6020800;21800;25;
 11900;Magic Dagger +25 - Carian Greatsword;1000800;21900;25;
 11901;Magic Longsword +25 - Carian Greatsword;2000800;21900;25;
 11902;Magic Bastard Sword +25 - Carian Greatsword;3000800;21900;25;
@@ -700,7 +700,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11906;Magic Uchigatana +25 - Carian Greatsword;9000800;21900;25;
 11907;Magic Twinblade +25 - Carian Greatsword;10000800;21900;25;
 11908;Magic Rapier +25 - Carian Greatsword;5020800;21900;25;
-11909;Magic Great epee +25 - Carian Greatsword;6020800;21900;25;
+11909;Magic Great Epee +25 - Carian Greatsword;6020800;21900;25;
 11950;Quality Dagger +25 - Vacuum Slice;1000300;22000;25;
 11951;Quality Longsword +25 - Vacuum Slice;2000300;22000;25;
 11952;Quality Bastard Sword +25 - Vacuum Slice;3000300;22000;25;
@@ -710,7 +710,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 11956;Quality Uchigatana +25 - Vacuum Slice;9000300;22000;25;
 11957;Quality Twinblade +25 - Vacuum Slice;10000300;22000;25;
 11958;Quality Rapier +25 - Vacuum Slice;5020300;22000;25;
-11959;Quality Great epee +25 - Vacuum Slice;6020300;22000;25;
+11959;Quality Great Epee +25 - Vacuum Slice;6020300;22000;25;
 11960;Quality Battle Axe +25 - Vacuum Slice;14000300;22000;25;
 11961;Quality Greataxe +25 - Vacuum Slice;15000300;22000;25;
 12007;Flame Art Twinblade +25 - Black Flame Tornado;10000500;22100;25;
@@ -743,7 +743,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 12256;Cold Uchigatana +25 - Chilling Mist;9000900;22700;25;
 12257;Cold Twinblade +25 - Chilling Mist;10000900;22700;25;
 12258;Cold Rapier +25 - Chilling Mist;5020900;22700;25;
-12259;Cold Great epee +25 - Chilling Mist;6020900;22700;25;
+12259;Cold Great Epee +25 - Chilling Mist;6020900;22700;25;
 12260;Cold Battle Axe +25 - Chilling Mist;14000900;22700;25;
 12261;Cold Greataxe +25 - Chilling Mist;15000900;22700;25;
 12262;Cold Mace +25 - Chilling Mist;11000900;22700;25;
@@ -765,7 +765,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 12306;Poison Uchigatana +25 - Poisonous Mist;9001000;22800;25;
 12307;Poison Twinblade +25 - Poisonous Mist;10001000;22800;25;
 12308;Poison Rapier +25 - Poisonous Mist;5021000;22800;25;
-12309;Poison Great epee +25 - Poisonous Mist;6021000;22800;25;
+12309;Poison Great Epee +25 - Poisonous Mist;6021000;22800;25;
 12310;Poison Battle Axe +25 - Poisonous Mist;14001000;22800;25;
 12311;Poison Greataxe +25 - Poisonous Mist;15001000;22800;25;
 12312;Poison Mace +25 - Poisonous Mist;11001000;22800;25;
@@ -827,7 +827,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13106;Cold Uchigatana +25 - Hoarfrost Stomp;9000900;50100;25;
 13107;Cold Twinblade +25 - Hoarfrost Stomp;10000900;50100;25;
 13108;Cold Rapier +25 - Hoarfrost Stomp;5020900;50100;25;
-13109;Cold Great epee +25 - Hoarfrost Stomp;6020900;50100;25;
+13109;Cold Great Epee +25 - Hoarfrost Stomp;6020900;50100;25;
 13110;Cold Battle Axe +25 - Hoarfrost Stomp;14000900;50100;25;
 13111;Cold Greataxe +25 - Hoarfrost Stomp;15000900;50100;25;
 13112;Cold Mace +25 - Hoarfrost Stomp;11000900;50100;25;
@@ -850,7 +850,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13156;Quality Uchigatana +25 - Storm Stomp;9000300;50200;25;
 13157;Quality Twinblade +25 - Storm Stomp;10000300;50200;25;
 13158;Quality Rapier +25 - Storm Stomp;5020300;50200;25;
-13159;Quality Great epee +25 - Storm Stomp;6020300;50200;25;
+13159;Quality Great Epee +25 - Storm Stomp;6020300;50200;25;
 13160;Quality Battle Axe +25 - Storm Stomp;14000300;50200;25;
 13161;Quality Greataxe +25 - Storm Stomp;15000300;50200;25;
 13162;Quality Mace +25 - Storm Stomp;11000300;50200;25;
@@ -873,7 +873,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13206;Heavy Uchigatana +25 - Kick;9000100;50300;25;
 13207;Heavy Twinblade +25 - Kick;10000100;50300;25;
 13208;Heavy Rapier +25 - Kick;5020100;50300;25;
-13209;Heavy Great epee +25 - Kick;6020100;50300;25;
+13209;Heavy Great Epee +25 - Kick;6020100;50300;25;
 13210;Heavy Battle Axe +25 - Kick;14000100;50300;25;
 13211;Heavy Greataxe +25 - Kick;15000100;50300;25;
 13212;Heavy Mace +25 - Kick;11000100;50300;25;
@@ -896,7 +896,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13256;Lightning Uchigatana +25 - Lightning Ram;9000600;50400;25;
 13257;Lightning Twinblade +25 - Lightning Ram;10000600;50400;25;
 13258;Lightning Rapier +25 - Lightning Ram;5020600;50400;25;
-13259;Lightning Great epee +25 - Lightning Ram;6020600;50400;25;
+13259;Lightning Great Epee +25 - Lightning Ram;6020600;50400;25;
 13260;Lightning Battle Axe +25 - Lightning Ram;14000600;50400;25;
 13261;Lightning Greataxe +25 - Lightning Ram;15000600;50400;25;
 13262;Lightning Mace +25 - Lightning Ram;11000600;50400;25;
@@ -919,7 +919,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13306;Fire Uchigatana +25 - Flame of the Redmanes;9000400;50500;25;
 13307;Fire Twinblade +25 - Flame of the Redmanes;10000400;50500;25;
 13308;Fire Rapier +25 - Flame of the Redmanes;5020400;50500;25;
-13309;Fire Great epee +25 - Flame of the Redmanes;6020400;50500;25;
+13309;Fire Great Epee +25 - Flame of the Redmanes;6020400;50500;25;
 13310;Fire Battle Axe +25 - Flame of the Redmanes;14000400;50500;25;
 13311;Fire Greataxe +25 - Flame of the Redmanes;15000400;50500;25;
 13312;Fire Mace +25 - Flame of the Redmanes;11000400;50500;25;
@@ -942,7 +942,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13356;Heavy Uchigatana +25 - Ground Slam;9000100;50600;25;
 13357;Heavy Twinblade +25 - Ground Slam;10000100;50600;25;
 13358;Heavy Rapier +25 - Ground Slam;5020100;50600;25;
-13359;Heavy Great epee +25 - Ground Slam;6020100;50600;25;
+13359;Heavy Great Epee +25 - Ground Slam;6020100;50600;25;
 13360;Heavy Battle Axe +25 - Ground Slam;14000100;50600;25;
 13361;Heavy Greataxe +25 - Ground Slam;15000100;50600;25;
 13362;Heavy Mace +25 - Ground Slam;11000100;50600;25;
@@ -965,7 +965,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13406;Sacred Uchigatana +25 - Golden Slam;9000700;50700;25;
 13407;Sacred Twinblade +25 - Golden Slam;10000700;50700;25;
 13408;Sacred Rapier +25 - Golden Slam;5020700;50700;25;
-13409;Sacred Great epee +25 - Golden Slam;6020700;50700;25;
+13409;Sacred Great Epee +25 - Golden Slam;6020700;50700;25;
 13410;Sacred Battle Axe +25 - Golden Slam;14000700;50700;25;
 13411;Sacred Greataxe +25 - Golden Slam;15000700;50700;25;
 13412;Sacred Mace +25 - Golden Slam;11000700;50700;25;
@@ -993,7 +993,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13506;Heavy Uchigatana +25 - Hoarah Loux's Earthshaker;9000100;50900;25;
 13507;Heavy Twinblade +25 - Hoarah Loux's Earthshaker;10000100;50900;25;
 13508;Heavy Rapier +25 - Hoarah Loux's Earthshaker;5020100;50900;25;
-13509;Heavy Great epee +25 - Hoarah Loux's Earthshaker;6020100;50900;25;
+13509;Heavy Great Epee +25 - Hoarah Loux's Earthshaker;6020100;50900;25;
 13510;Heavy Battle Axe +25 - Hoarah Loux's Earthshaker;14000100;50900;25;
 13511;Heavy Greataxe +25 - Hoarah Loux's Earthshaker;15000100;50900;25;
 13512;Heavy Mace +25 - Hoarah Loux's Earthshaker;11000100;50900;25;
@@ -1016,7 +1016,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13556;Quality Uchigatana +25 - Determination;9000300;60000;25;
 13557;Quality Twinblade +25 - Determination;10000300;60000;25;
 13558;Quality Rapier +25 - Determination;5020300;60000;25;
-13559;Quality Great epee +25 - Determination;6020300;60000;25;
+13559;Quality Great Epee +25 - Determination;6020300;60000;25;
 13560;Quality Battle Axe +25 - Determination;14000300;60000;25;
 13561;Quality Greataxe +25 - Determination;15000300;60000;25;
 13562;Quality Mace +25 - Determination;11000300;60000;25;
@@ -1039,7 +1039,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13606;Quality Uchigatana +25 - Royal Knight's Resolve;9000300;60100;25;
 13607;Quality Twinblade +25 - Royal Knight's Resolve;10000300;60100;25;
 13608;Quality Rapier +25 - Royal Knight's Resolve;5020300;60100;25;
-13609;Quality Great epee +25 - Royal Knight's Resolve;6020300;60100;25;
+13609;Quality Great Epee +25 - Royal Knight's Resolve;6020300;60100;25;
 13610;Quality Battle Axe +25 - Royal Knight's Resolve;14000300;60100;25;
 13611;Quality Greataxe +25 - Royal Knight's Resolve;15000300;60100;25;
 13612;Quality Mace +25 - Royal Knight's Resolve;11000300;60100;25;
@@ -1067,7 +1067,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13706;Sacred Uchigatana +25 - Golden Vow;9000700;60300;25;
 13707;Sacred Twinblade +25 - Golden Vow;10000700;60300;25;
 13708;Sacred Rapier +25 - Golden Vow;5020700;60300;25;
-13709;Sacred Great epee +25 - Golden Vow;6020700;60300;25;
+13709;Sacred Great Epee +25 - Golden Vow;6020700;60300;25;
 13710;Sacred Battle Axe +25 - Golden Vow;14000700;60300;25;
 13711;Sacred Greataxe +25 - Golden Vow;15000700;60300;25;
 13712;Sacred Mace +25 - Golden Vow;11000700;60300;25;
@@ -1090,7 +1090,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13756;Sacred Uchigatana +25 - Sacred Order;9000700;60400;25;
 13757;Sacred Twinblade +25 - Sacred Order;10000700;60400;25;
 13758;Sacred Rapier +25 - Sacred Order;5020700;60400;25;
-13759;Sacred Great epee +25 - Sacred Order;6020700;60400;25;
+13759;Sacred Great Epee +25 - Sacred Order;6020700;60400;25;
 13760;Sacred Battle Axe +25 - Sacred Order;14000700;60400;25;
 13761;Sacred Greataxe +25 - Sacred Order;15000700;60400;25;
 13762;Sacred Mace +25 - Sacred Order;11000700;60400;25;
@@ -1113,7 +1113,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13806;Sacred Uchigatana +25 - Shared Order;9000700;60500;25;
 13807;Sacred Twinblade +25 - Shared Order;10000700;60500;25;
 13808;Sacred Rapier +25 - Shared Order;5020700;60500;25;
-13809;Sacred Great epee +25 - Shared Order;6020700;60500;25;
+13809;Sacred Great Epee +25 - Shared Order;6020700;60500;25;
 13810;Sacred Battle Axe +25 - Shared Order;14000700;60500;25;
 13811;Sacred Greataxe +25 - Shared Order;15000700;60500;25;
 13812;Sacred Mace +25 - Shared Order;11000700;60500;25;
@@ -1135,7 +1135,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13856;Blood Uchigatana +25 - Seppuku;9001100;60600;25;
 13857;Bloody Twinblade +25 - Seppuku;10001100;60600;25;
 13858;Blood Rapier +25 - Seppuku;5021100;60600;25;
-13859;Blood Great epee +25 - Seppuku;6021100;60600;25;
+13859;Blood Great Epee +25 - Seppuku;6021100;60600;25;
 13865;Blood Short Spear +25 - Seppuku;16001100;60600;25;
 13866;Bloody Lance +25 - Seppuku;17061100;60600;25;
 13867;Blood Halberd +25 - Seppuku;18001100;60600;25;
@@ -1148,7 +1148,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 13906;Heavy Uchigatana +25 - Cragblade;9000100;60700;25;
 13907;Heavy Twinblade +25 - Cragblade;10000100;60700;25;
 13908;Heavy Rapier +25 - Cragblade;5020100;60700;25;
-13909;Heavy Great epee +25 - Cragblade;6020100;60700;25;
+13909;Heavy Great Epee +25 - Cragblade;6020100;60700;25;
 13910;Heavy Battle Axe +25 - Cragblade;14000100;60700;25;
 13911;Heavy Greataxe +25 - Cragblade;15000100;60700;25;
 13912;Heavy Mace +25 - Cragblade;11000100;60700;25;
@@ -1208,7 +1208,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14056;Keen Uchigatana +25 - Beast's Roar;9000200;65200;25;
 14057;Keen Twinblade +25 - Beast's Roar;10000200;65200;25;
 14058;Keen Rapier +25 - Beast's Roar;5020200;65200;25;
-14059;Keen Great epee +25 - Beast's Roar;6020200;65200;25;
+14059;Keen Great Epee +25 - Beast's Roar;6020200;65200;25;
 14060;Keen Battle Axe +25 - Beast's Roar;14000200;65200;25;
 14061;Keen Greataxe +25 - Beast's Roar;15000200;65200;25;
 14062;Keen Mace +25 - Beast's Roar;11000200;65200;25;
@@ -1256,7 +1256,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14206;Quality Uchigatana +25 - Endure;9000300;70000;25;
 14207;Quality Twinblade +25 - Endure;10000300;70000;25;
 14208;Quality Rapier +25 - Endure;5020300;70000;25;
-14209;Quality Great epee +25 - Endure;6020300;70000;25;
+14209;Quality Great Epee +25 - Endure;6020300;70000;25;
 14210;Quality Battle Axe +25 - Endure;14000300;70000;25;
 14211;Quality Greataxe +25 - Endure;15000300;70000;25;
 14212;Quality Mace +25 - Endure;11000300;70000;25;
@@ -1285,7 +1285,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14356;Quality Uchigatana +25 - Quickstep;9000300;80000;25;
 14357;Quality Twinblade +25 - Quickstep;10000300;80000;25;
 14358;Quality Rapier +25 - Quickstep;5020300;80000;25;
-14359;Quality Great epee +25 - Quickstep;6020300;80000;25;
+14359;Quality Great Epee +25 - Quickstep;6020300;80000;25;
 14360;Quality Battle Axe +25 - Quickstep;14000300;80000;25;
 14361;Quality Greataxe +25 - Quickstep;15000300;80000;25;
 14362;Quality Mace +25 - Quickstep;11000300;80000;25;
@@ -1308,7 +1308,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14406;Quality Uchigatana +25 - Bloodhound's Step;9000300;80100;25;
 14407;Quality Twinblade +25 - Bloodhound's Step;10000300;80100;25;
 14408;Quality Rapier +25 - Bloodhound's Step;5020300;80100;25;
-14409;Quality Great epee +25 - Bloodhound's Step;6020300;80100;25;
+14409;Quality Great Epee +25 - Bloodhound's Step;6020300;80100;25;
 14410;Quality Battle Axe +25 - Bloodhound's Step;14000300;80100;25;
 14411;Quality Greataxe +25 - Bloodhound's Step;15000300;80100;25;
 14412;Quality Mace +25 - Bloodhound's Step;11000300;80100;25;
@@ -1331,7 +1331,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14456;Quality Uchigatana +25 - Raptor of the Mists;9000300;80200;25;
 14457;Quality Twinblade +25 - Raptor of the Mists;10000300;80200;25;
 14458;Quality Rapier +25 - Raptor of the Mists;5020300;80200;25;
-14459;Quality Great epee +25 - Raptor of the Mists;6020300;80200;25;
+14459;Quality Great Epee +25 - Raptor of the Mists;6020300;80200;25;
 14460;Quality Battle Axe +25 - Raptor of the Mists;14000300;80200;25;
 14461;Quality Greataxe +25 - Raptor of the Mists;15000300;80200;25;
 14462;Quality Mace +25 - Raptor of the Mists;11000300;80200;25;
@@ -1354,7 +1354,7 @@ Row ID;Row Name;baseWepId;gemId;reinforceLv
 14506;Quality Uchigatana +25 - White Shadow's Lure;9000300;85000;25;
 14507;Quality Twinblade +25 - White Shadow's Lure;10000300;85000;25;
 14508;Quality Rapier +25 - White Shadow's Lure;5020300;85000;25;
-14509;Quality Great epee +25 - White Shadow's Lure;6020300;85000;25;
+14509;Quality Great Epee +25 - White Shadow's Lure;6020300;85000;25;
 14510;Quality Battle Axe +25 - White Shadow's Lure;14000300;85000;25;
 14511;Quality Greataxe +25 - White Shadow's Lure;15000300;85000;25;
 14512;Quality Mace +25 - White Shadow's Lure;11000300;85000;25;

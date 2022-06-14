@@ -15,6 +15,25 @@ emevd/
 
 yabber/
 
+csv/*
+
+!csv/BonfireWarpParam.csv
+!csv/BonfireWarpSubCategoryParam.csv
+!csv/BonfireWarpTabParam.csv
+!csv/GameAreaParam.csv
+!csv/EquipParamAccessory.csv
+!csv/EquipParamGem.csv
+!csv/EquipParamGoods.csv
+!csv/EquipParamProtector.csv
+!csv/EquipParamWeapon.csv
+!csv/SwordArtsParam.csv
+!csv/Magic.csv
+!csv/NpcParam.csv
+!csv/PlayRegionParam.csv
+!csv/WorldMapPieceParam.csv
+!csv/WorldMapPlaceNameParam.csv
+!csv/WorldMapPointParam.csv
+
 !xml/
 xml/*
 !xml/AccessoryCaption.fmg.xml
@@ -69,6 +88,9 @@ yapped/Paramdex/ER/Names/*
 !yapped/Paramdex/ER/Names/Magic.txt
 !yapped/Paramdex/ER/Names/NpcParam.txt
 !yapped/Paramdex/ER/Names/PlayRegionParam.txt
+!yapped/Paramdex/ER/Names/WorldMapPieceParam.txt
+!yapped/Paramdex/ER/Names/WorldMapPlaceNameParam.txt
+!yapped/Paramdex/ER/Names/WorldMapPointParam.txt
 
 EldenFlagScanner/*.user
 EldenFlagScanner/.vs
