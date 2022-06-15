@@ -458,9 +458,12 @@ for(i = 0; i < count; i++) {
             Storage storage;
             int unk1[67];
             UnkFlags unkFlags;
-            int unk2[8];
-            ubyte count;
-            struct { int unk; int unk; int unk; int unk; } unk[count];
+            FSeek(FTell() + 0x1C629);
+            FSeek(FTell() + 0x1C);
+            FSeek(FTell() + 0x40C);
+            int lastGraceEntity;
+            FSeek(FTell() + 0x9);
+            FSeek(FTell() + 0x1AABA3); // Event Flags
         }
     } character;
 }
