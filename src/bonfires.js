@@ -34,7 +34,8 @@ bonfire.bonfires.forEach(warp => {
         name: textlookup.place[warp.textId1] && textlookup.place[warp.textId1].name,
         sortId: parseInt(warp.bonfireSubCategorySortId),
         subcategory: subcategories[warp.bonfireSubCategoryId],
-        eventFlag: warp.eventflagId
+        eventFlag: warp.eventflagId,
+        entityId: warp.bonfireEntityId
     };
     if(subcategories[warp.bonfireSubCategoryId]) {
         bonfires[warp.RowID] = entry;

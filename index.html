@@ -110,6 +110,7 @@ progress {
     grid-auto-rows: max-content;
     grid-template-areas: 
         'name empty'
+        'grace empty'
         'statsleft statsright';
     grid-gap: 5px;
 }
@@ -133,6 +134,10 @@ progress {
 
 #character #name {
     grid-area: name;
+}
+
+#character #grace {
+    grid-area: grace;
 }
 
 #character #statsLeft {
@@ -419,6 +424,7 @@ progress::after {
         <div id="character" class="hide">
             <div id="character-stats">
                 <h2 id="name" class="stat" style="margin: 0;"></h2>
+                <h4 id="grace" style="margin: 0;"><span id="lastGrace-name" class="stat" data-format="Last Grace: %s"></span><span id="lastGrace-subcategory-name" class="stat" data-format=" @ %s"></span></h4>
                 <div id="statsLeft">
                     <div>Level: <span id="stats-runeLevel" class="stat"></span></div>
                     <div>Runes: <span id="stats-runes" class="stat"></span></div>
@@ -945,7 +951,12 @@ progress::after {
 
                 document.getElementById('character').querySelectorAll('.stat').forEach(el => {
                     if(el.id) {
-                        let stat = el.id.split('-').reduce((stat, name) => stat[name], character);
+                        let stat;
+                        try {
+                            stat = el.id.split('-').reduce((stat, name) => stat[name], character);
+                        } catch(e) {
+                            stat = '';
+                        }
                         if(Array.isArray(stat)) {
                             el.innerHTML = '';
                             stat.forEach(item => el.appendChild(renderItem(item)));
@@ -971,6 +982,8 @@ progress::after {
                                 el.value = parseInt(stat);
                                 el.innerHTML = stat;
                             } else {
+                                if(el.getAttribute('data-format') && stat != '')
+                                    stat = el.getAttribute('data-format').replace('%s', stat);
                                 el.innerHTML = stat;
                             }
                         } else {

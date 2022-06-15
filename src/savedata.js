@@ -4,6 +4,7 @@ import { roundtable } from './roundtable.js'
 import lookup from './lookup.js'
 import offsetMap from './offsets.js'
 import eventFlags from './eventflags.js'
+import bonfires from './bonfires.js'
 
 class SaveData {
     constructor(data) {
@@ -416,6 +417,8 @@ class CharacterData {
         this.internal.flags = {};
         reader.seek(0x40C, true); // Skip unknown stuff
         this.internal.lastGrace = reader.readUint32();
+        this.internal.lastGraceEntityId = this.internal.lastGrace - 1000;
+        this.lastGrace = Object.values(bonfires).find(bonfire => bonfire.entityId == this.internal.lastGraceEntityId);
         reader.seek(0x9, true); // Skip unknown stuff
         let flagsOffset = reader.offset;
 
