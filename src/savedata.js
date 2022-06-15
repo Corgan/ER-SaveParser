@@ -414,7 +414,9 @@ class CharacterData {
         // Start of the Event Flag Block
         reader.seek(0x1C, true); // Skip unknown stuff
         this.internal.flags = {};
-        reader.seek(0x419, true); // Skip unknown stuff
+        reader.seek(0x40C, true); // Skip unknown stuff
+        this.internal.lastGrace = reader.readUint32();
+        reader.seek(0x9, true); // Skip unknown stuff
         let flagsOffset = reader.offset;
 
         let checkFlag = (flagId) => {
