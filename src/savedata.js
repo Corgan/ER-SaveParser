@@ -418,7 +418,6 @@ class CharacterData {
         reader.seek(0x40C, true); // Skip unknown stuff
         this.internal.lastGrace = reader.readUint32();
         this.internal.lastGraceEntityId = this.internal.lastGrace - 1000;
-        this.lastGrace = Object.values(bonfires).find(bonfire => bonfire.entityId == this.internal.lastGraceEntityId);
         reader.seek(0x9, true); // Skip unknown stuff
         let flagsOffset = reader.offset;
 
@@ -447,6 +446,7 @@ class CharacterData {
         });
 
         this.name = this.internal.name;
+        this.lastGrace = Object.values(bonfires).find(bonfire => bonfire.entityId == this.internal.lastGraceEntityId);
         this.stats = {
             health: this.internal.health,
             baseMaxHealth: this.internal.baseMaxHealth,
