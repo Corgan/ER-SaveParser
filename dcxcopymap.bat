@@ -1,0 +1,1 @@
+FOR /r dcx\71_maptile-tpfbhd %%i IN (*.dds) DO copy "%%i" dds\map\%%~ni.dds

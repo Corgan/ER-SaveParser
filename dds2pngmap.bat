@@ -1,0 +1,1 @@
+FOR /r dds\map\ %%i IN (*.dds) DO texconv -r:keep "%%i" -y -ft png -o images2\map

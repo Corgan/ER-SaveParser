@@ -40,6 +40,10 @@ progress {
     font-size: 18px;
 }
 
+.flag {
+    white-space: pre-wrap;
+}
+
 .item {
     box-sizing: border-box;
     display: inline-block;
@@ -718,7 +722,7 @@ progress::after {
             import lookup from './src/lookup.js'
             import { roundtable_names, build_output } from './src/roundtable_names.js'
             import { roundtable } from './src/roundtable.js'
-            import eventFlags from './src/eventflags.js'
+            import { eventFlags, pickups } from './src/eventflags.js'
             import textLookup from './src/textlookup.js'
             import { bonfires, tabs as bonfireTabs } from './src/bonfires.js'
 
@@ -1229,35 +1233,11 @@ progress::after {
                     parent: flagEl
                 }));
                 
-                eventFlags.filter(flag => flag.type == "pickup" && flag.item.type == 1).sort((a,b) => a.item.id - b.item.id).forEach((flag) => createElement('div', {
+                Object.entries(pickups).forEach(([type, pickup]) => Object.entries(pickup).forEach(([id, item]) => createElement('div', {
                     classList: ['flag'],
-                    text: `${flag.id} - (${flag.item.id}) ${flag.item.name} = ${lookupFlag(flag)}`,
+                    html: `${item.id} - ${item.name}\n${item.flags.map(flag => `\t${flag} = ${lookupFlag({id: flag})}`).join('\n')}`,
                     parent: flagEl
-                }));
-                
-                eventFlags.filter(flag => flag.type == "pickup" && flag.item.type == 2).sort((a,b) => a.item.id - b.item.id).forEach((flag) => createElement('div', {
-                    classList: ['flag'],
-                    text: `${flag.id} - (${flag.item.id}) ${flag.item.name} = ${lookupFlag(flag)}`,
-                    parent: flagEl
-                }));
-
-                eventFlags.filter(flag => flag.type == "pickup" && flag.item.type == 3).sort((a,b) => a.item.id - b.item.id).forEach((flag) => createElement('div', {
-                    classList: ['flag'],
-                    text: `${flag.id} - (${flag.item.id}) ${flag.item.name} = ${lookupFlag(flag)}`,
-                    parent: flagEl
-                }));
-
-                eventFlags.filter(flag => flag.type == "pickup" && flag.item.type == 4).sort((a,b) => a.item.id - b.item.id).forEach((flag) => createElement('div', {
-                    classList: ['flag'],
-                    text: `${flag.id} - (${flag.item.id}) ${flag.item.name} = ${lookupFlag(flag)}`,
-                    parent: flagEl
-                }));
-
-                eventFlags.filter(flag => flag.type == "pickup" && flag.item.type == 5).sort((a,b) => a.item.id - b.item.id).forEach((flag) => createElement('div', {
-                    classList: ['flag'],
-                    text: `${flag.id} - (${flag.item.id}) ${flag.item.name} = ${lookupFlag(flag)}`,
-                    parent: flagEl
-                }));
+                })));
 
                 document.getElementById('character').classList.remove('hide');
             }

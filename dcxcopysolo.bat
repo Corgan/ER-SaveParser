@@ -1,0 +1,1 @@
+FOR /r dcx\00_solo-tpfbhd %%i IN (*.dds) DO copy "%%i" dds\solo\%%~ni.dds

@@ -3,15 +3,15 @@ const fs = require('fs');
 const { DOMParser } = require('xmldom')
 
 
-const layouts = fs.readdirSync('images2').filter(file => file.endsWith('.layout'));
+const layouts = fs.readdirSync('images2\\common').filter(file => file.endsWith('.layout'));
 
 
 layouts.forEach(layout => {
-  let xmlString = fs.readFileSync(`images2/${layout}`, {encoding: 'utf8'});
+  let xmlString = fs.readFileSync(`images2/common/${layout}`, {encoding: 'utf8'});
   let XmlNode = new DOMParser().parseFromString(xmlString, 'text/xml');
   let parsed = xml2json(XmlNode);
   if(parsed.TextureAtlas) {
-    let src = `images2\\${parsed.TextureAtlas.imagePath}`;
+    let src = `images2\\common\\${parsed.TextureAtlas.imagePath}`;
     console.log(src);
 
     if(!Array.isArray(parsed.TextureAtlas.SubTexture))

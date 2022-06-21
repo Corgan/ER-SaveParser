@@ -1,0 +1,1 @@
+FOR /r dcx\01_common-tpf %%i IN (*.dds) DO copy "%%i" dds\common\%%~ni.dds
